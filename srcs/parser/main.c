@@ -22,17 +22,16 @@ static void			freeObject(t_object **object)
 	ft_memdel((void**)object);
 }
 
-static void			freeStruct(t_env *env)
+void				freeStruct()
 {
-	if (env->light)
-		freeLight(&env->light);
-	if (env->object)
-		freeObject(&env->object);
+	if (g_env.light)
+		freeLight(&g_env.light);
+	if (g_env.object)
+		freeObject(&g_env.object);
 }
 
-int				main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
-	t_env			env;
 	char			*file;
 	int			analysis;
 	t_ast			*ast;
@@ -42,7 +41,7 @@ int				main(int argc, char **argv)
 		ft_putstr_fd("usage: ./RT file.json\n", 2);
 		return (1);
 	}
-	ft_bzero(&env, sizeof(t_env));
+	ft_bzero(&g_env, sizeof(t_env));
 	ft_bzero(&ast, sizeof(t_ast));
 	if (!(file = open_file(argv[1])))
 		return (1);
@@ -53,11 +52,10 @@ int				main(int argc, char **argv)
 		freeAst(&ast);
 		return (1);
 	}
-	analysis = fillStruct(&env, ast);
+	analysis = fillStruct(ast);
 	freeAst(&ast);
 	if (!analysis)
 		return (1);
-	//rt_main(&env);
-	freeStruct(&env);
+	rt_main();
 	return (0);
 }

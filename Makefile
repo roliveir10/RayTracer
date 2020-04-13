@@ -14,11 +14,11 @@ include mk/parser.mk
 include mk/rt.mk
 
 CC = gcc
-LIBS = -lft #-fsanitize=address #minilibx/libmlx.a
+LIBS = -lft minilibx/libmlx.a #-fsanitize=address
 LIBSFOLDERS = -L./libft
 vpath %.c $(dir MAKEFILE_LIST)
-MLX_FLAG = #-framework OpenGL -framework AppKit
-CFLAGS = -Wall -Wextra -Werror -flto -O2 -I./includes -I./libft/includes -g3#-I./minilibx/
+MLX_FLAG = -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror -flto -O2 -I./includes -I./libft/includes -I./minilibx/
 CPPFLAGS += -MMD -MP
 OBJDIR = .o
 UNAME = $(shell uname)
@@ -30,7 +30,7 @@ DEPS = $(subst .c,.d,$(subst ./srcs/,./$(OBJDIR)/,$(SRCS)))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | lib_rule #mlx_rule
+$(NAME): $(OBJS) | lib_rule mlx_rule
 	@$(RM) tmp_log
 	@$(RM) tmp_errors
 	@if  [ -e files_missing ]; then \

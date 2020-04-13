@@ -64,35 +64,35 @@ static int			elementValidity(t_nbrElement elements)
 	return (valid);
 }
 
-static void			addObjectToStruct(t_env *env, int type)
+static void			addObjectToStruct(int type)
 {
 	t_light			*tmpL;
 	t_object		*tmpO;
 
 	if (type == LIGHT)
 	{
-		if (!env->light)
-			env->light = ft_memalloc(sizeof(t_light));
+		if (!g_env.light)
+			g_env.light = ft_memalloc(sizeof(t_light));
 		else
 		{
-			tmpL = env->light;
-			while (env->light->next)
-				env->light = env->light->next;
-			env->light->next = ft_memalloc(sizeof(t_light));
-			env->light = tmpL;
+			tmpL = g_env.light;
+			while (g_env.light->next)
+				g_env.light = g_env.light->next;
+			g_env.light->next = ft_memalloc(sizeof(t_light));
+			g_env.light = tmpL;
 		}		
 	}
 	else if (type == OBJECTS)
 	{
-		if (!env->object)
-			env->object = ft_memalloc(sizeof(t_object));
+		if (!g_env.object)
+			g_env.object = ft_memalloc(sizeof(t_object));
 		else
 		{
-			tmpO = env->object;
-			while (env->object->next)
-				env->object = env->object->next;
-			env->object->next = ft_memalloc(sizeof(t_object));
-			env->object = tmpO;
+			tmpO = g_env.object;
+			while (g_env.object->next)
+				g_env.object = g_env.object->next;
+			g_env.object->next = ft_memalloc(sizeof(t_object));
+			g_env.object = tmpO;
 		}
 	}
 }
@@ -110,92 +110,92 @@ static t_vector			addValueToVector(t_vector vector, char *content, int vcount)
 		new.z = atof(content);
 	return (new);	
 }
-static void			addValueToScene(t_env *env, char *content, int currentName)
+static void			addValueToScene(char *content, int currentName)
 {
 	if (currentName == AMBIENT)
-		env->scene.ambient = atof(content);
+		g_env.scene.ambient = atof(content);
 	else if (currentName == SPECULAR)
-		env->scene.specular = atof(content);
+		g_env.scene.specular = atof(content);
 	else
 		printf("Warning: invalid member in scene object\n");		
 }
 
-static void			addValueToCamera(t_env *env, char *content, int currentName, int vcount)
+static void			addValueToCamera(char *content, int currentName, int vcount)
 {
 	if (currentName == ORIGIN)
-		env->camera.origin = addValueToVector(env->camera.origin, content, vcount);
+		g_env.camera.origin = addValueToVector(g_env.camera.origin, content, vcount);
 	else if (currentName == ROTATION)
-		env->camera.rotation = addValueToVector(env->camera.rotation, content, vcount);
+		g_env.camera.rotation = addValueToVector(g_env.camera.rotation, content, vcount);
 	else
 		printf("Warning: invalid member in camera object\n");		
 }
 
-static void			addValueToLight(t_env *env, char *content, int currentName, int vcount)
+static void			addValueToLight(char *content, int currentName, int vcount)
 {
 	t_light			*tmp;
 
-	tmp = env->light;
-	while (env->light->next)
-		env->light = env->light->next;
+	tmp = g_env.light;
+	while (g_env.light->next)
+		g_env.light = g_env.light->next;
 	if (currentName == ORIGIN)
-		env->light->origin = addValueToVector(env->light->origin, content, vcount);
+		g_env.light->origin = addValueToVector(g_env.light->origin, content, vcount);
 	else if (currentName == COLOR)
-		env->light->color = addValueToVector(env->light->color, content, vcount);
+		g_env.light->color = addValueToVector(g_env.light->color, content, vcount);
 	else if (currentName == DIRECTION)
-		env->light->direction = addValueToVector(env->light->direction, content, vcount);
+		g_env.light->direction = addValueToVector(g_env.light->direction, content, vcount);
 	else if (currentName == TYPE)
-		env->light->type = ft_strdup(content);
+		g_env.light->type = ft_strdup(content);
 	else
 		printf("Warning: invalid member in light object\n");
-	env->light = tmp;
+	g_env.light = tmp;
 
 }
 
-static void			addValueToObject(t_env *env, char *content, int currentName, int vcount)
+static void			addValueToObject(char *content, int currentName, int vcount)
 {
 	t_object		*tmp;
 
-	tmp = env->object;
-	while (env->object->next)
-		env->object = env->object->next;
+	tmp = g_env.object;
+	while (g_env.object->next)
+		g_env.object = g_env.object->next;
 	if (currentName == NAME)
-		env->object->name = ft_strdup(content);
+		g_env.object->name = ft_strdup(content);
 	else if (currentName == ORIGIN)
-		env->object->origin = addValueToVector(env->object->origin, content, vcount);
+		g_env.object->origin = addValueToVector(g_env.object->origin, content, vcount);
 	else if (currentName == ROTATION)
-		env->object->rotation = addValueToVector(env->object->rotation, content, vcount);
+		g_env.object->rotation = addValueToVector(g_env.object->rotation, content, vcount);
 	else if (currentName == COLOR)
-		env->object->color = addValueToVector(env->object->color, content, vcount);
+		g_env.object->color = addValueToVector(g_env.object->color, content, vcount);
 	else if (currentName == RADIUS)
-		env->object->radius = atof(content);
+		g_env.object->radius = atof(content);
 	else if (currentName == ANGLE)
-		env->object->angle = atof(content);
+		g_env.object->angle = atof(content);
 	else if (currentName == TEXTURE)
-		env->object->texture = ft_strdup(content);
+		g_env.object->texture = ft_strdup(content);
 	else if (currentName == TRANSPARENCY)
-		env->object->transparency = atof(content);
+		g_env.object->transparency = atof(content);
 	else if (currentName == DENSITY)
-		env->object->density = atof(content);
+		g_env.object->density = atof(content);
 	else if (currentName == REFLECTION)
-		env->object->reflection = atof(content);
+		g_env.object->reflection = atof(content);
 	else
 		printf("Warning: invalid member in object object\n");
-	env->object = tmp;
+	g_env.object = tmp;
 }
 
-static void			addValueToStruct(t_env *env, char *content, int currentObject, int currentName, int vcount)
+static void			addValueToStruct(char *content, int currentObject, int currentName, int vcount)
 {
 	if (currentObject == SCENE)
-		addValueToScene(env, content, currentName);
+		addValueToScene(content, currentName);
 	else if (currentObject == CAMERA)
-		addValueToCamera(env, content, currentName, vcount);
+		addValueToCamera(content, currentName, vcount);
 	else if (currentObject == LIGHT)
-		addValueToLight(env, content, currentName, vcount);
+		addValueToLight(content, currentName, vcount);
 	else if (currentObject == OBJECTS)
-		addValueToObject(env, content, currentName, vcount);
+		addValueToObject(content, currentName, vcount);
 }
 
-int				fillStruct(t_env *env, t_ast *ast)
+int				fillStruct(t_ast *ast)
 {
 	int			currentObject = 0;
 	int			currentName = 0;
@@ -210,14 +210,14 @@ int				fillStruct(t_env *env, t_ast *ast)
 	{
 		if (isMemberObject(ast->type))
 		{
-			addObjectToStruct(env, ast->type);
+			addObjectToStruct(ast->type);
 			currentObject = ast->type;
 		}
 		else if (ast->type == -1)
-			addObjectToStruct(env, currentObject);
+			addObjectToStruct(currentObject);
 		else if (isStringValue(ast->type) || ast->type == NUMBER)
 		{
-			addValueToStruct(env, ast->content, currentObject, currentName, vcount);
+			addValueToStruct(ast->content, currentObject, currentName, vcount);
 			vcount++;
 		}
 		else
