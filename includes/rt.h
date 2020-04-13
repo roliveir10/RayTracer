@@ -7,12 +7,10 @@
 # include "lexer.h"
 # include "data.h"
 
-# define SCREENX 1440
+# define SCREENX 900
 # define SCREENY 900
 # define PIXELS SCREENX * SCREENY
-# define FOV 10
-# define VIEW_PLANE_WIDTH SCREENX / 100
-# define VIEW_PLANE_HEIGHT SCREENY / 100
+# define FOV 1000
 
 # define NBR_KEY 1
 # define NBR_ELEMENT 4
@@ -60,6 +58,7 @@ typedef struct			s_rayHit
 	t_vector			normal;
 	t_vector			point;
 	t_vector			color;
+	t_object			obj;
 }						t_rayHit;
 
 t_env					g_env;
@@ -70,6 +69,13 @@ int						fillStruct(t_ast *ast);
 
 int						keyPress(int keycode);
 int						rt_close(void);
+
+// SHAPEINTER
+
+double					plan(t_object obj, t_vector o, t_vector dir);
+double					sphere(t_object obj, t_vector o, t_vector dir);
+double					cylindre(t_object obj, t_vector o, t_vector dir);
+double					cone(t_object obj, t_vector o, t_vector dir);
 
 //RAYCAST
 
@@ -82,6 +88,16 @@ t_vector				vDirCamToPoint(t_camera cam, double x, double y);
 //CAMERA
 
 void					initCamera(t_camera *cam);
+
+// ROTATION
+
+void					initializeRotation(void);
+void					changeReference(t_vector *o, t_vector *dir, t_object obj);
+t_vector				resetPointReference(t_object obj, t_vector point);
+
+// NORMAL
+
+t_vector				normal(t_vector point, t_object obj);
 
 // FREE
 

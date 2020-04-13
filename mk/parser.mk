@@ -7,7 +7,8 @@ PARSER =	main.c				\
 		lexerTabInit.c			\
 		syntaxAnalysis.c		\
 		ast.c				\
-		fillStruct.c
+		fillStruct.c			\
+		valueToStruct.c
 	
 
 

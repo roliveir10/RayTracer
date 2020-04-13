@@ -13,7 +13,6 @@
 #include <math.h>
 #include "libft.h"
 
-#include <stdio.h>
 double			ft_2nd_degree(double a, double b, double c)
 {
 	double		t1;
@@ -24,9 +23,7 @@ double			ft_2nd_degree(double a, double b, double c)
 		return (-1);
 	t1 = (-b + sqrt(delta)) / (2.0 * a);
 	if (!delta)
-	{
 		return (t1 > 0 ? t1 : -1);
-	}
 	t2 = (-b - sqrt(delta)) / (2.0 * a);
 	if (t1 <= 0 && t2 > 0)
 		return (t2);

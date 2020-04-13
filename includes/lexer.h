@@ -131,4 +131,5 @@ int				isMemberNumber(int s);
 void				addNoeud(t_ast **ast, char *content, int type);
 void				freeAst(t_ast **ast);
 
+void				addValueToStruct(char *content, int currentObject, int currentName, int vcount);
 #endif

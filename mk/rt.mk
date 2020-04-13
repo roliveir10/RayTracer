@@ -4,7 +4,10 @@ RT_PATH = ./srcs/rt/
 RT =	init.c				\
 		keyHandler.c		\
 		camera.c			\
-		rayHit.c
+		rayHit.c			\
+		basicsShape.c		\
+		rotationManager.c	\
+		basicsNormal.c
 	
 
 

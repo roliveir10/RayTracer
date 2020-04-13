@@ -43,29 +43,29 @@ t_vector			attribute_color(int color)
 int				rt_manager(void *param)
 {
 	int				pos;
-	t_vector		color;
 	t_mlx			*mlx;
 	t_rayHit		hit;
 
 	mlx = (t_mlx*)param;
 	pos = 0;
-	color.x = 0xFF;
-	color.y = 0x00;
-	color.z = 0x00;
 	while (pos < PIXELS)
 	{
-		hit = rayCast(g_env.camera.origin, vDirCamToPoint(g_env.camera, pos % SCREENX, pos / SCREENY), 100);
-		addPixel(mlx, color, pos);
+		hit = rayCast(g_env.camera.origin, vDirCamToPoint(g_env.camera, pos % SCREENX, pos / SCREENY), 100000);
+		if (hit.distance > 0)
+			addPixel(mlx, hit.color, pos);
+		else
+			addPixel(mlx, hit.color, pos);
 		pos++; 
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->id, mlx->image, 0, 0);
-	return (0);
+	return (1);
 }
 
 int				rt_main(void)
 {
 	initmlx();
 	initCamera(&(g_env.camera));
+	initializeRotation();
 	mlx_hook(g_env.mlx.id, KEYPRESS, 0, keyPress, NULL);
 	mlx_hook(g_env.mlx.id, REDBUTTON, 0, rt_close, NULL);
 //	mlx_hook(g_env.mlx.id, MOUSEPRESS, 0, void, void);

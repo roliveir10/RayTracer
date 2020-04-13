@@ -3,6 +3,16 @@
 
 # include "rt.h"
 
+# define NBR_SHAPE 4
+
+typedef enum			s_shape
+{
+	SPHERE,
+	PLAN,
+	CYLINDRE,
+	CONE
+}						t_shape;
+
 typedef struct			s_scene
 {
 	double				ambient;
@@ -29,6 +39,7 @@ typedef struct			s_light
 typedef struct			s_object
 {
 	char				*name;
+	int					type;
 	t_vector			origin;
 	t_vector			rotation;
 	t_vector			color;
@@ -38,6 +49,8 @@ typedef struct			s_object
 	double				transparency;
 	double				density;
 	double				reflection;
+	double				matRot[3][3][3];
+	double				matRotInv[3][3][3];
 	struct s_object		*next;
 }						t_object;
 
