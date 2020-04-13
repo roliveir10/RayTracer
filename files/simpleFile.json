@@ -9,7 +9,7 @@
 		"origin":[0, 0, 0],
 		"rotation":[90, 90, 49],
 		"radius":3,
-		"color":[255, 0, 0]
+		"color":[255, 45, 100]
 	},
 	{
 		"name":"sphere",

@@ -76,7 +76,7 @@ static void			addValueToObject(char *content, int currentName, int vcount)
 		else if (currentName == ROTATION)
 				g_env.object->rotation = addValueToVector(g_env.object->rotation, content, vcount);
 		else if (currentName == COLOR)
-				g_env.object->color = addValueToVector(g_env.object->color, content, vcount);
+				g_env.object->color = addValueToVector(ft_vdiv(g_env.object->color, 255), content, vcount);
 		else if (currentName == RADIUS)
 				g_env.object->radius = atof(content);
 		else if (currentName == ANGLE)
