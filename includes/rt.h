@@ -13,6 +13,7 @@
 # define FOV 1000
 
 # define NBR_KEY 1
+# define NBR_MKEY 2
 # define NBR_ELEMENT 4
 
 typedef enum			e_event
@@ -32,6 +33,11 @@ typedef enum			e_key
 	KDOWN
 }						t_key;
 
+typedef enum			e_mkey
+{
+	MDOWN = 4,
+	MUP
+}						t_mkey;
 typedef struct			s_mlx
 {
 	void				*mlx;
@@ -64,10 +70,12 @@ typedef struct			s_rayHit
 t_env					g_env;
 
 int						rt_main(void);
+int						rt_manager(void);
 char					*open_file(char *argv);
 int						fillStruct(t_ast *ast);
 
 int						keyPress(int keycode);
+int						mousePress(int keycode, int x, int y);
 int						rt_close(void);
 
 // SHAPEINTER
@@ -88,6 +96,7 @@ t_vector				vDirCamToPoint(t_camera cam, double x, double y);
 //CAMERA
 
 void					initCamera(t_camera *cam);
+void					moveCamZ(int keycode);
 
 // ROTATION
 

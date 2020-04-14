@@ -23,3 +23,13 @@ void				initCamera(t_camera *cam)
 	cam->direction[2].z = 1.0;
 	cam->vpUpLeft = calcUpLeftPoint(*cam);
 }
+
+void				moveCamZ(int keycode)
+{
+	if (keycode == MUP)
+		g_env.camera.origin.z -= SCREENX * 0.004;
+	else if (keycode == MDOWN)
+		g_env.camera.origin.z += SCREENX * 0.004;
+	g_env.camera.vpUpLeft = calcUpLeftPoint(g_env.camera);
+	rt_manager();
+}

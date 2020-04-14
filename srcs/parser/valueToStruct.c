@@ -1,5 +1,6 @@
 #include "rt.h"
 #include <stdlib.h>
+#include <math.h>
 
 static t_vector			addValueToVector(t_vector vector, char *content, int vcount)
 {
@@ -14,6 +15,21 @@ static t_vector			addValueToVector(t_vector vector, char *content, int vcount)
 				new.z = atof(content);
 		return (new);
 }
+
+static t_vector		addValueToColor(t_vector vector, char *content, int vcount)
+{
+	t_vector		new;
+
+	new = vector;
+	if (vcount == 0)
+		new.x = ft_clamp(atof(content) / 255, 0, 1);
+	else if (vcount == 1)
+		new.y = ft_clamp(atof(content) / 255, 0, 1);
+	else if (vcount == 2)
+		new.z = ft_clamp(atof(content) / 255, 0, 1);
+	return (new);
+}
+
 static void			addValueToScene(char *content, int currentName)
 {
 		if (currentName == AMBIENT)
@@ -44,7 +60,7 @@ static void			addValueToLight(char *content, int currentName, int vcount)
 		if (currentName == ORIGIN)
 				g_env.light->origin = addValueToVector(g_env.light->origin, content, vcount);
 		else if (currentName == COLOR)
-				g_env.light->color = addValueToVector(g_env.light->color, content, vcount);
+				g_env.light->color = addValueToColor(g_env.light->color, content, vcount);
 		else if (currentName == DIRECTION)
 				g_env.light->direction = addValueToVector(g_env.light->direction, content, vcount);
 		else if (currentName == TYPE)
@@ -76,11 +92,11 @@ static void			addValueToObject(char *content, int currentName, int vcount)
 		else if (currentName == ROTATION)
 				g_env.object->rotation = addValueToVector(g_env.object->rotation, content, vcount);
 		else if (currentName == COLOR)
-				g_env.object->color = addValueToVector(ft_vdiv(g_env.object->color, 255), content, vcount);
+				g_env.object->color = addValueToColor(g_env.object->color, content, vcount);
 		else if (currentName == RADIUS)
 				g_env.object->radius = atof(content);
 		else if (currentName == ANGLE)
-				g_env.object->angle = atof(content);
+				g_env.object->angle = atof(content) * M_PI / 180;
 		else if (currentName == TEXTURE)
 				g_env.object->texture = ft_strdup(content);
 		else if (currentName == TRANSPARENCY)

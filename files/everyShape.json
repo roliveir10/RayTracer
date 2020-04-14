@@ -12,21 +12,22 @@
 		"color":[255, 255, 255]
 	},
 	{
-		"name":"sphere",
-		"origin":[15, 33, 3],
-		"radius":3,
-		"color":[0, 0, 255]
+		"name":"cone",
+		"origin":[50, 33, 300],
+		"angle":10,
+		"color":[0, 255, 0]
 	},
 	{
-		"name":"sphere",
-		"origin":[30, 33, 20],
-		"radius":7,
+		"name":"cylindre",
+		"origin":[30, 33, 1400],
+		"rotation":[0, 0, -45],
+		"radius":3,
 		"color":[255, 255, 255]
 	},
 	{
-		"name":"sphere",
-		"origin":[25, 33, 3],
-		"radius":3,
+		"name":"plan",
+		"origin":[20, 32, 50],
+		"rotation":[0, 0, 0],
 		"color":[0, 0, 255]
 	}]
 }

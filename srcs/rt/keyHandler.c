@@ -14,12 +14,19 @@ int					rt_close(void)
 
 int					keyPress(int keycode)
 {
-	const int		key[NBR_KEY] = {KESCAP};
-	static void		(*function[NBR_KEY])(int) = {escap};
+	int				key[NBR_KEY] = {KESCAP};
+	void			(*function[NBR_KEY])(int) = {escap};
 	int				i = -1;
 
 	while (++i < NBR_KEY)
 		if (key[i] == keycode)
 			function[i](keycode);
+	return (1);
+}
+
+int					mousePress(int keycode, __unused int x, __unused int y)
+{
+	if (keycode == MDOWN || keycode == MUP)
+		moveCamZ(keycode);
 	return (1);
 }
