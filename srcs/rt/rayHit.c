@@ -7,11 +7,11 @@ t_vector			vDirCamToPoint(t_camera cam, double x, double y)
 	double			xind;
 	double			yind;
 
-	xind = 1.0 / (double)SCREENX;
-	yind = 1.0 / (double)SCREENY;
+	xind = 14 * x / (double)SCREENX;
+	yind = 9 * y / (double)SCREENY;
 
-	pointOnCanvas = ft_vsub(ft_vmul(cam.direction[1], yind * y),
-				ft_vadd(cam.vpUpLeft, ft_vmul(cam.direction[0], xind * x)));
+	pointOnCanvas = ft_vsub(ft_vmul(cam.direction[1], yind),
+				ft_vadd(cam.vpUpLeft, ft_vmul(cam.direction[0], xind)));
 	vDir = ft_vsub(cam.origin, pointOnCanvas);
 	return (ft_normalize(vDir));
 }

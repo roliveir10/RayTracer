@@ -7,9 +7,9 @@ static t_vector		calcUpLeftPoint(t_camera cam)
 	t_vector		vy;
 	t_vector		vz;
 
-	vz = ft_vmul(cam.direction[2], 1.0);
-	vy = ft_vmul(cam.direction[1], 1.0 * 0.5);
-	vx = ft_vmul(cam.direction[0], 1.0 * 0.5);
+	vz = ft_vmul(cam.direction[2], FOV);
+	vy = ft_vmul(cam.direction[1], 9 * 0.5);
+	vx = ft_vmul(cam.direction[0], 14 * 0.5);
 	vpUpLeft.x = cam.origin.x + vz.x + vy.x - vx.x;
 	vpUpLeft.y = cam.origin.y + vz.y + vy.y - vx.y;
 	vpUpLeft.z = cam.origin.z + vz.z + vy.z - vx.z;

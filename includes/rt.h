@@ -6,11 +6,7 @@
 # include "libft.h"
 # include "lexer.h"
 # include "data.h"
-
-# define SCREENX 900
-# define SCREENY 900
-# define PIXELS SCREENX * SCREENY
-# define FOV 1000
+# include "var.h"
 
 # define NBR_KEY 1
 # define NBR_MKEY 2

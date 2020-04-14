@@ -18,16 +18,25 @@ static void			initmlx(void)
 			&g_env.mlx.pix, &g_env.mlx.size_line, &g_env.mlx.endian);
 }
 
-void				addPixel(t_mlx mlx, t_vector color, int pos)
+void				addPixel(t_mlx mlx, t_vector color, int x, int y)
 {
 	unsigned char		rgb[3];
 	unsigned int		color_rgb;
+	int					offSetX;
+	int					offSetY;
 
+	offSetX = x + PIXPERUNIT;
+	offSetY = y + PIXPERUNIT;
 	rgb[0] = (unsigned char)(ft_clamp(pow(color.x, .454545), 0, 1) * 255);
 	rgb[1] = (unsigned char)(ft_clamp(pow(color.y, .454545), 0, 1) * 255);
 	rgb[2] = (unsigned char)(ft_clamp(pow(color.z, .454545), 0, 1) * 255);
 	color_rgb = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
-	mlx.mem_image[pos] = color_rgb;
+	for (int i = y; i < offSetY; i++)
+		for (int j = x; j < offSetX; j++)
+		{
+			if (j + i * SCREENX < RESOLUTION)
+				mlx.mem_image[j + i * SCREENX] = color_rgb;
+		}
 }
 
 t_vector			attribute_color(int color)
@@ -42,19 +51,28 @@ t_vector			attribute_color(int color)
 
 int				rt_manager(void)
 {
-	int				pos;
 	t_rayHit		hit;
+	double			x;
+	double			y;
+	t_vector		rayDir;
+	t_vector		color;
 
-	pos = 0;
-	while (pos < PIXELS)
-	{
-		hit = rayCast(g_env.camera.origin, vDirCamToPoint(g_env.camera, pos % SCREENX, pos / SCREENY), 100000);
-		if (hit.distance > 0)
-			addPixel(g_env.mlx, hit.color, pos);
-		else
-			addPixel(g_env.mlx, hit.color, pos);
-		pos++; 
-	}
+	for (int i = 0; i < SCREENY; i += PIXPERUNIT)
+		for (int j = 0; j < SCREENX; j += PIXPERUNIT)
+		{
+			ft_bzero(&color, sizeof(t_vector));
+			for (int s = 0; s < SAMPLE_RATE; s++)
+			{
+				y = (double)i + drand48();
+				x = (double)j + drand48();
+				rayDir = vDirCamToPoint(g_env.camera, x, y);
+				hit = rayCast(g_env.camera.origin, rayDir, 100000);
+				color = ft_vadd(color, hit.color);
+			}
+			color = ft_vdiv(color, SAMPLE_RATE);
+			addPixel(g_env.mlx, color, j, i);
+
+		}
 	mlx_put_image_to_window(g_env.mlx.mlx, g_env.mlx.id, g_env.mlx.image, 0, 0);
 	return (1);
 }
