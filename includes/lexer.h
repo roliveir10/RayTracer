@@ -5,7 +5,9 @@
 
 # define NBR_STATE 17
 # define NBR_CHAR 128
-# define NBR_WORD 25
+
+// number of possible word in the config file
+# define NBR_WORD 26
 
 # define INITIAL_DICO_SIZE 50
 # define INCREMENT_DICO_SIZE 25
@@ -20,13 +22,13 @@
 # define LAST_STRING_NAME 22
 
 # define FIRST_VECTOR_NAME 23
-# define LAST_VECTOR_NAME 26
+# define LAST_VECTOR_NAME 27
 
-# define FIRST_NUMBER_NAME 27
-# define LAST_NUMBER_NAME 33
+# define FIRST_NUMBER_NAME 28
+# define LAST_NUMBER_NAME 34
 
-# define FIRST_STRING_VALUE 34
-# define LAST_STRING_VALUE 40
+# define FIRST_STRING_VALUE 35
+# define LAST_STRING_VALUE 41
 
 
 int				g_transit[NBR_STATE][NBR_CHAR];
@@ -60,21 +62,22 @@ typedef	enum			e_state
 	ORIGIN = 23,
 	ROTATION,
 	DIRECTION,
-	COLOR = 26,
-	AMBIENT = 27,
+	BACKGROUND,
+	COLOR = 27,
+	AMBIENT = 28,
 	SPECULAR,
 	ANGLE,
 	RADIUS,
 	REFLECTION,
 	DENSITY,
-	TRANSPARENCY = 33,
-	LPOINT = 34,
+	TRANSPARENCY = 34,
+	LPOINT = 35,
 	LCAST,
 	LSPOT,
 	SSPHERE,
 	SCONE,
 	SPLAN,
-	SCYLINDRE = 40,
+	SCYLINDRE = 41,
 	ERROR
 }				t_state;
 

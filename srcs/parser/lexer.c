@@ -34,7 +34,8 @@ static void			wordCompare(char *charSaved)
 		{"\"density\"", DENSITY}, {"\"texture\"", TEXTURE},
 		{"\"transparency\"", TRANSPARENCY}, {"\"point\"", LPOINT}, {"\"cast\"", LCAST},
 		{"\"spot\"", LSPOT}, {"\"sphere\"", SSPHERE}, {"\"cone\"", SCONE},
-		{"\"plan\"", SPLAN}, {"\"cylindre\"", SCYLINDRE}
+		{"\"plan\"", SPLAN}, {"\"cylindre\"", SCYLINDRE},
+		{"\"background\"", BACKGROUND}
 	};
 	char			*tmp;
 

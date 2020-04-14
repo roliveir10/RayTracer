@@ -45,7 +45,10 @@ static t_vector		hitPoint(t_vector o, t_vector dir, double dist)
 void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 {
 	if (!hit->distance)
+	{
+		hit->color = g_env.scene.background;
 		return;
+	}
 	hit->point = hitPoint(o, dir, hit->distance);
 	hit->normal = normal(hit->point, hit->obj);
 	hit->point = resetPointReference(hit->obj, hit->point);

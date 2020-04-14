@@ -34,6 +34,7 @@ typedef enum			e_mkey
 	MDOWN = 4,
 	MUP
 }						t_mkey;
+
 typedef struct			s_mlx
 {
 	void				*mlx;
@@ -66,7 +67,7 @@ typedef struct			s_rayHit
 t_env					g_env;
 
 int						rt_main(void);
-int						rt_manager(void);
+int						printWindow(void);
 char					*open_file(char *argv);
 int						fillStruct(t_ast *ast);
 
@@ -103,6 +104,10 @@ t_vector				resetPointReference(t_object obj, t_vector point);
 // NORMAL
 
 t_vector				normal(t_vector point, t_object obj);
+
+// COLOR
+
+t_vector				setColor(int color);
 
 // FREE
 

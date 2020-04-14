@@ -30,12 +30,14 @@ static t_vector		addValueToColor(t_vector vector, char *content, int vcount)
 	return (new);
 }
 
-static void			addValueToScene(char *content, int currentName)
+static void			addValueToScene(char *content, int currentName, int vcount)
 {
 		if (currentName == AMBIENT)
 				g_env.scene.ambient = atof(content);
 		else if (currentName == SPECULAR)
 				g_env.scene.specular = atof(content);
+		else if (currentName == BACKGROUND)
+				g_env.scene.background = addValueToColor(g_env.scene.background, content, vcount);
 		else
 				printf("Warning: invalid member in scene object\n");
 }
@@ -113,7 +115,7 @@ static void			addValueToObject(char *content, int currentName, int vcount)
 void			addValueToStruct(char *content, int currentObject, int currentName, int vcount)
 {
 		if (currentObject == SCENE)
-				addValueToScene(content, currentName);
+				addValueToScene(content, currentName, vcount);
 		else if (currentObject == CAMERA)
 				addValueToCamera(content, currentName, vcount);
 		else if (currentObject == LIGHT)

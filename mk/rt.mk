@@ -7,7 +7,9 @@ RT =	init.c				\
 		rayHit.c			\
 		basicsShape.c		\
 		rotationManager.c	\
-		basicsNormal.c
+		basicsNormal.c		\
+		printWindow.c		\
+		color.c
 	
 
 

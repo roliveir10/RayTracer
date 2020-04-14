@@ -15,6 +15,7 @@ typedef enum			s_shape
 
 typedef struct			s_scene
 {
+	t_vector			background;
 	double				ambient;
 	double				specular;
 }						t_scene;

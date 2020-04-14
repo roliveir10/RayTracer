@@ -31,5 +31,5 @@ void				moveCamZ(int keycode)
 	else if (keycode == MDOWN)
 		g_env.camera.origin.z += SCREENX * 0.004;
 	g_env.camera.vpUpLeft = calcUpLeftPoint(g_env.camera);
-	rt_manager();
+	printWindow();
 }
