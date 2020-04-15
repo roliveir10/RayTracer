@@ -7,8 +7,8 @@ t_vector			vDirCamToPoint(t_camera cam, double x, double y)
 	double			xind;
 	double			yind;
 
-	xind = 14 * x / (double)SCREENX;
-	yind = 9 * y / (double)SCREENY;
+	xind = 14 * x / (double)g_env.scene.screenX;
+	yind = 9 * y / (double)g_env.scene.screenY;
 
 	pointOnCanvas = ft_vsub(ft_vmul(cam.direction[1], yind),
 				ft_vadd(cam.vpUpLeft, ft_vmul(cam.direction[0], xind)));
@@ -51,10 +51,9 @@ void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 	}
 	hit->point = hitPoint(o, dir, hit->distance);
 	hit->normal = normal(hit->point, hit->obj);
-	hit->point = resetPointReference(hit->obj, hit->point);
 	for (int i = 2; i >= 0; i--)
 		hit->normal = ft_vrotate(hit->normal, hit->obj.matRotInv[i]);
-//	hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
+	hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
 
 }
 

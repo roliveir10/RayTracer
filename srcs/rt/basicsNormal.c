@@ -45,5 +45,6 @@ t_vector					normal(t_vector point, t_object obj)
 	t_vector				(*func[NBR_SHAPE])(t_vector, t_object) = {
 		sphereNormal, planNormal, cylindreNormal, coneNormal};
 	
+	point = changePointReference(point, obj);
 	return (ft_normalize(func[obj.type](point, obj)));
 }

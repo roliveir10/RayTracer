@@ -6,7 +6,6 @@
 # include "libft.h"
 # include "lexer.h"
 # include "data.h"
-# include "var.h"
 
 # define NBR_KEY 1
 # define NBR_MKEY 2
@@ -49,6 +48,7 @@ typedef struct			s_mlx
 typedef struct			s_env
 {
 	t_mlx				mlx;
+	int					resolution;
 	t_scene				scene;
 	t_camera			camera;
 	t_light				*light;
@@ -100,6 +100,7 @@ void					moveCamZ(int keycode);
 
 void					initializeRotation(void);
 void					changeReference(t_vector *o, t_vector *dir, t_object obj);
+t_vector				changePointReference(t_vector point, t_object obj);
 t_vector				resetPointReference(t_object obj, t_vector point);
 
 // NORMAL

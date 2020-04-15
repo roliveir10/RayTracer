@@ -100,6 +100,36 @@ static void			addObjectToStruct(int type)
 	}
 }
 
+static void		addDefaultValue(void)
+{
+	if (!g_env.scene.screenX || !g_env.scene.screenY)
+	{
+		g_env.scene.screenX = 1400;
+		g_env.scene.screenY = 900;
+		printf("Warning: `screenX` set by default to 1400. `screenY` set by default to 900\n");
+	}
+	if (!g_env.camera.fov)
+	{
+		g_env.camera.fov = 10;
+		printf("Warning: `fov` set by default to 10\n");
+	}
+	if (!g_env.scene.sampleRate)
+	{
+		g_env.scene.sampleRate = 1;
+		printf("Warning: `sampleRate` set by default to 1\n");
+	}
+	if (!g_env.scene.pixPerUnit)
+	{
+		g_env.scene.pixPerUnit = 1;
+		printf("Warning: `pixPerUnit` set by default to 1\n");
+	}
+	if (!g_env.scene.maxDistToPrint)
+	{
+		g_env.scene.maxDistToPrint = 15000;
+		printf("Warning: `maxDistToPrint` set by default to 15000\n");
+	}
+}
+
 int				fillStruct(t_ast *ast)
 {
 	int			currentObject = 0;
@@ -132,5 +162,6 @@ int				fillStruct(t_ast *ast)
 		}
 		ast = ast->next;
 	}
+	addDefaultValue();
 	return (1);
 }

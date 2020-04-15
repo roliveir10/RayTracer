@@ -16,6 +16,11 @@ typedef enum			s_shape
 typedef struct			s_scene
 {
 	t_vector			background;
+	int					screenX;
+	int					screenY;
+	int					sampleRate;
+	int					pixPerUnit;
+	int					maxDistToPrint;
 	double				ambient;
 	double				specular;
 }						t_scene;
@@ -26,6 +31,7 @@ typedef struct			s_camera
 	t_vector			rotation;
 	t_vector			direction[3];
 	t_vector			vpUpLeft;
+	int					fov;
 }						t_camera;
 
 typedef struct			s_light

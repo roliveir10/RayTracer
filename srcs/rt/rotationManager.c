@@ -10,6 +10,14 @@ void				changeReference(t_vector *o, t_vector *dir, t_object obj)
 	}
 }
 
+t_vector				changePointReference(t_vector point, t_object obj)
+{
+	point = ft_vsub(obj.origin, point);
+	for (int i = 0; i < 3; i++)
+		point = ft_vrotate(point, obj.matRot[i]);
+	return (point);
+}
+
 t_vector				resetPointReference(t_object obj, t_vector point)
 {
 	t_vector			new;

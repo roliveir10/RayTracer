@@ -11,8 +11,8 @@ void				delenv(void)
 static void			initmlx(void)
 {
 	g_env.mlx.mlx = mlx_init();
-	g_env.mlx.image = mlx_new_image(g_env.mlx.mlx, SCREENX, SCREENY);
-	g_env.mlx.id = mlx_new_window(g_env.mlx.mlx, SCREENX, SCREENY, "RayTracer de Robin");
+	g_env.mlx.image = mlx_new_image(g_env.mlx.mlx, g_env.scene.screenX, g_env.scene.screenY);
+	g_env.mlx.id = mlx_new_window(g_env.mlx.mlx, g_env.scene.screenX, g_env.scene.screenY, "RayTracer de Robin");
 	g_env.mlx.mem_image = (unsigned int*)mlx_get_data_addr(g_env.mlx.image,
 			&g_env.mlx.pix, &g_env.mlx.size_line, &g_env.mlx.endian);
 }
@@ -20,6 +20,7 @@ static void			initmlx(void)
 int				rt_main(void)
 {
 	initmlx();
+	g_env.resolution = g_env.scene.screenX * g_env.scene.screenY;
 	initCamera(&(g_env.camera));
 	initializeRotation();
 	mlx_hook(g_env.mlx.id, KEYPRESS, 0, keyPress, NULL);

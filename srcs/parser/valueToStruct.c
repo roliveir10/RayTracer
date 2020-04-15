@@ -38,6 +38,18 @@ static void			addValueToScene(char *content, int currentName, int vcount)
 				g_env.scene.specular = atof(content);
 		else if (currentName == BACKGROUND)
 				g_env.scene.background = addValueToColor(g_env.scene.background, content, vcount);
+		else if (currentName == SCREENX)
+				g_env.scene.screenX = ft_atoi(content);
+		else if (currentName == SCREENY)
+				g_env.scene.screenY = ft_atoi(content);
+		else if (currentName == FOV)
+				g_env.camera.fov = ft_atoi(content);
+		else if (currentName == SAMPLERATE)
+				g_env.scene.sampleRate = ft_atoi(content);
+		else if (currentName == PIXPERUNIT)
+				g_env.scene.pixPerUnit = ft_atoi(content);
+		else if (currentName == MAXDISTTOPRINT)
+				g_env.scene.maxDistToPrint = ft_atoi(content);
 		else
 				printf("Warning: invalid member in scene object\n");
 }

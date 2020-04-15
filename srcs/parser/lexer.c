@@ -35,7 +35,9 @@ static void			wordCompare(char *charSaved)
 		{"\"transparency\"", TRANSPARENCY}, {"\"point\"", LPOINT}, {"\"cast\"", LCAST},
 		{"\"spot\"", LSPOT}, {"\"sphere\"", SSPHERE}, {"\"cone\"", SCONE},
 		{"\"plan\"", SPLAN}, {"\"cylindre\"", SCYLINDRE},
-		{"\"background\"", BACKGROUND}
+		{"\"background\"", BACKGROUND}, {"\"screenX\"", SCREENX},
+		{"\"screenY\"", SCREENY}, {"\"fov\"", FOV}, {"\"sampleRate\"", SAMPLERATE},
+		{"\"pixPerUnit\"", PIXPERUNIT}, {"\"maxDistToPrint\"", MAXDISTTOPRINT}
 	};
 	char			*tmp;
 

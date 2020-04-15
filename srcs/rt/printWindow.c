@@ -9,8 +9,8 @@ void					addPixel(t_mlx mlx, t_vector color, int x, int y)
 	int					offSetX;
 	int					offSetY;
 
-	offSetX = x + PIXPERUNIT;
-	offSetY = y + PIXPERUNIT;
+	offSetX = x + g_env.scene.pixPerUnit;
+	offSetY = y + g_env.scene.pixPerUnit;
 	rgb[0] = (unsigned char)(ft_clamp(pow(color.x, .454545), 0, 1) * 255);
 	rgb[1] = (unsigned char)(ft_clamp(pow(color.y, .454545), 0, 1) * 255);
 	rgb[2] = (unsigned char)(ft_clamp(pow(color.z, .454545), 0, 1) * 255);
@@ -18,8 +18,8 @@ void					addPixel(t_mlx mlx, t_vector color, int x, int y)
 	for (int i = y; i < offSetY; i++)
 		for (int j = x; j < offSetX; j++)
 		{
-			if (j + i * SCREENX < RESOLUTION)
-				mlx.mem_image[j + i * SCREENX] = color_rgb;
+			if (j + i * g_env.scene.screenX < g_env.resolution)
+				mlx.mem_image[j + i * g_env.scene.screenX] = color_rgb;
 		}
 }
 
@@ -33,7 +33,7 @@ static t_vector			pixColor(int i, int j)
 	y = (double)i + drand48();
 	x = (double)j + drand48();
 	rayDir = vDirCamToPoint(g_env.camera, x, y);
-	hit = rayCast(g_env.camera.origin, rayDir, MAX_DIST_TO_PRINT);
+	hit = rayCast(g_env.camera.origin, rayDir, g_env.scene.maxDistToPrint);
 	if (hit.distance > 0)
 		hit.color = light(hit);
 	return (hit.color);
@@ -43,13 +43,13 @@ int						printWindow(void)
 {
 	t_vector			color;
 
-	for (int i = 0; i < SCREENY; i += PIXPERUNIT)
-		for (int j = 0; j < SCREENX; j += PIXPERUNIT)
+	for (int i = 0; i < g_env.scene.screenY; i += g_env.scene.pixPerUnit)
+		for (int j = 0; j < g_env.scene.screenX; j += g_env.scene.pixPerUnit)
 		{
 			ft_bzero(&color, sizeof(t_vector));
-			for (int s = 0; s < SAMPLE_RATE; s++)
+			for (int s = 0; s < g_env.scene.sampleRate; s++)
 				color = ft_vadd(color, pixColor(i, j));
-			color = ft_vdiv(color, SAMPLE_RATE);
+			color = ft_vdiv(color, g_env.scene.sampleRate);
 			addPixel(g_env.mlx, color, j, i);
 		}
 	mlx_put_image_to_window(g_env.mlx.mlx, g_env.mlx.id, g_env.mlx.image, 0, 0);

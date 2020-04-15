@@ -1,0 +1,45 @@
+{
+	"scene":
+	{
+		"screenX":1400,
+		"screenY":900,
+		"fov":10,
+		"sampleRate":1,
+		"pixPerUnit":1,
+		"maxDistToPrint":15000,
+		"background":[0, 0, 0]
+	},
+	"camera":
+	{
+		"origin":[0, 0, -20]
+	},
+	"light":[
+	{
+		"origin":[6.5, 0, -16],
+		"color":[200, 0, 0],
+		"type":"point"
+	},
+	{
+		"origin":[-6.5, 0, -16],
+		"color":[0, 0, 200],
+		"type":"point"
+	}],
+	"object":[
+		{
+			"name":"sphere",
+			"origin":[0, 0, 0],
+			"radius":3,
+			"color":[180, 180, 180]
+		},
+		{
+			"name":"plan",
+			"origin":[0, -3, 0],
+			"color":[40, 40, 40]
+		},
+		{
+			"name":"cylindre",
+			"origin":[0, 0, 40],
+			"radius":5,
+			"color":[180, 180, 180]
+		}]
+}
