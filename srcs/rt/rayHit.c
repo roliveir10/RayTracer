@@ -16,7 +16,7 @@ t_vector			vDirCamToPoint(t_camera cam, double x, double y)
 	return (ft_normalize(vDir));
 }
 
-static double		distToHit(t_object obj, t_vector o, t_vector dir)
+double				distToHit(t_object obj, t_vector o, t_vector dir)
 {
 	double			(*func[NBR_SHAPE])(t_object, t_vector, t_vector) = {
 		sphere, plan, cylindre, cone};
@@ -52,10 +52,10 @@ void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 	hit->point = hitPoint(o, dir, hit->distance);
 	hit->normal = normal(hit->point, hit->obj);
 	hit->point = resetPointReference(hit->obj, hit->point);
-	for (int i = 3; i > -1; i--)
+	for (int i = 2; i > -1; i--)
 		hit->normal = ft_vrotate(hit->normal, hit->obj.matRotInv[i]);
-	hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
-	hit->color = hit->obj.color;
+	//hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
+
 }
 
 t_rayHit			rayCast(t_vector o, t_vector dir, double maxDist)

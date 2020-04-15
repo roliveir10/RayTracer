@@ -85,6 +85,7 @@ double					cone(t_object obj, t_vector o, t_vector dir);
 //RAYCAST
 
 t_rayHit				rayCast(t_vector o, t_vector dir, double maxDist);
+double					distToHit(t_object obj, t_vector o, t_vector dir);
 
 //VECTOR
 
@@ -104,6 +105,10 @@ t_vector				resetPointReference(t_object obj, t_vector point);
 // NORMAL
 
 t_vector				normal(t_vector point, t_object obj);
+
+// LIGHT
+
+t_vector				light(t_rayHit hit);
 
 // COLOR
 

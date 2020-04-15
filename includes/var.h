@@ -34,4 +34,11 @@
 
 # define PIXPERUNIT 1
 
+/*
+** change the maximal distance to print object in the scene
+** recommended value : MAX_DIST_TO_PRINT 15000
+*/
+
+# define MAX_DIST_TO_PRINT 15000
+
 # endif

@@ -9,7 +9,8 @@ RT =	init.c				\
 		rotationManager.c	\
 		basicsNormal.c		\
 		printWindow.c		\
-		color.c
+		color.c				\
+		light.c
 	
 
 

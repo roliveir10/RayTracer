@@ -33,7 +33,9 @@ static t_vector			pixColor(int i, int j)
 	y = (double)i + drand48();
 	x = (double)j + drand48();
 	rayDir = vDirCamToPoint(g_env.camera, x, y);
-	hit = rayCast(g_env.camera.origin, rayDir, 1000);
+	hit = rayCast(g_env.camera.origin, rayDir, MAX_DIST_TO_PRINT);
+	if (hit.distance > 0)
+		hit.color = light(hit);
 	return (hit.color);
 }
 
