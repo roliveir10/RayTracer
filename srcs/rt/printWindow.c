@@ -39,11 +39,21 @@ static t_vector			pixColor(int i, int j)
 	return (hit.color);
 }
 
+static void				printLoading(int y)
+{
+	double				percent;
+
+	percent = (double)y / g_env.scene.screenY * 100;
+	printf("Loading: %d%%\n", (int)percent);
+}
+
 int						printWindow(void)
 {
 	t_vector			color;
 
+
 	for (int i = 0; i < g_env.scene.screenY; i += g_env.scene.pixPerUnit)
+	{
 		for (int j = 0; j < g_env.scene.screenX; j += g_env.scene.pixPerUnit)
 		{
 			ft_bzero(&color, sizeof(t_vector));
@@ -52,6 +62,9 @@ int						printWindow(void)
 			color = ft_vdiv(color, g_env.scene.sampleRate);
 			addPixel(g_env.mlx, color, j, i);
 		}
+		if (i % (g_env.scene.screenY / 20) == 0)
+			printLoading(i);
+	}
 	mlx_put_image_to_window(g_env.mlx.mlx, g_env.mlx.id, g_env.mlx.image, 0, 0);
 	return (1);
 }
