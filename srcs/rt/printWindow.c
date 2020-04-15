@@ -1,6 +1,15 @@
 #include <stdlib.h>
 #include <math.h>
+#include <pthread.h>
 #include "rt.h"
+
+static void				printLoading(int y)
+{
+	double				percent;
+
+	percent = (double)y / g_env.scene.screenY * 100;
+	printf("Loading: %d%%\n", (int)percent);
+}
 
 void					addPixel(t_mlx mlx, t_vector color, int x, int y)
 {
@@ -39,32 +48,38 @@ static t_vector			pixColor(int i, int j)
 	return (hit.color);
 }
 
-static void				printLoading(int y)
+static void				*printLine(void *arg)
 {
-	double				percent;
+	t_vector			color;
 
-	percent = (double)y / g_env.scene.screenY * 100;
-	printf("Loading: %d%%\n", (int)percent);
+	for (int x = 0; x < g_env.scene.screenX; x += g_env.scene.pixPerUnit)
+	{
+		ft_bzero(&color, sizeof(t_vector));
+		for (int s = 0; s < g_env.scene.sampleRate; s++)
+			color = ft_vadd(color, pixColor((intptr_t)arg, x));
+		color = ft_vdiv(color, g_env.scene.sampleRate);
+		addPixel(g_env.mlx, color, x, (intptr_t)arg);
+	}
+	if ((intptr_t)arg % (g_env.scene.screenY / 20) == 0)
+		printLoading((intptr_t)arg);
+	return (NULL);
+}
+
+static void				createThread(int y)
+{
+	pthread_t			id[NBR_THREAD];
+
+	for (int i = 0; i < NBR_THREAD; i++)
+		pthread_create(&id[i], NULL, printLine, (void*)(intptr_t)(y + i));
+	for (int i = 0; i < NBR_THREAD; i++)
+		pthread_join(id[i], NULL);
 }
 
 int						printWindow(void)
 {
-	t_vector			color;
-
-
-	for (int i = 0; i < g_env.scene.screenY; i += g_env.scene.pixPerUnit)
-	{
-		for (int j = 0; j < g_env.scene.screenX; j += g_env.scene.pixPerUnit)
-		{
-			ft_bzero(&color, sizeof(t_vector));
-			for (int s = 0; s < g_env.scene.sampleRate; s++)
-				color = ft_vadd(color, pixColor(i, j));
-			color = ft_vdiv(color, g_env.scene.sampleRate);
-			addPixel(g_env.mlx, color, j, i);
-		}
-		if (i % (g_env.scene.screenY / 20) == 0)
-			printLoading(i);
-	}
+	for (int i = 0; i < g_env.scene.screenY; i += g_env.scene.pixPerUnit * NBR_THREAD)
+		createThread(i);
+	printLoading(g_env.scene.screenY);
 	mlx_put_image_to_window(g_env.mlx.mlx, g_env.mlx.id, g_env.mlx.image, 0, 0);
 	return (1);
 }

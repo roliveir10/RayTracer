@@ -10,6 +10,7 @@
 # define NBR_KEY 1
 # define NBR_MKEY 2
 # define NBR_ELEMENT 4
+# define NBR_THREAD 6
 
 typedef enum			e_event
 {
