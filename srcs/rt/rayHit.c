@@ -52,9 +52,9 @@ void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 	hit->point = hitPoint(o, dir, hit->distance);
 	hit->normal = normal(hit->point, hit->obj);
 	hit->point = resetPointReference(hit->obj, hit->point);
-	for (int i = 2; i > -1; i--)
+	for (int i = 2; i >= 0; i--)
 		hit->normal = ft_vrotate(hit->normal, hit->obj.matRotInv[i]);
-	//hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
+//	hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
 
 }
 

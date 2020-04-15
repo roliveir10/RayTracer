@@ -29,7 +29,7 @@ static t_vector			getLightAt(t_object *obj, t_light light, t_rayHit hit)
 
 	if (obj)
 		return (ambientOnly());
-	lDir = ft_get_vector(hit.point, light.origin);
+	lDir = ft_get_vector(light.origin, hit.point);
 	angle = ft_dot(hit.normal, lDir);
 	if (angle > 0)
 	{

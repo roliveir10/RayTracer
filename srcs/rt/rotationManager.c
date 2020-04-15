@@ -15,7 +15,7 @@ t_vector				resetPointReference(t_object obj, t_vector point)
 	t_vector			new;
 
 	new = point;
-	for (int i = 3; i >= 0; i--)
+	for (int i = 2; i >= 0; i--)
 		new = ft_vrotate(new, obj.matRotInv[i]);
 	new = ft_vadd(new, obj.origin);
 	return (new);
