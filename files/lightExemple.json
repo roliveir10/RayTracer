@@ -7,7 +7,8 @@
 		"sampleRate":4,
 		"pixPerUnit":1,
 		"maxDistToPrint":15000,
-		"background":[0, 0, 0]
+		"background":[0, 0, 0],
+		"ambient":0
 	},
 	"camera":
 	{
@@ -15,12 +16,12 @@
 	},
 	"light":[
 	{
-		"origin":[6.5, 0, -16],
+		"origin":[6, 0, -16],
 		"color":[200, 0, 0],
 		"type":"point"
 	},
 	{
-		"origin":[-6.5, 0, -16],
+		"origin":[-6, 0, -16],
 		"color":[0, 0, 200],
 		"type":"point"
 	}],
