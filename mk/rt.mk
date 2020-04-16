@@ -10,7 +10,9 @@ RT =	init.c				\
 		basicsNormal.c		\
 		printWindow.c		\
 		color.c				\
-		light.c
+		light.c				\
+		loading.c			\
+		ui.c
 	
 
 

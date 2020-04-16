@@ -35,16 +35,30 @@ typedef enum			e_mkey
 	MUP
 }						t_mkey;
 
+typedef enum			e_color
+{
+	WHITE = 0xffffff,
+	GREEN = 0x00ff00
+}						t_color;
+
 typedef struct			s_mlx
 {
 	void				*mlx;
-	void				*image;
+	void				*image[2];
 	void				*id;
-	unsigned int		*mem_image;
-	int					pix;
-	int					size_line;
-	int					endian;
+	unsigned int		*mem_image[2];
+	int					pix[2];
+	int					size_line[2];
+	int					endian[2];
+	int					loadX;
+	int					loadY;
 }						t_mlx;
+
+typedef enum			s_image
+{
+	RT,
+	LOAD
+}						t_image;
 
 typedef struct			s_env
 {
@@ -116,6 +130,14 @@ t_vector				light(t_rayHit hit);
 
 t_vector				setColor(int color);
 
+// LOADING
+
+void					printLoading(t_mlx *mlx, t_scene scene, int y);
+
+// UI
+
+void					addRectImage(unsigned int **image, int startX, int startY, int sizeX, int sizeY, int color);
+void					printImage(t_mlx *mlx, int imageId, int x, int y);
 // FREE
 
 void					delenv(void);

@@ -3,14 +3,6 @@
 #include <pthread.h>
 #include "rt.h"
 
-static void				printLoading(int y)
-{
-	double				percent;
-
-	percent = (double)y / g_env.scene.screenY * 100;
-	printf("Loading: %d%%\n", (int)percent);
-}
-
 void					addPixel(t_mlx mlx, t_vector color, int x, int y)
 {
 	unsigned char		rgb[3];
@@ -28,7 +20,7 @@ void					addPixel(t_mlx mlx, t_vector color, int x, int y)
 		for (int j = x; j < offSetX; j++)
 		{
 			if (j + i * g_env.scene.screenX < g_env.resolution)
-				mlx.mem_image[j + i * g_env.scene.screenX] = color_rgb;
+				mlx.mem_image[0][j + i * g_env.scene.screenX] = color_rgb;
 		}
 }
 
@@ -60,8 +52,8 @@ static void				*printLine(void *arg)
 		color = ft_vdiv(color, g_env.scene.sampleRate);
 		addPixel(g_env.mlx, color, x, (intptr_t)arg);
 	}
-	if ((intptr_t)arg % (g_env.scene.screenY / 20) == 0)
-		printLoading((intptr_t)arg);
+	if ((intptr_t)arg % (g_env.scene.screenY / 100) == 0)
+		printLoading(&g_env.mlx, g_env.scene, (intptr_t)arg);
 	return (NULL);
 }
 
@@ -70,16 +62,21 @@ static void				createThread(int y)
 	pthread_t			id[NBR_THREAD];
 
 	for (int i = 0; i < NBR_THREAD; i++)
-		pthread_create(&id[i], NULL, printLine, (void*)(intptr_t)(y + i));
+		pthread_create(&id[i], NULL, printLine, (void*)(intptr_t)(y + i * g_env.scene.pixPerUnit));
 	for (int i = 0; i < NBR_THREAD; i++)
 		pthread_join(id[i], NULL);
 }
 
 int						printWindow(void)
 {
-	for (int i = 0; i < g_env.scene.screenY; i += g_env.scene.pixPerUnit * NBR_THREAD)
+	static int			i = 0;
+	
+	if (i < g_env.scene.screenY)
+	{
 		createThread(i);
-	printLoading(g_env.scene.screenY);
-	mlx_put_image_to_window(g_env.mlx.mlx, g_env.mlx.id, g_env.mlx.image, 0, 0);
+		i += g_env.scene.pixPerUnit * NBR_THREAD;
+	}
+	if (i >= g_env.scene.screenY)
+		mlx_put_image_to_window(g_env.mlx.mlx, g_env.mlx.id, g_env.mlx.image[0], 0, 0);
 	return (1);
 }
