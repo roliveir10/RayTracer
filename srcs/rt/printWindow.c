@@ -36,7 +36,7 @@ static void				*printLine(void *arg)
 			color = antiAliasing(g_env.scene.sampleRate, x, y);
 			addPixel(color, x, y);
 		}
-		if (y % (g_env.scene.screenY / 100) == 0)
+		if (y % (NBR_THREAD * g_env.scene.pixPerUnit) == 0)
 			drawBar(&g_env.lib, (double)y / g_env.scene.screenY * g_env.lib.load.loadRect.w, 1);
 	}
 	return (NULL);

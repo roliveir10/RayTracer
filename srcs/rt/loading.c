@@ -15,7 +15,7 @@ static void		drawLoadingBar(t_lib *lib, int currentLoad)
 	for (int i = 0; i < lib->load.loadRect.h; i++)
 		for (int j = currentLoad - width; j < currentLoad + width; j++)
 		{
-			if (j >= 0)
+			if (j >= 0 && j < lib->load.loadRect.w)
 				lib->load.image[i * lib->load.loadRect.w + j] = GREEN;
 		}
 }
