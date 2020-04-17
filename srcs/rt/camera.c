@@ -8,8 +8,8 @@ static t_vector		calcUpLeftPoint(t_camera cam)
 	t_vector		vz;
 
 	vz = ft_vmul(cam.direction[2], g_env.camera.fov);
-	vy = ft_vmul(cam.direction[1], 9 * 0.5);
-	vx = ft_vmul(cam.direction[0], 14 * 0.5);
+	vy = ft_vmul(cam.direction[1], g_env.scene.screenY * 0.005);
+	vx = ft_vmul(cam.direction[0], g_env.scene.screenX * 0.005);
 	vpUpLeft.x = cam.origin.x + vz.x + vy.x - vx.x;
 	vpUpLeft.y = cam.origin.y + vz.y + vy.y - vx.y;
 	vpUpLeft.z = cam.origin.z + vz.z + vy.z - vx.z;
@@ -22,14 +22,4 @@ void				initCamera(t_camera *cam)
 	cam->direction[1].y = 1.0;
 	cam->direction[2].z = 1.0;
 	cam->vpUpLeft = calcUpLeftPoint(*cam);
-}
-
-void				moveCamZ(int keycode)
-{
-	if (keycode == MUP)
-		g_env.camera.origin.z -= g_env.scene.screenX * 0.004;
-	else if (keycode == MDOWN)
-		g_env.camera.origin.z += g_env.scene.screenX * 0.004;
-	g_env.camera.vpUpLeft = calcUpLeftPoint(g_env.camera);
-	printWindow();
 }

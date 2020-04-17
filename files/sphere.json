@@ -1,0 +1,29 @@
+{
+	"scene":
+	{
+		"screenX":1400,
+		"screenY":900,
+		"fov":10,
+		"sampleRate":1,
+		"pixPerUnit":4,
+		"maxDistToPrint":15000,
+		"background":[30, 60, 200],
+		"ambient":0.03
+	},
+	"camera":
+	{
+		"origin":[0, 0, -30]
+	},
+	"light":
+	{
+		"origin":[0, 0, -30],
+		"color":[255, 255, 255]
+	},
+	"object":[
+	{
+		"name":"sphere",
+		"origin":[0, 0, -13],
+		"radius":7,
+		"color":[180, 180, 180]
+	}]
+}

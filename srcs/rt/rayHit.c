@@ -4,14 +4,9 @@ t_vector			vDirCamToPoint(t_camera cam, double x, double y)
 {
 	t_vector		pointOnCanvas;
 	t_vector		vDir;
-	double			xind;
-	double			yind;
 
-	xind = 14 * x / (double)g_env.scene.screenX;
-	yind = 9 * y / (double)g_env.scene.screenY;
-
-	pointOnCanvas = ft_vsub(ft_vmul(cam.direction[1], yind),
-				ft_vadd(cam.vpUpLeft, ft_vmul(cam.direction[0], xind)));
+	pointOnCanvas = ft_vsub(ft_vmul(cam.direction[1], y * 0.01),
+				ft_vadd(cam.vpUpLeft, ft_vmul(cam.direction[0], x * 0.01)));
 	vDir = ft_vsub(cam.origin, pointOnCanvas);
 	return (ft_normalize(vDir));
 }

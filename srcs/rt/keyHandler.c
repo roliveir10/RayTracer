@@ -1,18 +1,6 @@
 #include "rt.h"
 
-void				escap(int keycode)
-{
-	(void)keycode;
-	delenv();
-}
-
-int					rt_close(void)
-{
-	delenv();
-	return (1);
-}
-
-int					keyPress(int keycode)
+/*int					keyPress(int keycode)
 {
 	int				key[NBR_KEY] = {KESCAP};
 	void			(*function[NBR_KEY])(int) = {escap};
@@ -23,10 +11,16 @@ int					keyPress(int keycode)
 			function[i](keycode);
 	return (1);
 }
+*/
 
-int					mousePress(int keycode, __unused int x, __unused int y)
+void				keyHandler(SDL_Event *event)
 {
-	if (keycode == MDOWN || keycode == MUP)
-		moveCamZ(keycode);
-	return (1);
+	if (event->type == SDL_MOUSEBUTTONDOWN)
+		return ;
+	else if (event->type == SDL_MOUSEWHEEL)
+		return ;
+	else if (event->type == SDL_KEYDOWN)
+		return ;
+	else if (event->type == SDL_KEYUP)
+		return ;
 }

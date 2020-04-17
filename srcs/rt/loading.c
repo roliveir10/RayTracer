@@ -1,6 +1,6 @@
 #include "rt.h"
 
-void					printLoading(t_mlx *mlx, t_scene scene, int index)
+/*void					printLoading(t_mlx *mlx, t_scene scene, int index)
 {
 	double				percent;
 	int					currentLoad;
@@ -11,3 +11,4 @@ void					printLoading(t_mlx *mlx, t_scene scene, int index)
 	printImage(mlx, 1, (scene.screenX - mlx->loadX) * 0.5, scene.screenY * 0.9);
 	return ;
 }
+*/
