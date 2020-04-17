@@ -49,14 +49,13 @@ static void				*printLine(void *arg)
 		{
 			ft_bzero(&color, sizeof(t_vector));
 			for (int s = 0; s < g_env.scene.sampleRate; s++)
-				color = ft_vadd(color, pixColor((intptr_t)arg, x));
+				color = ft_vadd(color, pixColor(y, x));
 			color = ft_vdiv(color, g_env.scene.sampleRate);
 			addPixel(color, x, y);
 		}
 		if (y % (g_env.scene.screenY / 100) == 0)
 			printf("Loading: %d%%\n", (int)((double)y / g_env.scene.screenY * 100));
 			//	printLoading(&g_env.mlx, g_env.scene, (intptr_t)arg);
-		}
 	}
 	return (NULL);
 }

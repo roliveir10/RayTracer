@@ -4,7 +4,7 @@
 		"screenX":1400,
 		"screenY":900,
 		"fov":10,
-		"sampleRate":4,
+		"sampleRate":32,
 		"pixPerUnit":1,
 		"maxDistToPrint":15000,
 		"background":[30, 60, 200],
@@ -36,11 +36,5 @@
 			"name":"plan",
 			"origin":[0, -3, 0],
 			"color":[40, 40, 40]
-		},
-		{
-			"name":"cylindre",
-			"origin":[0, 0, 40],
-			"radius":5,
-			"color":[180, 180, 180]
 		}]
 }
