@@ -1,14 +1,51 @@
 #include "rt.h"
 
-/*void					printLoading(t_mlx *mlx, t_scene scene, int index)
+static void		drawBgBar(t_lib *lib)
 {
-	double				percent;
-	int					currentLoad;
-
-	percent = (double)index / scene.screenY * 100;
-	currentLoad = (int)percent * mlx->loadX * 0.01;
-	addRectImage(&mlx->mem_image[1], currentLoad - mlx->loadX * 0.01, 0, currentLoad + mlx->loadX * 0.01, mlx->loadY, GREEN);
-	printImage(mlx, 1, (scene.screenX - mlx->loadX) * 0.5, scene.screenY * 0.9);
-	return ;
+	for (int i = 0; i < lib->load.loadRect.h; i++)
+		for (int j = 0; j < lib->load.loadRect.w; j++)
+			lib->load.image[i * lib->load.loadRect.w + j] = WHITE;
 }
-*/
+
+static void		drawLoadingBar(t_lib *lib, int currentLoad)
+{
+	int			width;
+
+	width = lib->load.loadRect.w * 0.01 * NBR_THREAD;
+	for (int i = 0; i < lib->load.loadRect.h; i++)
+		for (int j = currentLoad - width; j < currentLoad + width; j++)
+		{
+			if (j >= 0)
+				lib->load.image[i * lib->load.loadRect.w + j] = GREEN;
+		}
+}
+
+void			drawBar(t_lib *lib, int currentLoad, int loading)
+{
+	int			p;
+
+	if (!SDL_LockTexture(lib->load.texture, NULL, (void**)&lib->load.image, &p))
+	{
+		SDL_RenderClear(lib->renderer);
+		if (loading)
+			drawLoadingBar(lib, currentLoad);
+		else
+			drawBgBar(lib);
+		SDL_UnlockTexture(lib->load.texture);
+		SDL_RenderCopy(lib->renderer, lib->load.texture, NULL, &lib->load.loadRect);
+		SDL_RenderPresent(lib->renderer);
+	}
+}
+
+int				initLoadBar(t_lib *lib)
+{
+	lib->load.loadRect.w = g_env.scene.screenX * 0.25;
+	lib->load.loadRect.h = g_env.scene.screenY * 0.05;
+	lib->load.loadRect.x = (g_env.scene.screenX - lib->load.loadRect.w) * 0.5;
+	lib->load.loadRect.y = g_env.scene.screenY * 0.9;
+	if (!(lib->load.texture = SDL_CreateTexture(lib->renderer,
+			SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
+			lib->load.loadRect.w, lib->load.loadRect.h)))
+		return (0);
+	return (1);
+}

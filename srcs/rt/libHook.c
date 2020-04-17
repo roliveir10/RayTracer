@@ -14,9 +14,12 @@ static void			printTexture(void)
 }
 
 static void			rayLoop(void)
-{
+{	
 	if (g_env.scene.pixPerUnit > 0)
+	{
+		drawBar(&g_env.lib, 0, 0);
 		printTexture();
+	}
 	g_env.scene.pixPerUnit = 0;
 }
 
@@ -42,6 +45,5 @@ void				runLoop(void)
 		}
 		if (g_env.running == 1)
 			rayLoop();
-		return ;
 	}
 }

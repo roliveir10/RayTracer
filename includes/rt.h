@@ -2,32 +2,21 @@
 # define _RT_H
 
 # include <stdio.h>
+# include "lib.h"
 # include "libft.h"
 # include "lexer.h"
 # include "data.h"
-# include "SDL.h"
 
 # define NBR_KEY 1
 # define NBR_MKEY 2
 # define NBR_ELEMENT 4
 # define NBR_THREAD 6
-# define WIN_TITLE "RayTracer de Robin"
 
 typedef enum			e_color
 {
 	WHITE = 0xffffff,
 	GREEN = 0x00ff00
 }						t_color;
-
-typedef struct			s_lib
-{
-	SDL_Window			*window;
-	SDL_Renderer		*renderer;
-	SDL_Texture			*texture;
-	unsigned int		*image;
-	int					loadX;
-	int					loadY;
-}						t_lib;
 
 typedef enum			s_image
 {
@@ -106,16 +95,10 @@ t_vector				light(t_rayHit hit);
 
 t_vector				setColor(int color);
 
-// LOADING
+// ANTIALIASING
 
-//void					printLoading(t_mlx *mlx, t_scene scene, int y);
+t_vector				antiAliasing(int sampleRate, int x, int y);
 
-// UI
-
-//void					addRectImage(unsigned int **image, int startX, int startY, int sizeX, int sizeY, int color);
-//void					printImage(t_mlx *mlx, int imageId, int x, int y);
 // FREE
-
-void					delenv(t_lib *lib);
 void					freeStruct(void);
 #endif

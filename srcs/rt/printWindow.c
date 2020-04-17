@@ -21,41 +21,23 @@ static void				addPixel(t_vector color, int x, int y)
 		}
 }
 
-static t_vector			pixColor(int i, int j)
-{
-	t_vector			rayDir;
-	t_rayHit			hit;
-	double				x;
-	double				y;
-
-	y = (double)i + drand48();
-	x = (double)j + drand48();
-	rayDir = vDirCamToPoint(g_env.camera, x, y);
-	hit = rayCast(g_env.camera.origin, rayDir, g_env.scene.maxDistToPrint);
-	if (hit.distance > 0)
-		hit.color = light(hit);
-	return (hit.color);
-}
-
 static void				*printLine(void *arg)
 {
-	t_vector			color;
 	int					incy;
+	int					starty;
+	t_vector			color;
 
 	incy = g_env.scene.pixPerUnit * NBR_THREAD;
-	for (int y = g_env.scene.pixPerUnit * (intptr_t)arg; y < g_env.scene.screenY; y += incy)
+	starty = g_env.scene.pixPerUnit * (intptr_t)arg;
+	for (int y = starty; y < g_env.scene.screenY; y += incy)
 	{
 		for (int x = 0; x < g_env.scene.screenX; x += g_env.scene.pixPerUnit)
 		{
-			ft_bzero(&color, sizeof(t_vector));
-			for (int s = 0; s < g_env.scene.sampleRate; s++)
-				color = ft_vadd(color, pixColor(y, x));
-			color = ft_vdiv(color, g_env.scene.sampleRate);
+			color = antiAliasing(g_env.scene.sampleRate, x, y);
 			addPixel(color, x, y);
 		}
 		if (y % (g_env.scene.screenY / 100) == 0)
-			printf("Loading: %d%%\n", (int)((double)y / g_env.scene.screenY * 100));
-			//	printLoading(&g_env.mlx, g_env.scene, (intptr_t)arg);
+			drawBar(&g_env.lib, (double)y / g_env.scene.screenY * g_env.lib.load.loadRect.w, 1);
 	}
 	return (NULL);
 }
