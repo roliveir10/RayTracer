@@ -54,8 +54,8 @@ rt/printWindow.c					\
 rt/color.c							\
 rt/light.c							\
 rt/loading.c						\
-rt/ui.c								\
-rt/libHook.c
+rt/libHook.c						\
+rt/antiAliasing.c
 
 OBJ_DIR		=		.o
 OBJ			=		$(SRC:.c=.o)

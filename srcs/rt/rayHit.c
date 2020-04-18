@@ -39,6 +39,8 @@ static t_vector		hitPoint(t_vector o, t_vector dir, double dist)
 
 void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 {
+	double			invNormal;
+
 	if (!hit->distance)
 	{
 		hit->color = g_env.scene.background;
@@ -48,6 +50,9 @@ void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 	hit->normal = normal(hit->point, hit->obj);
 	for (int i = 2; i >= 0; i--)
 		hit->normal = ft_vrotate(hit->normal, hit->obj.matRotInv[i]);
+	invNormal = ft_dot(hit->normal, dir);
+	if (invNormal > 0)
+		hit->normal = ft_vmul(hit->normal, -1);
 	hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
 
 }
