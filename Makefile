@@ -82,6 +82,7 @@ $(SDL_BUILD): | $(SDL_DIR)
 	$(MAKE) -C $(SDL_LIB) install
 
 $(TTF_BUILD): | $(SDL_BUILD)
+	export PKG_CONFIG_PATH=$(shell pwd)/SDL_text/freetype-2.8/builds/unix
 	cd $(TTF_DIR) && tar -xf freetype-2.8.tar.gz
 	cd $(TTF_DIR) && mkdir freetype_build
 	cd $(TTF_DIR)/freetype-2.8 && ./configure --prefix=$(shell pwd)/SDL_text/freetype_build
