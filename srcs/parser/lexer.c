@@ -37,7 +37,8 @@ static void			wordCompare(char *charSaved)
 		{"\"plan\"", SPLAN}, {"\"cylindre\"", SCYLINDRE},
 		{"\"background\"", BACKGROUND}, {"\"screenX\"", SCREENX},
 		{"\"screenY\"", SCREENY}, {"\"fov\"", FOV}, {"\"sampleRate\"", SAMPLERATE},
-		{"\"pixPerUnit\"", PIXPERUNIT}, {"\"maxDistToPrint\"", MAXDISTTOPRINT}
+		{"\"pixPerUnit\"", PIXPERUNIT}, {"\"maxDistToPrint\"", MAXDISTTOPRINT},
+		{"\"shininess\"", SHININESS}, {"\"shininessStrength\"", SHININESSSTRENGTH}
 	};
 	char			*tmp;
 

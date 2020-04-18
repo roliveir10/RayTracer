@@ -54,7 +54,7 @@ void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 	if (invNormal > 0)
 		hit->normal = ft_vmul(hit->normal, -1);
 	hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
-
+	hit->viewDir = ft_vmul(dir, -1);
 }
 
 t_rayHit			rayCast(t_vector o, t_vector dir, double maxDist)

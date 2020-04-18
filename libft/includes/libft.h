@@ -140,4 +140,5 @@ int					ft_mgerror(int ex_code, int fd, char *mg);
 char				*ft_delc(char **str);
 long				ft_diff_abs(int a, int b);
 void				ft_print_vector(t_vector vector);
+double				ft_max(double value1, double value2);
 #endif

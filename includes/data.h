@@ -56,6 +56,8 @@ typedef struct			s_object
 	double				transparency;
 	double				density;
 	double				reflection;
+	double				shininess;
+	double				shininessStrength;
 	double				matRot[3][3][3];
 	double				matRotInv[3][3][3];
 	struct s_object		*next;

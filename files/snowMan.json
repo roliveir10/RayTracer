@@ -4,7 +4,7 @@
 		"screenX":1260,
 		"screenY":810,
 		"fov":10,
-		"sampleRate":8,
+		"sampleRate":2,
 		"pixPerUnit":1,
 		"maxDistToPrint":15000,
 		"background":[30, 60, 200],

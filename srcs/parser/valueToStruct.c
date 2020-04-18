@@ -119,6 +119,10 @@ static void			addValueToObject(char *content, int currentName, int vcount)
 				g_env.object->density = atof(content);
 		else if (currentName == REFLECTION)
 				g_env.object->reflection = atof(content);
+		else if (currentName == SHININESS)
+				g_env.object->shininess = atof(content);
+		else if (currentName == SHININESSSTRENGTH)
+				g_env.object->shininessStrength = atof(content);
 		else
 				printf("Warning: invalid member in object object\n");
 		g_env.object = tmp;

@@ -40,6 +40,7 @@ typedef struct			s_rayHit
 	double				distance;
 	t_vector			normal;
 	t_vector			point;
+	t_vector			viewDir;
 	t_vector			color;
 	t_object			obj;
 }						t_rayHit;
@@ -90,6 +91,9 @@ t_vector				normal(t_vector point, t_object obj);
 // LIGHT
 
 t_vector				light(t_rayHit hit);
+t_vector				ambient(t_light light);
+t_vector				diffuse(t_light light, double angle);
+t_vector				specular(t_light light, t_rayHit hit, t_vector reflectDir);
 
 // COLOR
 
