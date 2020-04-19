@@ -4,6 +4,7 @@
 # include "rt.h"
 
 # define NBR_SHAPE 4
+# define NBR_LIGHT_TYPE 3
 
 typedef enum			s_shape
 {
@@ -12,6 +13,13 @@ typedef enum			s_shape
 	CYLINDRE,
 	CONE
 }						t_shape;
+
+typedef enum			s_lType
+{
+	POINTL,
+	DIRECTIONAL,
+	SPOT
+}						t_lType;
 
 typedef struct			s_scene
 {
@@ -36,9 +44,9 @@ typedef struct			s_camera
 
 typedef struct			s_light
 {
+	int					etype;
 	t_vector			origin;
 	t_vector			color;
-	t_vector			direction;
 	char				*type;
 	struct s_light		*next;
 }						t_light;

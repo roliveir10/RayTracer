@@ -66,6 +66,8 @@ static void			addValueToCamera(char *content, int currentName, int vcount)
 
 static void			addValueToLight(char *content, int currentName, int vcount)
 {
+		const int		type[NBR_LIGHT_TYPE] = {POINTL, DIRECTIONAL, SPOT};
+		const char		*typeString[NBR_LIGHT_TYPE] = {"\"point\"", "\"directional\"", "\"spot\""};
 		t_light			*tmp;
 
 		tmp = g_env.light;
@@ -75,10 +77,13 @@ static void			addValueToLight(char *content, int currentName, int vcount)
 				g_env.light->origin = addValueToVector(g_env.light->origin, content, vcount);
 		else if (currentName == COLOR)
 				g_env.light->color = addValueToColor(g_env.light->color, content, vcount);
-		else if (currentName == DIRECTION)
-				g_env.light->direction = addValueToVector(g_env.light->direction, content, vcount);
 		else if (currentName == TYPE)
+		{
 				g_env.light->type = ft_strdup(content);
+				for (int i = 0; i < NBR_LIGHT_TYPE; i++)
+					if (!ft_strcmp(g_env.light->type, typeString[i]))
+						g_env.light->etype = type[i];
+		}
 		else
 				printf("Warning: invalid member in light object\n");
 		g_env.light = tmp;

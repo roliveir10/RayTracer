@@ -28,11 +28,11 @@ static void			wordCompare(char *charSaved)
 	t_wordType		wordType[NBR_WORD] = {
 		{"\"scene\"", SCENE}, {"\"camera\"", CAMERA}, {"\"light\"", LIGHT},
 		{"\"object\"", OBJECTS}, {"\"specular\"", SPECULAR}, {"\"ambient\"", AMBIENT},
-		{"\"origin\"", ORIGIN}, {"\"rotation\"", ROTATION}, {"\"direction\"", DIRECTION},
+		{"\"origin\"", ORIGIN}, {"\"rotation\"", ROTATION},
 		{"\"angle\"", ANGLE}, {"\"color\"", COLOR}, {"\"type\"", TYPE},
 		{"\"name\"", NAME}, {"\"radius\"", RADIUS}, {"\"reflection\"", REFLECTION},
 		{"\"density\"", DENSITY}, {"\"texture\"", TEXTURE},
-		{"\"transparency\"", TRANSPARENCY}, {"\"point\"", LPOINT}, {"\"cast\"", LCAST},
+		{"\"transparency\"", TRANSPARENCY}, {"\"point\"", LPOINT}, {"\"directional\"", LDIR},
 		{"\"spot\"", LSPOT}, {"\"sphere\"", SSPHERE}, {"\"cone\"", SCONE},
 		{"\"plan\"", SPLAN}, {"\"cylindre\"", SCYLINDRE},
 		{"\"background\"", BACKGROUND}, {"\"screenX\"", SCREENX},

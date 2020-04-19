@@ -51,7 +51,8 @@ void				initializeRotation(void)
 	lightTmp = g_env.light;
 	while (g_env.light)
 	{
-		g_env.light->direction = ft_normalize(g_env.light->direction);
+		if (g_env.light->etype == DIRECTIONAL)
+			g_env.light->origin = ft_vmul(ft_normalize(g_env.light->origin), -1);
 		g_env.light = g_env.light->next;
 	}
 	g_env.light = lightTmp;

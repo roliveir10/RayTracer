@@ -1,0 +1,114 @@
+{
+	"scene":
+	{
+		"screenX":1260,
+		"screenY":810,
+		"fov":10,
+		"sampleRate":1,
+		"pixPerUnit":1,
+		"maxDistToPrint":15000,
+		"background":[30, 60, 200],
+		"ambient":0
+	},
+	"camera":
+	{
+		"origin":[0, 0, -60]
+	},	
+	"object":[
+	{
+		"name":"plan",
+		"origin":[15, -40, 3],
+		"color":[20, 20, 20]
+	},
+	{
+		"name":"plan",
+		"origin":[15, 10, 100],
+		"rotation":[90, 0, 0],
+		"color":[0, 0, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[0, 0, 30],
+		"radius":13,
+		"color":[0, 30, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[0, 18, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[0, -18, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},	
+	{
+		"name":"sphere",
+		"origin":[18, -1, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[-18, 0, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},	
+	{
+		"name":"sphere",
+		"origin":[16, 8, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[9, 15, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[15, -10, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[-15, -9, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[-15, 9, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[-9, 16, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[-9, -15, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	},
+	{
+		"name":"sphere",
+		"origin":[9, -16, 20],
+		"radius":3,
+		"color":[0, 55, 0]
+	}],	
+	"light":[
+	{
+		"origin":[0,0, -60],
+		"color":[255, 255, 255],
+		"type":"point"
+
+	}]
+}
