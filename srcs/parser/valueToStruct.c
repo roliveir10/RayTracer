@@ -30,6 +30,26 @@ static t_vector		addValueToColor(t_vector vector, char *content, int vcount)
 	return (new);
 }
 
+static t_limit		addValueToLimit(t_limit limit, char *content, int vcount)
+{
+	t_limit			new;
+
+	new = limit;
+	if (vcount == 0)
+		new.x = atof(content);
+	else if (vcount == 1)
+		new.y = atof(content);
+	else if (vcount == 2)
+		new.z = atof(content);
+	else if (vcount == 3)
+		new.sizeX = atof(content);
+	else if (vcount == 4)
+		new.sizeY = atof(content);
+	else if (vcount == 5)
+		new.sizeZ = atof(content);
+	return (new);
+}
+
 static void			addValueToScene(char *content, int currentName, int vcount)
 {
 		if (currentName == AMBIENT)
@@ -114,6 +134,11 @@ static void			addValueToObject(char *content, int currentName, int vcount)
 				g_env.object->rotation = addValueToVector(g_env.object->rotation, content, vcount);
 		else if (currentName == COLOR)
 				g_env.object->color = addValueToColor(g_env.object->color, content, vcount);
+		else if (currentName == LIMIT)
+		{
+				g_env.object->isLimited = 1;
+				g_env.object->limit = addValueToLimit(g_env.object->limit, content, vcount);
+		}
 		else if (currentName == RADIUS)
 				g_env.object->radius = atof(content);
 		else if (currentName == ANGLE)

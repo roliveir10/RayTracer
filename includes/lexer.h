@@ -7,7 +7,7 @@
 # define NBR_CHAR 128
 
 // number of possible word in the config file
-# define NBR_WORD 34
+# define NBR_WORD 35
 
 # define INITIAL_DICO_SIZE 50
 # define INCREMENT_DICO_SIZE 25
@@ -27,8 +27,11 @@
 # define FIRST_NUMBER_NAME 27
 # define LAST_NUMBER_NAME 42
 
-# define FIRST_STRING_VALUE 43
-# define LAST_STRING_VALUE 49
+# define FIRST_LIMIT_NAME 43
+# define LAST_LIMIT_NAME 43
+
+# define FIRST_STRING_VALUE 44
+# define LAST_STRING_VALUE 50
 
 
 int				g_transit[NBR_STATE][NBR_CHAR];
@@ -79,15 +82,16 @@ typedef	enum			e_state
 	SAMPLERATE,
 	PIXPERUNIT,
 	MAXDISTTOPRINT = 42,
-	LPOINT = 43,
+	LIMIT = 43,
+	LPOINT = 44,
 	LDIR,
 	LSPOT,
 	SSPHERE,
 	SCONE,
 	SPLAN,
-	SCYLINDRE = 49,
+	SCYLINDRE = 50,
 	ERROR
-}				t_state;
+}						t_state;
 
 typedef enum			s_symbol
 {
@@ -101,46 +105,46 @@ typedef enum			s_symbol
 	ARRAY,
 	ELEMENTS,
 	END_ELEMENTS
-}				t_symbol;
+}						t_symbol;
 
 typedef struct			s_wordType
 {
-	char			*lexeme;
-	int			type;
-}				t_wordType;
+	char				*lexeme;
+	int					type;
+}						t_wordType;
 
 typedef struct			s_ast
 {
-	char			*content;
-	int			type;
+	char				*content;
+	int					type;
 	struct s_ast		*next;
-}				t_ast;
+}						t_ast;
 
 typedef struct			s_error
 {
-	int			nbrError;
-	int			line;
-}				t_error;
+	int					nbrError;
+	int					line;
+}						t_error;
 
-void				initFinalTab(void);
-void				initStateTab(void);
+void					initFinalTab(void);
+void					initStateTab(void);
 
-void				lexFile(char *file, t_error *error);
-int				*currentState(void);
-char				**charSaved(void);
+void					lexFile(char *file, t_error *error);
+int						*currentState(void);
+char					**charSaved(void);
 
-int				syntaxAnalysis(char *file, t_ast **ast);
-void				object(char *file, t_error *error, t_ast **ast);
+int						syntaxAnalysis(char *file, t_ast **ast);
+void					object(char *file, t_error *error, t_ast **ast);
 
-int				isMemberObject(int s);
-int				isStringValue(int s);
-int				isWord(int symbol);
-int				isMemberString(int s);
-int				isMemberVector(int s);
-int				isMemberNumber(int s);
+int						isMemberObject(int s);
+int						isStringValue(int s);
+int						isWord(int symbol);
+int						isMemberString(int s);
+int						isMemberVector(int s);
+int						isMemberNumber(int s);
 
-void				addNoeud(t_ast **ast, char *content, int type);
-void				freeAst(t_ast **ast);
+void					addNoeud(t_ast **ast, char *content, int type);
+void					freeAst(t_ast **ast);
 
-void				addValueToStruct(char *content, int currentObject, int currentName, int vcount);
+void					addValueToStruct(char *content, int currentObject, int currentName, int vcount);
 #endif

@@ -32,6 +32,16 @@ typedef struct		s_vector
 	double			z;
 }					t_vector;
 
+typedef struct		s_limit
+{
+	double			x;
+	double			y;
+	double			z;
+	double			sizeX;
+	double			sizeY;
+	double			sizeZ;
+}					t_limit;
+
 double				ft_clamp(double value, double lo, double hi);
 void				ft_fmat(double (*mat)[3][3][3], t_vector rotation,
 		double way);

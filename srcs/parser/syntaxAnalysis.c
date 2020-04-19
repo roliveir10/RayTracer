@@ -25,6 +25,11 @@ int			isMemberObject(int s)
 	return (s >= FIRST_OBJECTS_NAME && s <= LAST_OBJECTS_NAME);
 }
 
+int			isMemberLimit(int s)
+{
+	return (s >= FIRST_LIMIT_NAME && s <= LAST_LIMIT_NAME);
+}
+
 int			isStringValue(int s)
 {
 	return (s >= FIRST_STRING_VALUE && s <= LAST_STRING_VALUE);
@@ -53,6 +58,23 @@ static void		terminal(char *file, int symbol, t_error *error, t_ast **ast)
 static void		vector(char *file, t_error *error, t_ast **ast)
 {
 	terminal(file, SSBKT, error, ast);
+	terminal(file, NUMBER, error, ast);
+	terminal(file, COMMA, error, ast);
+	terminal(file, NUMBER, error, ast);
+	terminal(file, COMMA, error, ast);
+	terminal(file, NUMBER, error, ast);
+	terminal(file, ESBKT, error, ast);
+}
+
+static void		limit(char *file, t_error *error, t_ast **ast)
+{
+	terminal(file, SSBKT, error, ast);
+	terminal(file, NUMBER, error, ast);
+	terminal(file, COMMA, error, ast);
+	terminal(file, NUMBER, error, ast);
+	terminal(file, COMMA, error, ast);
+	terminal(file, NUMBER, error, ast);
+	terminal(file, COMMA, error, ast);
 	terminal(file, NUMBER, error, ast);
 	terminal(file, COMMA, error, ast);
 	terminal(file, NUMBER, error, ast);
@@ -127,6 +149,14 @@ static void		elementMember(char *file, t_error *error, t_ast **ast)
 		object(file, error, ast);
 }
 
+static void		limitMember(char *file, t_error *error, t_ast **ast)
+{
+	addNoeud(ast, *charSaved(), *currentState());
+	lexFile(file, error);
+	terminal(file, COLON, error, ast);
+	limit(file, error, ast);
+}
+
 static void		member(char *file, t_error *error, t_ast **ast)
 {
 	if (isMemberString(*currentState()))
@@ -137,6 +167,8 @@ static void		member(char *file, t_error *error, t_ast **ast)
 		vectorMember(file, error, ast);
 	else if (isMemberObject(*currentState()))
 		elementMember(file, error, ast);
+	else if (isMemberLimit(*currentState()))
+		limitMember(file, error, ast);
 	else
 		terminal(file, -1, error, ast);
 }

@@ -39,7 +39,7 @@ static void			wordCompare(char *charSaved)
 		{"\"screenY\"", SCREENY}, {"\"fov\"", FOV}, {"\"sampleRate\"", SAMPLERATE},
 		{"\"pixPerUnit\"", PIXPERUNIT}, {"\"maxDistToPrint\"", MAXDISTTOPRINT},
 		{"\"shininess\"", SHININESS}, {"\"shininessStrength\"", SHININESSSTRENGTH},
-		{"\"intensity\"", INTENSITY}
+		{"\"intensity\"", INTENSITY}, {"\"limit\"", LIMIT}
 	};
 	char			*tmp;
 

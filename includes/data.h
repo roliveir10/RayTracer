@@ -57,6 +57,8 @@ typedef struct			s_object
 	char				*name;
 	int					type;
 	t_vector			origin;
+	t_limit				limit;
+	int					isLimited;
 	t_vector			rotation;
 	t_vector			color;
 	double				radius;
