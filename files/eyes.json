@@ -90,6 +90,7 @@
 	{
 		"origin":[0,27, -60],
 		"color":[255, 255, 255],
+		"intensity":10000,
 		"type":"point"
 
 	}]

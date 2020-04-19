@@ -92,8 +92,8 @@ t_vector				normal(t_vector point, t_object obj);
 
 t_vector				light(t_rayHit hit);
 t_vector				ambient(t_light light);
-t_vector				diffuse(t_light light, double angle);
-t_vector				specular(t_light light, t_rayHit hit, t_vector reflectDir);
+t_vector				diffuse(t_light light, double angle, t_vector intensity);
+t_vector				specular(t_light light, t_rayHit hit, t_vector reflectDir, t_vector intensity);
 
 // COLOR
 

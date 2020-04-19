@@ -8,7 +8,7 @@
 		"pixPerUnit":1,
 		"maxDistToPrint":15000,
 		"background":[135, 206, 235],
-		"ambient":0.2
+		"ambient":0.1
 	},
 	"camera":
 	{
@@ -16,8 +16,9 @@
 	},
 	"light":[
 	{
-		"origin":[10, 38, -16],
+		"origin":[10, 38, -20],
 		"color":[255, 255, 255],
+		"intensity":10000,
 		"type":"point"
 	}],
 	"object":[

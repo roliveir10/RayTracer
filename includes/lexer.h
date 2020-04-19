@@ -7,7 +7,7 @@
 # define NBR_CHAR 128
 
 // number of possible word in the config file
-# define NBR_WORD 33
+# define NBR_WORD 34
 
 # define INITIAL_DICO_SIZE 50
 # define INCREMENT_DICO_SIZE 25
@@ -25,10 +25,10 @@
 # define LAST_VECTOR_NAME 26
 
 # define FIRST_NUMBER_NAME 27
-# define LAST_NUMBER_NAME 41
+# define LAST_NUMBER_NAME 42
 
-# define FIRST_STRING_VALUE 42
-# define LAST_STRING_VALUE 48
+# define FIRST_STRING_VALUE 43
+# define LAST_STRING_VALUE 49
 
 
 int				g_transit[NBR_STATE][NBR_CHAR];
@@ -72,19 +72,20 @@ typedef	enum			e_state
 	TRANSPARENCY,
 	SHININESS,
 	SHININESSSTRENGTH,
+	INTENSITY,
 	SCREENX,
 	SCREENY,
 	FOV,
 	SAMPLERATE,
 	PIXPERUNIT,
-	MAXDISTTOPRINT = 41,
-	LPOINT = 42,
+	MAXDISTTOPRINT = 42,
+	LPOINT = 43,
 	LDIR,
 	LSPOT,
 	SSPHERE,
 	SCONE,
 	SPLAN,
-	SCYLINDRE = 48,
+	SCYLINDRE = 49,
 	ERROR
 }				t_state;
 

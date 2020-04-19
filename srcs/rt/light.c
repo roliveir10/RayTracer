@@ -12,6 +12,22 @@ static t_vector			lightDir(t_vector o, t_light light)
 	return (light.origin);
 }
 
+static t_vector			lightIntensity(t_light light, t_vector hitPoint)
+{
+	double				dist;
+	t_vector			intensity;
+
+	intensity.x = 1.0;
+	intensity.y = 1.0;
+	intensity.z = 1.0;
+	if (light.etype == POINTL)
+	{
+		dist = ft_vdist(light.origin, hitPoint);
+		intensity = ft_vmul(light.color, light.intensity / (12.556 * pow(dist, 2)));
+	}
+	return (intensity);
+}
+
 static int				hitLight(t_vector o, t_vector dir, t_object obj, t_light light)
 {
 	double				distance;
@@ -32,15 +48,17 @@ static t_vector			getLightAt(t_object *obj, t_light light, t_rayHit hit, t_vecto
 	double				angle;
 	t_vector			color;
 	t_vector			reflectDir;
+	t_vector			intensity;
 
 	ft_bzero(&color, sizeof(t_vector));
 	if (obj)
 		return (ft_vvmul(ambient(light), hit.obj.color));
 	angle = ft_max(ft_dot(hit.normal, lDir), 0);
 	reflectDir = reflect(ft_vmul(lDir, -1), hit.normal);
-	color = ft_vadd(ambient(light), diffuse(light, angle));
+	intensity = lightIntensity(light, hit.point);
+	color = ft_vadd(ambient(light), diffuse(light, angle, intensity));
 	color = ft_vvmul(color, hit.obj.color);
-	return (ft_vadd(color, specular(light, hit, reflectDir)));
+	return (ft_vadd(color, specular(light, hit, reflectDir, intensity)));
 }
 
 //vDir : light to point

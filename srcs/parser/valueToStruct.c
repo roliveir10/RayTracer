@@ -84,6 +84,8 @@ static void			addValueToLight(char *content, int currentName, int vcount)
 					if (!ft_strcmp(g_env.light->type, typeString[i]))
 						g_env.light->etype = type[i];
 		}
+		else if (currentName == INTENSITY)
+			g_env.light->intensity = ft_atoi(content);
 		else
 				printf("Warning: invalid member in light object\n");
 		g_env.light = tmp;

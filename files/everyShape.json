@@ -1,7 +1,24 @@
 {
+	"scene":
+	{
+		"screenX":1260,
+		"screenY":810,
+		"fov":10,
+		"sampleRate":2,
+		"pixPerUnit":1,
+		"maxDistToPrint":15000,
+		"background":[30, 60, 200],
+		"ambient":0.1
+	},
 	"camera":
 	{
 		"origin":[20, 33, -60]
+	},
+	"light":
+	{
+		"origin":[0, -5, 5],
+		"color":[255, 255, 255],
+		"type":"directional"
 	},
 	"object":[
 	{

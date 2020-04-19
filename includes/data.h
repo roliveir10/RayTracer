@@ -47,6 +47,7 @@ typedef struct			s_light
 	int					etype;
 	t_vector			origin;
 	t_vector			color;
+	int					intensity;
 	char				*type;
 	struct s_light		*next;
 }						t_light;
