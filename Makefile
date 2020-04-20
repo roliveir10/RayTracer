@@ -56,7 +56,8 @@ rt/light.c							\
 rt/loading.c						\
 rt/libHook.c						\
 rt/antiAliasing.c					\
-rt/lightType.c
+rt/lightType.c						\
+rt/limit.c
 
 OBJ_DIR		=		.o
 OBJ			=		$(SRC:.c=.o)

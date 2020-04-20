@@ -15,10 +15,12 @@ double				distToHit(t_object obj, t_vector o, t_vector dir)
 {
 	double			(*func[NBR_SHAPE])(t_object, t_vector, t_vector) = {
 		sphere, plan, cylindre, cone};
+	double			dist;
 
 	if (obj.type == -1)
 		return (-1);
-	return (func[obj.type](obj, o, dir));
+	dist = func[obj.type](obj, o, dir);
+	return (limit(o, dir, dist, obj));
 }
 
 static void			addClosestObj(t_rayHit *hit, t_object obj, double dist, double maxDist)
@@ -32,7 +34,7 @@ static void			addClosestObj(t_rayHit *hit, t_object obj, double dist, double max
 	}
 }
 
-static t_vector		hitPoint(t_vector o, t_vector dir, double dist)
+t_vector			hitPoint(t_vector o, t_vector dir, double dist)
 {
 	return (ft_vadd(o, ft_vmul(dir, dist)));
 }
