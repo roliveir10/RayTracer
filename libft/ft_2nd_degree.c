@@ -13,21 +13,38 @@
 #include <math.h>
 #include "libft.h"
 
-double			ft_2nd_degree(double a, double b, double c)
+t_solution		ft_2nd_degree(double a, double b, double c)
 {
 	double		t1;
 	double		t2;
 	double		delta;
+	t_solution	sol;
 
+	ft_bzero(&sol, sizeof(t_solution));
 	if ((delta = pow(b, 2) - 4 * a * c) < 0)
-		return (-1);
+		return (sol);
 	t1 = (-b + sqrt(delta)) / (2.0 * a);
 	if (!delta)
-		return (t1 > 0 ? t1 : -1);
+	{
+		sol.nbrSol = 1;
+		sol.sol[0] = t1;
+		return (sol);
+	}
 	t2 = (-b - sqrt(delta)) / (2.0 * a);
 	if (t1 <= 0 && t2 > 0)
-		return (t2);
+	{
+		sol.nbrSol = 1;
+		sol.sol[0] = t2;
+		return (sol);
+	}
 	if (t1 > 0 && t2 <= 0)
-		return (t1);
-	return (t1 > t2 ? t2 : t1);
+	{
+		sol.nbrSol = 1;
+		sol.sol[0] = t1;
+		return (sol);
+	}
+	sol.nbrSol = 2;
+	sol.sol[0] = t1;
+	sol.sol[1] = t2;
+	return (sol);
 }

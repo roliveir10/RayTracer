@@ -1,0 +1,139 @@
+{
+	"scene":
+	{
+		"screenX":1260,
+		"screenY":810,
+		"fov":8,
+		"sampleRate":1,
+		"pixPerUnit":8,
+		"maxDistToPrint":15000,
+		"background":[30, 60, 200],
+		"ambient":0.005
+	},
+	"camera":
+	{
+		"origin":[-4, 5, -7.5],
+		"rotation":[-10, -25, 0]
+	},
+	"light":[
+	{
+		"origin":[0, 7, 0],
+		"color":[255, 220, 100],
+		"intensity":200,
+		"type":"point"
+	},
+	{
+		"origin":[-1.75, 2.5, 6],
+		"color":[255, 220, 21],
+		"intensity":30,
+		"type":"point"
+	}],
+	"object":[
+		{
+			"name":"plan",
+			"origin":[0, 0, 0],
+			"color":[200, 173, 127]
+		},
+		{
+			"name":"plan",
+			"origin":[0, 8, 0],
+			"color":[255, 255, 255]
+
+		},
+		{
+			"name":"plan",
+			"origin":[-5, 0, 0],
+			"rotation":[0, 0, 90],
+			"color":[190, 50, 20]
+
+		},
+		{
+			"name":"plan",
+			"origin":[5, 0, 0],
+			"rotation":[0, 0, 90],
+			"color":[190, 50, 20]
+		},
+		{
+			"name":"plan",
+			"origin":[0, 0, 8],
+			"rotation":[90, 0, 0],
+			"color":[210, 193, 189]
+		},
+		{
+			"name":"plan",
+			"origin":[0, 0, -8],
+			"rotation":[90, 0, 0],
+			"color":[210, 193, 189]
+		},
+		{
+			"name":"cylindre",
+			"origin":[-2, 0, 7],
+			"limit":[0, 0, 0, 0, 2, 0],
+			"color":[119, 70, 52],
+			"radius":0.1
+		},
+		{
+			"name":"cylindre",
+			"origin":[2, 0, 7],
+			"limit":[0, 0, 0, 0, 2, 0],
+			"color":[119, 70, 52],
+			"radius":0.1
+		},
+		{
+			"name":"cylindre",
+			"origin":[-2, 0, 4],
+			"limit":[0, 0, 0, 0, 2, 0],
+			"color":[119, 70, 52],
+			"radius":0.1
+		},
+		{
+			"name":"cylindre",
+			"origin":[2, 0, 4],
+			"limit":[0, 0, 0, 0, 2, 0],
+			"color":[119, 70, 52],
+			"radius":0.1
+		},
+		{
+			"name":"plan",
+			"origin":[0, 2, 5.5],
+			"limit":[-2.25, 0, -1.75, 4.5, 0, 3.5],
+			"color":[119, 70, 52]
+		},
+		{
+			"name":"plan",
+			"origin":[0, 2.2, 5.5],
+			"limit":[-2.25, 0, -1.75, 4.5, 0, 3.5],
+			"color":[119, 70, 52],
+			"shininess":256,
+			"shininessStrength":0.3
+		},
+		{
+			"name":"plan",
+			"origin":[0, 2, 7.25],
+			"rotation":[90, 0, 0],
+			"limit":[-2.25, 0, -0.2, 4.5, 0, 0.2],
+			"color":[119, 70, 52]
+		},
+		{
+			"name":"plan",
+			"origin":[0, 2, 3.75],
+			"rotation":[90, 0, 0],
+			"limit":[-2.25, 0, -0.2, 4.5, 0, 0.2],
+			"color":[119, 70, 52]
+		},
+		{
+			"name":"plan",
+			"origin":[-2.25, 2, 5.5],
+			"rotation":[0, 0, 90],
+			"limit":[0, 0, -1.75, 0.2, 0, 3.5],
+			"color":[119, 70, 52]
+		},
+		{
+			"name":"plan",
+			"origin":[2.25, 2, 5.5],
+			"rotation":[0, 0, 90],
+			"limit":[0, 0, -1.75, 0.2, 0, 3.5],
+			"color":[119, 70, 52]
+		}
+		]
+}

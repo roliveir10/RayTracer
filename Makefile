@@ -40,9 +40,16 @@ parser/fileManager.c				\
 parser/lexer.c						\
 parser/lexerTabInit.c				\
 parser/syntaxAnalysis.c				\
+parser/word.c					\
+parser/wordReference.c				\
 parser/ast.c						\
 parser/fillStruct.c					\
 parser/valueToStruct.c				\
+parser/objectMember.c				\
+parser/parsScene.c				\
+parser/parsCamera.c				\
+parser/parsLight.c				\
+parser/parsObject.c				\
 rt/init.c							\
 rt/keyHandler.c						\
 rt/camera.c							\
@@ -84,11 +91,11 @@ $(SDL_BUILD): | $(SDL_DIR)
 	$(MAKE) -C $(SDL_LIB) install
 
 $(TTF_BUILD): | $(SDL_BUILD)
-	export PKG_CONFIG_PATH=$(shell pwd)/SDL_text/freetype-2.8/builds/unix
 	cd $(TTF_DIR) && tar -xf freetype-2.8.tar.gz
 	cd $(TTF_DIR) && mkdir freetype_build
 	cd $(TTF_DIR)/freetype-2.8 && ./configure --prefix=$(shell pwd)/SDL_text/freetype_build
 	$(MAKE) -C $(TTF_DIR)/freetype-2.8
+	export PKG_CONFIG_PATH=$(shell pwd)/SDL_text/freetype-2.8/builds/unix
 	$(MAKE) -C $(TTF_DIR)/freetype-2.8 install
 	cd $(TTF_DIR) && unzip SDL2_ttf-2.0.15.zip 
 	mkdir $(TTF_DIR)/ttf_build
@@ -128,6 +135,6 @@ fclean: clean
 
 re:
 	$(MAKE) fclean
-	$(MAKE) all	
+	$(MAKE) all
 
 .PHONY: all clean fclean

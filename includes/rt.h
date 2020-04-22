@@ -69,7 +69,7 @@ double					cone(t_object obj, t_vector o, t_vector dir);
 t_rayHit				rayCast(t_vector o, t_vector dir, double maxDist);
 double					distToHit(t_object obj, t_vector o, t_vector dir);
 t_vector				hitPoint(t_vector o, t_vector dir, double dist);
-double					limit(t_vector o, t_vector dir, double dist, t_object obj);
+double					limit(t_vector o, t_vector dir, t_solution  dist, t_object obj);
 
 //VECTOR
 

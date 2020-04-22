@@ -42,11 +42,17 @@ typedef struct		s_limit
 	double			sizeZ;
 }					t_limit;
 
+typedef struct			s_solution
+{
+	int			nbrSol;
+	double			sol[2];
+}				t_solution;
+
 double				ft_clamp(double value, double lo, double hi);
 void				ft_fmat(double (*mat)[3][3][3], t_vector rotation,
 		double way);
 t_vector			ft_vrotate(t_vector v, double mat[3][3]);
-double				ft_2nd_degree(double a, double b, double c);
+t_solution			ft_2nd_degree(double a, double b, double c);
 double				ft_3rd_degree(double a, double b, double c, double d);
 double				ft_3rd_degree_cardan(double a, double b,
 		double c, double d);

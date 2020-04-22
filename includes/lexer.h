@@ -7,7 +7,7 @@
 # define NBR_CHAR 128
 
 // number of possible word in the config file
-# define NBR_WORD 35
+# define NBR_WORD 34
 
 # define INITIAL_DICO_SIZE 50
 # define INCREMENT_DICO_SIZE 25
@@ -25,13 +25,13 @@
 # define LAST_VECTOR_NAME 26
 
 # define FIRST_NUMBER_NAME 27
-# define LAST_NUMBER_NAME 42
+# define LAST_NUMBER_NAME 41
 
-# define FIRST_LIMIT_NAME 43
-# define LAST_LIMIT_NAME 43
+# define FIRST_LIMIT_NAME 42
+# define LAST_LIMIT_NAME 42
 
-# define FIRST_STRING_VALUE 44
-# define LAST_STRING_VALUE 50
+# define FIRST_STRING_VALUE 43
+# define LAST_STRING_VALUE 49
 
 
 int				g_transit[NBR_STATE][NBR_CHAR];
@@ -67,7 +67,6 @@ typedef	enum			e_state
 	BACKGROUND,
 	COLOR = 26,
 	AMBIENT = 27,
-	SPECULAR,
 	ANGLE,
 	RADIUS,
 	REFLECTION,
@@ -81,15 +80,15 @@ typedef	enum			e_state
 	FOV,
 	SAMPLERATE,
 	PIXPERUNIT,
-	MAXDISTTOPRINT = 42,
-	LIMIT = 43,
-	LPOINT = 44,
+	MAXDISTTOPRINT = 41,
+	LIMIT = 42,
+	LPOINT = 43,
 	LDIR,
 	LSPOT,
 	SSPHERE,
 	SCONE,
 	SPLAN,
-	SCYLINDRE = 50,
+	SCYLINDRE = 49,
 	ERROR
 }						t_state;
 
@@ -134,6 +133,7 @@ int						*currentState(void);
 char					**charSaved(void);
 
 int						syntaxAnalysis(char *file, t_ast **ast);
+void						wordCompare(char *charSaved);
 void					object(char *file, t_error *error, t_ast **ast);
 
 int						isMemberObject(int s);
@@ -142,9 +142,17 @@ int						isWord(int symbol);
 int						isMemberString(int s);
 int						isMemberVector(int s);
 int						isMemberNumber(int s);
+int						isMemberLimit(int s);
 
 void					addNoeud(t_ast **ast, char *content, int type);
 void					freeAst(t_ast **ast);
 
-void					addValueToStruct(char *content, int currentObject, int currentName, int vcount);
+int					addValueToStruct(t_ast **ast, int currentObject);
+int					addValueToScene(t_ast **ast);
+int					addValueToCamera(t_ast **ast);
+int					addValueToObject(t_ast **ast);
+int					addValueToLight(t_ast **ast);
+t_vector				addValueToVector(t_vector vector, char *content, int i);
+t_vector				addValueToColor(t_vector vector, char *content, int i);
+t_limit					addValueToLimit(t_limit limit, char *content, int i);
 #endif

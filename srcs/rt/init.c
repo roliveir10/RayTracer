@@ -36,8 +36,8 @@ int				rt_main(void)
 	if (!initLoadBar(&g_env.lib))
 		return (0);
 	g_env.resolution = g_env.scene.screenX * g_env.scene.screenY;
-	initCamera(&(g_env.camera));
 	initializeRotation();
+	initCamera(&(g_env.camera));
 	runLoop();
 	delenv(&g_env.lib);
 	return (1);

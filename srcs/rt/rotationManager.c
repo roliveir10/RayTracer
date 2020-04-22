@@ -44,6 +44,9 @@ void				initializeRotation(void)
 		g_env.object = g_env.object->next;
 	}
 	g_env.object = objTmp;
+	g_env.camera.direction[0].x = 1.0;
+	g_env.camera.direction[1].y = 1.0;
+	g_env.camera.direction[2].z = 1.0;
 	ft_fmat(&cmat, g_env.camera.rotation, -1);
 	for (i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)

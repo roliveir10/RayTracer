@@ -54,6 +54,7 @@ int					main(int argc, char **argv)
 	}
 	analysis = fillStruct(ast);
 	freeAst(&ast);
+	//freeStruct
 	if (!analysis)
 		return (1);
 	rt_main();

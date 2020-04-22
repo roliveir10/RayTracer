@@ -18,8 +18,5 @@ static t_vector		calcUpLeftPoint(t_camera cam)
 
 void				initCamera(t_camera *cam)
 {
-	cam->direction[0].x = 1.0;
-	cam->direction[1].y = 1.0;
-	cam->direction[2].z = 1.0;
 	cam->vpUpLeft = calcUpLeftPoint(*cam);
 }
