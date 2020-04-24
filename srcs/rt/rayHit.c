@@ -11,14 +11,12 @@ t_vector			vDirCamToPoint(t_camera cam, double x, double y)
 	return (ft_normalize(vDir));
 }
 
-double				distToHit(t_object obj, t_vector o, t_vector dir)
+double				distToHit(t_object obj, t_ray ray)
 {
-	double			(*func[NBR_SHAPE])(t_object, t_vector, t_vector) = {
-		sphere, plan, cylindre, cone};
-
-	if (obj.type == -1)
-		return (-1);
-	return (func[obj.type](obj, o, dir));
+	double			(*func[NBR_SHAPE])(t_object, t_ray) = {
+		sphere, plan, cylindre, cone, box};
+	
+	return (func[obj.type](obj, ray));
 }
 
 static void			addClosestObj(t_rayHit *hit, t_object obj, double dist, double maxDist)
@@ -32,12 +30,12 @@ static void			addClosestObj(t_rayHit *hit, t_object obj, double dist, double max
 	}
 }
 
-t_vector			hitPoint(t_vector o, t_vector dir, double dist)
+t_vector			hitPoint(t_ray ray, double dist)
 {
-	return (ft_vadd(o, ft_vmul(dir, dist)));
+	return (ft_vadd(ray.o, ft_vmul(ray.dir, dist)));
 }
 
-void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
+static void			getHitData(t_rayHit *hit, t_ray ray)
 {
 	double			invNormal;
 
@@ -46,18 +44,18 @@ void				getHitData(t_rayHit *hit, t_vector o, t_vector dir)
 		hit->color = g_env.scene.background;
 		return;
 	}
-	hit->point = hitPoint(o, dir, hit->distance);
+	hit->point = hitPoint(ray, hit->distance);
 	hit->normal = normal(hit->point, hit->obj);
 	for (int i = 2; i >= 0; i--)
 		hit->normal = ft_vrotate(hit->normal, hit->obj.matRotInv[i]);
-	invNormal = ft_dot(hit->normal, dir);
+	invNormal = ft_dot(hit->normal, ray.dir);
 	if (invNormal > 0)
 		hit->normal = ft_vmul(hit->normal, -1);
 	hit->point = ft_vadd(ft_vmul(hit->normal, 1e-5), hit->point);
-	hit->viewDir = ft_vmul(dir, -1);
+	hit->viewDir = ft_vmul(ray.dir, -1);
 }
 
-t_rayHit			rayCast(t_vector o, t_vector dir, double maxDist)
+t_rayHit			rayCast(t_ray ray, double maxDist)
 {
 	t_rayHit		hit;
 	t_object		*currentObj;
@@ -67,10 +65,10 @@ t_rayHit			rayCast(t_vector o, t_vector dir, double maxDist)
 	currentObj = g_env.object;
 	while (currentObj)
 	{
-		currentDist = distToHit(*currentObj, o, dir);
+		currentDist = distToHit(*currentObj, ray);
 		addClosestObj(&hit, *currentObj, currentDist, maxDist);
 		currentObj = currentObj->next;
 	}
-	getHitData(&hit, o, dir);
+	getHitData(&hit, ray);
 	return (hit);
 }

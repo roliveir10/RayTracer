@@ -45,6 +45,14 @@ typedef struct			s_rayHit
 	t_object			obj;
 }						t_rayHit;
 
+typedef struct				s_ray
+{
+	t_vector			o;
+	t_vector			dir;
+	t_vector			invDir;
+	int				sign[3];
+}					t_ray;
+
 t_env					g_env;
 
 int						rt_main(void);
@@ -59,17 +67,20 @@ void					runLoop(void);
 void					keyHandler(SDL_Event *event);
 // SHAPEINTER
 
-double					plan(t_object obj, t_vector o, t_vector dir);
-double					sphere(t_object obj, t_vector o, t_vector dir);
-double					cylindre(t_object obj, t_vector o, t_vector dir);
-double					cone(t_object obj, t_vector o, t_vector dir);
+double					plan(t_object obj, t_ray ray);
+double					sphere(t_object obj, t_ray ray);
+double					cylindre(t_object obj, t_ray ray);
+double					cone(t_object obj, t_ray ray);
+double					box(t_object obj, t_ray ray);
+double					lowerDist(t_solution sol);
 
 //RAYCAST
 
-t_rayHit				rayCast(t_vector o, t_vector dir, double maxDist);
-double					distToHit(t_object obj, t_vector o, t_vector dir);
-t_vector				hitPoint(t_vector o, t_vector dir, double dist);
-double					limit(t_vector o, t_vector dir, t_solution  dist, t_object obj);
+t_rayHit				rayCast(t_ray ray, double maxDist);
+double					distToHit(t_object obj, t_ray ray);
+t_vector				hitPoint(t_ray ray, double dist);
+double					limit(t_ray ray, t_solution  dist, t_object obj);
+void					fillRay(t_vector o, t_vector dir, t_ray *ray);
 
 //VECTOR
 
@@ -82,7 +93,7 @@ void					initCamera(t_camera *cam);
 // ROTATION
 
 void					initializeRotation(void);
-void					changeReference(t_vector *o, t_vector *dir, t_object obj);
+void					changeReference(t_ray *ray, t_object obj);
 t_vector				changePointReference(t_vector point, t_object obj);
 t_vector				resetPointReference(t_object obj, t_vector point);
 

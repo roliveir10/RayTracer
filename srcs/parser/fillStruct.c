@@ -37,6 +37,27 @@ static void			addObjectToStruct(int type)
 	}
 }
 
+static void			fillExtra(t_object **obj)
+{
+	t_object		*tmp;
+
+	tmp = *obj;
+	while (*obj)
+	{
+		if ((*obj)->type == BOX)
+		{
+			(*obj)->b[0].x = -(*obj)->size.x * 0.5;
+			(*obj)->b[1].x = (*obj)->size.x * 0.5;
+			(*obj)->b[0].y = -(*obj)->size.y * 0.5;
+			(*obj)->b[1].y = (*obj)->size.y * 0.5;
+			(*obj)->b[0].z = -(*obj)->size.z * 0.5;
+			(*obj)->b[1].z = (*obj)->size.z * 0.5;
+		}
+		*obj = (*obj)->next;
+	}
+	*obj = tmp;
+}
+
 int				fillStruct(t_ast *ast)
 {
 	int			currentObject = 0;
@@ -61,5 +82,6 @@ int				fillStruct(t_ast *ast)
 				return (0);
 		}
 	}
+	fillExtra(&g_env.object);
 	return (1);
 }

@@ -14,7 +14,7 @@ static double			hitLimit(t_vector hitPos, t_limit limit, double dist)
 	return (dist);
 }
 
-double				limit(t_vector o, t_vector dir, t_solution sol, t_object obj)
+double				limit(t_ray ray, t_solution sol, t_object obj)
 {
 	t_vector		hitPos;
 	t_limit			limit;
@@ -22,20 +22,16 @@ double				limit(t_vector o, t_vector dir, t_solution sol, t_object obj)
 	double			dist;
 
 	dist = -1;
-	if (sol.nbrSol == 0)
-		return (-1);
-	if (sol.nbrSol == 1 && sol.sol[0] <= 0)
-		return (-1);
-	if (sol.nbrSol == 2 && sol.sol[0] <= 0 && sol.sol[1] <= 0)
+	if (sol.sol[0] <= 0 && sol.sol[1] <= 0)
 		return (-1);
 	limit = obj.limit;	
-	hitPos = hitPoint(o, dir, sol.sol[0]);
+	hitPos = hitPoint(ray, sol.sol[0]);
 	if (sol.nbrSol == 1)
 		return (hitLimit(hitPos, limit, sol.sol[0]));
-	for (int i = 1; i <= sol.nbrSol; i++)
+	for (int i = 0; i < sol.nbrSol; i++)
 	{
-		hitPos = hitPoint(o, dir, sol.sol[i - 1]);
-		distTmp = hitLimit(hitPos, limit, sol.sol[i - 1]);
+		hitPos = hitPoint(ray, sol.sol[i]);
+		distTmp = hitLimit(hitPos, limit, sol.sol[i]);
 		if (distTmp > 0 && (dist == -1 || distTmp < dist))
 			dist = distTmp;
 	}

@@ -61,6 +61,7 @@ double				ft_dot(t_vector va, t_vector vb);
 t_vector			ft_get_vector(t_vector pos_a, t_vector pos_b);
 double				ft_vdist(t_vector pos_a, t_vector pos_b);
 t_vector			ft_vdiv(t_vector v, double f);
+t_vector			ft_divv(double f, t_vector v);
 t_vector			ft_vvmul(t_vector va, t_vector vb);
 t_vector			ft_vsub(t_vector pos_a, t_vector pos_b);
 t_vector			ft_vadd(t_vector pos_a, t_vector pos_b);

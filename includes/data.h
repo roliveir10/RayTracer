@@ -3,19 +3,20 @@
 
 # include "rt.h"
 
-# define NBR_SHAPE 4
+# define NBR_SHAPE 5
 # define NBR_LIGHT_TYPE 3
 # define SCENE_ELEMENT 7 + 1
 # define CAMERA_ELEMENT 2
 # define LIGHT_ELEMENT 4
-# define OBJECT_ELEMENT 13
+# define OBJECT_ELEMENT 14
 
 typedef enum			s_shape
 {
 	SPHERE,
 	PLAN,
 	CYLINDRE,
-	CONE
+	CONE,
+	BOX
 }						t_shape;
 
 typedef enum			s_lType
@@ -61,8 +62,10 @@ typedef struct			s_object
 	int					type;
 	t_vector			origin;
 	t_limit				limit;
+	char				isLimited;
 	t_vector			rotation;
 	t_vector			color;
+	t_vector			size;
 	double				radius;
 	double				angle;
 	char				*texture;
@@ -73,6 +76,7 @@ typedef struct			s_object
 	double				shininessStrength;
 	double				matRot[3][3][3];
 	double				matRotInv[3][3][3];
+	t_vector			b[2];
 	struct s_object		*next;
 }						t_object;
 

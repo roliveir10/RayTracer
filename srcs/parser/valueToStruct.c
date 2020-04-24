@@ -16,6 +16,24 @@ t_vector			addValueToVector(t_vector vector, char *content, int vcount)
 		return (new);
 }
 
+t_vector			addValueToSize(t_vector vector, char *content, int vcount)
+{
+	t_vector		new;
+	double			value;
+
+	new = vector;
+	value = atof(content);
+	if (vcount == 0)
+		new.x = ft_max(value, 0);
+	else if (vcount == 1)
+		new.y = ft_max(value, 0);
+	else if (vcount == 2)
+		new.z = ft_max(value, 0);
+	if (value <= 0)
+		printf("Warning: size value lower or equal to null\n");
+	return (new);
+}
+
 t_vector			addValueToColor(t_vector vector, char *content, int vcount)
 {
 	t_vector		new;

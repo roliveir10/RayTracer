@@ -1,13 +1,15 @@
 #include "rt.h"
 
-void				changeReference(t_vector *o, t_vector *dir, t_object obj)
+void				changeReference(t_ray *ray, t_object obj)
 {
-	*o = ft_vsub(obj.origin, *o);
+	ray->o = ft_vsub(obj.origin, ray->o);
 	for (int i = 0; i < 3; i++)
 	{
-		*dir = ft_vrotate(*dir, obj.matRot[i]);
-		*o = ft_vrotate(*o, obj.matRot[i]);
+		ray->dir = ft_vrotate(ray->dir, obj.matRot[i]);
+		ray->o = ft_vrotate(ray->o, obj.matRot[i]);
 	}
+	if (obj.type == BOX)
+		fillRay(ray->o, ray->dir, ray);
 }
 
 t_vector				changePointReference(t_vector point, t_object obj)

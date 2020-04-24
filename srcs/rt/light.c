@@ -28,16 +28,16 @@ static t_vector			lightIntensity(t_light light, t_vector hitPoint)
 	return (intensity);
 }
 
-static int				hitLight(t_vector o, t_vector dir, t_object obj, t_light light)
+static int				hitLight(t_ray ray, t_object obj, t_light light)
 {
 	double				distance;
 
-	distance = distToHit(obj, o, dir);
+	distance = distToHit(obj, ray);
 	if (distance > 0)
 	{
 		if (light.etype == DIRECTIONAL)
 			return (0);
-		if (distance < ft_vdist(light.origin, o))
+		if (distance < ft_vdist(light.origin, ray.o))
 			return (0);
 	}
 	return (1);
@@ -68,21 +68,21 @@ t_vector				light(t_rayHit hit)
 	t_vector			color;
 	t_object			*currentObj;
 	t_light				*currentLight;
-	t_vector			vDir;
+	t_ray				ray;
 
 	currentLight = g_env.light;
 	ft_bzero(&color, sizeof(t_vector));
 	while (currentLight)
 	{
 		currentObj = g_env.object;
-		vDir = lightDir(hit.point, *currentLight);
+		fillRay(hit.point, lightDir(hit.point, *currentLight), &ray);
 		while (currentObj)
 		{
-			if (!hitLight(hit.point, vDir, *currentObj, *currentLight))
+			if (!hitLight(ray, *currentObj, *currentLight))
 				break ;
 			currentObj = currentObj->next;
 		}
-		color = ft_vadd(color, getLightAt(currentObj, *currentLight, hit, vDir));
+		color = ft_vadd(color, getLightAt(currentObj, *currentLight, hit, ray.dir));
 		currentLight = currentLight->next;
 	}
 	return (color);

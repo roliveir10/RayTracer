@@ -7,10 +7,7 @@
 # define NBR_CHAR 128
 
 // number of possible word in the config file
-# define NBR_WORD 34
-
-# define INITIAL_DICO_SIZE 50
-# define INCREMENT_DICO_SIZE 25
+# define NBR_WORD 36
 
 # define FIRST_WORD_STATE 16
 # define LAST_WORD_STATE 40
@@ -22,16 +19,16 @@
 # define LAST_STRING_NAME 22
 
 # define FIRST_VECTOR_NAME 23
-# define LAST_VECTOR_NAME 26
+# define LAST_VECTOR_NAME 27
 
-# define FIRST_NUMBER_NAME 27
-# define LAST_NUMBER_NAME 41
+# define FIRST_NUMBER_NAME 28
+# define LAST_NUMBER_NAME 42
 
-# define FIRST_LIMIT_NAME 42
-# define LAST_LIMIT_NAME 42
+# define FIRST_LIMIT_NAME 43
+# define LAST_LIMIT_NAME 43
 
-# define FIRST_STRING_VALUE 43
-# define LAST_STRING_VALUE 49
+# define FIRST_STRING_VALUE 44
+# define LAST_STRING_VALUE 51
 
 
 int				g_transit[NBR_STATE][NBR_CHAR];
@@ -65,8 +62,9 @@ typedef	enum			e_state
 	ORIGIN = 23,
 	ROTATION,
 	BACKGROUND,
-	COLOR = 26,
-	AMBIENT = 27,
+	SIZE,
+	COLOR = 27,
+	AMBIENT = 28,
 	ANGLE,
 	RADIUS,
 	REFLECTION,
@@ -80,15 +78,16 @@ typedef	enum			e_state
 	FOV,
 	SAMPLERATE,
 	PIXPERUNIT,
-	MAXDISTTOPRINT = 41,
-	LIMIT = 42,
-	LPOINT = 43,
+	MAXDISTTOPRINT = 42,
+	LIMIT = 43,
+	LPOINT = 44,
 	LDIR,
 	LSPOT,
 	SSPHERE,
 	SCONE,
 	SPLAN,
-	SCYLINDRE = 49,
+	SCYLINDRE = 50,
+	SBOX = 51,
 	ERROR
 }						t_state;
 
@@ -154,5 +153,6 @@ int					addValueToObject(t_ast **ast);
 int					addValueToLight(t_ast **ast);
 t_vector				addValueToVector(t_vector vector, char *content, int i);
 t_vector				addValueToColor(t_vector vector, char *content, int i);
+t_vector				addValueToSize(t_vector vector, char *content, int vcount);
 t_limit					addValueToLimit(t_limit limit, char *content, int i);
 #endif

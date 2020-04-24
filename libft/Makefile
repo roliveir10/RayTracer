@@ -109,6 +109,7 @@ SRCS = ft_bzero.c\
 	   ft_dot.c\
 	   ft_vdist.c\
 	   ft_vdiv.c\
+		ft_divv.c\
 	   ft_vvmul.c\
 	   ft_vsub.c\
 	   ft_vadd.c\

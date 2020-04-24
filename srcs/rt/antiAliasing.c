@@ -1,16 +1,26 @@
 #include "rt.h"
 
+void				fillRay(t_vector o, t_vector dir, t_ray *ray)
+{
+	ray->o = o;
+	ray->dir = dir;
+	ray->invDir = ft_divv(1.0, dir);
+	ray->sign[0] = (ray->invDir.x < 0);
+	ray->sign[1] = (ray->invDir.y < 0);
+	ray->sign[2] = (ray->invDir.z < 0);
+}
+
 static t_vector			pixColor(int i, int j)
 {
-	t_vector			rayDir;
+	t_ray				ray;
 	t_rayHit			hit;
 	double				x;
 	double				y;
 
 	y = (double)i + drand48();
 	x = (double)j + drand48();
-	rayDir = vDirCamToPoint(g_env.camera, x, y);
-	hit = rayCast(g_env.camera.origin, rayDir, g_env.scene.maxDistToPrint);
+	fillRay(g_env.camera.origin, vDirCamToPoint(g_env.camera, x, y), &ray);
+	hit = rayCast(ray, g_env.scene.maxDistToPrint);
 	if (hit.distance > 0)
 		hit.color = light(hit);
 	return (hit.color);

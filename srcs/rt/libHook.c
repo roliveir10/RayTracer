@@ -45,5 +45,6 @@ void				runLoop(void)
 		}
 		if (g_env.running == 1)
 			rayLoop();
+		return ;
 	}
 }

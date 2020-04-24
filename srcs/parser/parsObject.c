@@ -17,8 +17,8 @@ static void		parsOrigin(t_ast **ast)
 
 static void		parsName(char *content)
 {
-	const int	type[NBR_SHAPE] = {SPHERE, PLAN, CYLINDRE, CONE};
-	const char	*typeString[NBR_SHAPE] = {"\"sphere\"", "\"plan\"", "\"cylindre\"", "\"cone\""};
+	const int	type[NBR_SHAPE] = {SPHERE, PLAN, CYLINDRE, CONE, BOX};
+	const char	*typeString[NBR_SHAPE] = {"\"sphere\"", "\"plan\"", "\"cylindre\"", "\"cone\"", "\"box\""};
 	t_object	*tmp;
 
 	tmp = g_env.object;
@@ -41,6 +41,22 @@ static void		parsLimit(t_ast **ast)
 	for (int i = 0; i < 6; i++)
 	{
 		g_env.object->limit = addValueToLimit(g_env.object->limit, (*ast)->content, i);
+		*ast = (*ast)->next;
+	}
+	g_env.object->isLimited = 1;
+	g_env.object = tmp;
+}
+
+static void		parsSize(t_ast **ast)
+{
+	t_object	*tmp;
+
+	tmp = g_env.object;
+	while (g_env.object->next)
+		g_env.object = g_env.object->next;
+	for (int i = 0; i < 3; i++)
+	{
+		g_env.object->size = addValueToSize(g_env.object->size, (*ast)->content, i);
 		*ast = (*ast)->next;
 	}
 	g_env.object = tmp;
@@ -208,7 +224,8 @@ static void		fillObject(int currentField, int *element, t_ast **ast)
 		{"\"density\"", DENSITY},
 		{"\"reflection\"", REFLECTION},
 		{"\"shininess\"", SHININESS},
-		{"\"shininessStrength\"", SHININESSSTRENGTH}
+		{"\"shininessStrength\"", SHININESSSTRENGTH},
+		{"\"size\"", SIZE}
 	};
 
 	if (currentField == NAME)
@@ -237,6 +254,8 @@ static void		fillObject(int currentField, int *element, t_ast **ast)
 		parsShininess((*ast)->content);
 	else if (currentField == SHININESSSTRENGTH)
 		parsShininessStrength((*ast)->content);
+	else if (currentField == SIZE)
+		parsSize(ast);
 	else
 		printf("Warning: invalid field in objects object\n");
 	for (int i = 0; i < OBJECT_ELEMENT; i++)
@@ -277,6 +296,11 @@ static int		checkElement(int *element)
 	if (currentObject == CONE && !element[6])
 	{
 		dprintf(2, "Error: angle not set for object. Aborting...\n");
+		return (0);
+	}
+	if (currentObject == BOX && !element[13])
+	{
+		dprintf(2, "Error: size not set for box object. Aborting...\n");
 		return (0);
 	}
 	return (1);

@@ -36,7 +36,9 @@ void				wordCompare(char *charSaved)
 		{"\"shininess\"", SHININESS},
 		{"\"shininessStrength\"", SHININESSSTRENGTH},
 		{"\"intensity\"", INTENSITY},
-		{"\"limit\"", LIMIT}
+		{"\"limit\"", LIMIT},
+		{"\"box\"", SBOX},
+		{"\"size\"", SIZE}
 	};
 	char			*tmp;
 
