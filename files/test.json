@@ -1,0 +1,12 @@
+{
+	"camera":
+	{
+		"origin":[8, 8, 8]
+	},
+	"object":
+	{
+		"name":"sphere",
+		"origin":[8, 8, 8],
+		"radius":10
+	}
+}

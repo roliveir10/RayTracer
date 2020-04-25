@@ -3,32 +3,32 @@
 
 # include "libft.h"
 
-# define NBR_STATE 17
+# define NBR_STATE 19
 # define NBR_CHAR 128
 
 // number of possible word in the config file
 # define NBR_WORD 36
 
-# define FIRST_WORD_STATE 16
-# define LAST_WORD_STATE 40
+# define FIRST_WORD_STATE 18
+# define LAST_WORD_STATE 45
 
-# define FIRST_OBJECTS_NAME 16
-# define LAST_OBJECTS_NAME 19
+# define FIRST_OBJECTS_NAME 18
+# define LAST_OBJECTS_NAME 21
 
-# define FIRST_STRING_NAME 20
-# define LAST_STRING_NAME 22
+# define FIRST_STRING_NAME 22
+# define LAST_STRING_NAME 24
 
-# define FIRST_VECTOR_NAME 23
-# define LAST_VECTOR_NAME 27
+# define FIRST_VECTOR_NAME 25
+# define LAST_VECTOR_NAME 29
 
-# define FIRST_NUMBER_NAME 28
-# define LAST_NUMBER_NAME 42
+# define FIRST_NUMBER_NAME 30
+# define LAST_NUMBER_NAME 44
 
-# define FIRST_LIMIT_NAME 43
-# define LAST_LIMIT_NAME 43
+# define FIRST_LIMIT_NAME 45
+# define LAST_LIMIT_NAME 45
 
-# define FIRST_STRING_VALUE 44
-# define LAST_STRING_VALUE 51
+# define FIRST_STRING_VALUE 46
+# define LAST_STRING_VALUE 53
 
 
 int				g_transit[NBR_STATE][NBR_CHAR];
@@ -51,20 +51,22 @@ typedef	enum			e_state
 	SSBKT,
 	ESBKT,
 	MINUS,
+	COMMENT,
+	ENTER,
 	END,
-	SCENE = 16,
+	SCENE = 18,
 	CAMERA,
 	LIGHT,
-	OBJECTS = 19,
-	TYPE = 20,
+	OBJECTS = 21,
+	TYPE = 22,
 	TEXTURE,
-	NAME = 22,
-	ORIGIN = 23,
+	NAME = 24,
+	ORIGIN = 25,
 	ROTATION,
 	BACKGROUND,
 	SIZE,
-	COLOR = 27,
-	AMBIENT = 28,
+	COLOR = 29,
+	AMBIENT = 30,
 	ANGLE,
 	RADIUS,
 	REFLECTION,
@@ -78,16 +80,16 @@ typedef	enum			e_state
 	FOV,
 	SAMPLERATE,
 	PIXPERUNIT,
-	MAXDISTTOPRINT = 42,
-	LIMIT = 43,
-	LPOINT = 44,
+	MAXDISTTOPRINT = 44,
+	LIMIT = 45,
+	LPOINT = 46,
 	LDIR,
 	LSPOT,
 	SSPHERE,
 	SCONE,
 	SPLAN,
-	SCYLINDRE = 50,
-	SBOX = 51,
+	SCYLINDRE = 52,
+	SBOX = 53,
 	ERROR
 }						t_state;
 

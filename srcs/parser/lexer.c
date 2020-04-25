@@ -49,8 +49,9 @@ void				lexFile(char *file, t_error *error)
 	while (!g_final[state])
 	{
 		state = g_transit[state][(int)file[i]];
-		putCharInStack(charSaved(), file[i]);
-		if (file[i] == '\n')
+		if (state != COMMENT && state != ENTER)
+			putCharInStack(charSaved(), file[i]);
+		if (state == ENTER)
 			error->line++;
 		i++;
 	}
@@ -63,4 +64,5 @@ void				lexFile(char *file, t_error *error)
 	wordCompare(*charSaved());
 	if (*currentState() == ERROR)
 		dprintf(2, "line %d: lexical ERROR\n", error->line);
+	
 }

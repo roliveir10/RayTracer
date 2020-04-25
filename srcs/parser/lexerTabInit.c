@@ -12,7 +12,7 @@ void			initFinalTab(void)
 	g_final[11] = ECBKT + 1;
 	g_final[12] = SSBKT + 1;
 	g_final[13] = ESBKT + 1;
-	g_final[15] = END + 1;
+	g_final[17] = END + 1;
 	g_final[NBR_STATE] = ERROR + 1;
 }
 
@@ -26,7 +26,7 @@ void			initStateTab(void)
 			g_transit[i][j] = NBR_STATE;
 	for (j = 9; j <= 32; j++)
 		g_transit[0][j] = 0;
-	g_transit[0][0] = 15;
+	g_transit[0][0] = 17;
 	g_transit[0]['"'] = 2;
 	g_transit[0][':'] = 5;
 	g_transit[0]['{'] = 1;
@@ -35,6 +35,8 @@ void			initStateTab(void)
 	g_transit[0]['['] = 12;
 	g_transit[0][']'] = 13;
 	g_transit[0]['-'] = 14;
+	g_transit[0]['#'] = 15;
+	g_transit[0]['\n'] = 16;
 	for (j = '0'; j <= '9'; j++)
 		g_transit[0][j] = 6;
 
@@ -56,6 +58,7 @@ void			initStateTab(void)
 	g_transit[6][','] = 7;
 	g_transit[6]['.'] = 8;
 	g_transit[6][']'] = 7;
+	g_transit[6]['\n'] = 7;
 	for (j = '0'; j <= '9'; j++)
 		g_transit[6][j] = 6;
 
@@ -67,9 +70,18 @@ void			initStateTab(void)
 	g_transit[9]['}'] = 7;
 	g_transit[9][','] = 7;
 	g_transit[9][']'] = 7;
+	g_transit[6]['\n'] = 7;
 	for (j = '0'; j <= '9'; j++)
 		g_transit[9][j] = 9;
 
 	for (j = '0'; j <= '9'; j++)
 		g_transit[14][j] = 6;
+
+	for (j = 0; j < NBR_CHAR; j++)
+		g_transit[15][j] = 15;
+	g_transit[15][0] = 17;
+	g_transit[15]['\n'] = 16;
+
+	for (j = 0; j < NBR_CHAR; j++)
+		g_transit[16][j] = g_transit[0][j];
 }
