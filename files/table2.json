@@ -1,0 +1,72 @@
+{
+	"scene":
+	{
+		"screenX":1260,
+		"screenY":810,
+		"fov":5,
+		"sampleRate":8,
+		"pixPerUnit":1,
+		"maxDistToPrint":15000,
+		"background":[30, 60, 200],
+		"ambient":0.000
+	},
+	"camera":
+	{
+		"origin":[3, -4.5, -15],
+		"rotation":[-15, 0, 0]
+	},
+	"light":[
+	{
+		"origin":[0, 9, 0],
+		"color":[255, 220, 100],
+		"intensity":7500,
+		"type":"point"
+	},
+	{
+		"origin":[14, 6, -14],
+		"color":[255, 140, 80],
+		"intensity":600,
+		"type":"point"	
+	}],
+	"object":[
+		{
+			"name":"box",
+			"size":[30, 20, 30],
+			"origin":[0, 0, 0],
+			"color":[150, 50, 40],
+			"shininess":16,
+			"shininessStrength":0.075
+		},
+		{
+			"name":"box",
+			"size":[10, 0.2, 7],
+			"origin":[0, -6.9, 0],
+			"color":[255, 222, 173],
+			"shininess":256,
+			"shininessStrength":0.3
+		},
+{
+			"name":"box",
+			"size":[1.2, 3, 5],
+			"origin":[4, -8.5, 0],
+			"color":[255, 222, 173],
+			"shininess":256,
+			"shininessStrength":0.3
+		},
+{
+			"name":"box",
+			"size":[1.2, 3, 5],
+			"origin":[-4, -8.5, 0],
+			"color":[255, 222, 173],
+			"shininess":256,
+			"shininessStrength":0.3
+		},
+{
+			"name":"box",
+			"size":[6.8, 0.2, 4.5],
+			"origin":[0, -9, 0],
+			"color":[255, 222, 173],
+			"shininess":256,
+			"shininessStrength":0.3
+		}]
+}
