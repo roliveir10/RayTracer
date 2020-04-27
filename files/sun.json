@@ -3,7 +3,7 @@
 	{
 		"screenX":1260,
 		"screenY":810,
-		"fov":10,
+		"fov":90,
 		"sampleRate":4,
 		"pixPerUnit":1,
 		"maxDistToPrint":15000,
@@ -16,10 +16,9 @@
 	},
 	"light":[
 	{
-		"origin":[10, 38, -20],
+		"origin":[0, 0, 1],
 		"color":[255, 255, 255],
-		"intensity":10000,
-		"type":"point"
+		"type":"directional"
 	}],
 	"object":[
 	{

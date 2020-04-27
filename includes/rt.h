@@ -6,11 +6,14 @@
 # include "libft.h"
 # include "lexer.h"
 # include "data.h"
+# include "cl.h"
 
 # define NBR_KEY 1
 # define NBR_MKEY 2
 # define NBR_ELEMENT 4
 # define NBR_THREAD 6
+
+# define SCREEN_MIN 100
 
 typedef enum			e_color
 {
@@ -27,6 +30,7 @@ typedef enum			s_image
 typedef struct			s_env
 {
 	t_lib				lib;
+	t_cl				ocl;
 	t_scene				scene;
 	t_camera			camera;
 	t_light				*light;
@@ -95,11 +99,12 @@ void					initCamera(t_camera *cam);
 void					initializeRotation(void);
 void					changeReference(t_ray *ray, t_object obj);
 t_vector				changePointReference(t_vector point, t_object obj);
+t_vector				changeDirReference(t_vector dir, t_object obj);
 t_vector				resetPointReference(t_object obj, t_vector point);
 
 // NORMAL
 
-t_vector				normal(t_vector point, t_object obj);
+t_vector				normal(t_rayHit hit);
 
 // LIGHT
 

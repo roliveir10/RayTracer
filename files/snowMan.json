@@ -3,8 +3,8 @@
 	{
 		"screenX":1260,
 		"screenY":810,
-		"fov":10,
-		"sampleRate":2,
+		"fov":90,
+		"sampleRate":1,
 		"pixPerUnit":1,
 		"maxDistToPrint":15000,
 		"background":[30, 60, 200],
@@ -12,7 +12,7 @@
 	},
 	"camera":
 	{
-		"origin":[0, 0, -20]
+		"origin":[0, 0, -15]
 	},
 	"light":[
 	{
@@ -22,7 +22,7 @@
 	}],
 	"object":[
 		{
-			"name":"plan",
+			"name":"plan", #back wall
 			"origin":[0, 0, 10],
 			"rotation":[90, 0, 0],
 			"color":[139, 243, 239],
@@ -30,103 +30,119 @@
 			"shininessStrength":0.4
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #body
 			"origin":[0, 0, -5],
 			"radius":2.2,
 			"color":[205, 205, 205]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #face
 			"origin":[0, 3, -5.5],
 			"radius":1.4,
 			"color":[180, 180, 180]
 		},
 		{
-			"name":"plan",
+			"name":"cone", #hat
+			"origin":[0.5, 5.5, -6],
+			"limit":[0, -1.5, 0, 0, 1.5, 0],
+			"rotation":[0, 0, -7],
+			"angle":15,
+			"color":[220, 20, 60]
+		},
+		{
+			"name":"sphere", #ball on hat
+			"origin":[0.52, 5.5, -6],
+			"radius":0.2,
+			"color":[220, 150, 60]
+		},
+		{
+			"name":"plan", #ground
 			"origin":[0, -1.5, 0],
 			"color":[190, 190, 190],
 			"shininess":16,
 			"shininessStrength":0.4
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #left eye
 			"origin":[-0.45, 2.85, -6.8],
 			"radius":0.12
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #right eye
 			"origin":[0.45, 2.85, -6.8],
 			"radius":0.12
 		},
 		{
-			"name":"sphere",
-			"origin":[0, 2.5, -6.8],
-			"radius":0.11,
+			"name":"cone", #nose
+			"origin":[0, 2.15, -7.3],
+			"limit":[0, 0, 0, 0, 0.5, 0],
+			"rotation":[50, 0, 0],
+			"angle":15,
 			"color":[244, 102, 27]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #mouse
 			"origin":[-0.3, 2.310, -6.65],
 			"radius":0.06
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #mouse
 			"origin":[-0.15, 2.285, -6.67],
 			"radius":0.06
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #mouse
 			"origin":[0, 2.26, -6.67],
 			"radius":0.06
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #mouse
 			"origin":[0.15, 2.285, -6.67],
 			"radius":0.06
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #mouse
 			"origin":[0.3, 2.31, -6.65],
 			"radius":0.06
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #button
 			"origin":[0, -1.2, -6.79],
 			"radius":0.1,
 			"color":[220, 20, 60]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #button
 			"origin":[0, -0.9, -6.95],
 			"radius":0.1,
 			"color":[220, 20, 60]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #button
 			"origin":[0, -0.6, -7.07],
 			"radius":0.1,
 			"color":[220, 20, 60]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #button
 			"origin":[0, -0.3, -7.15],
 			"radius":0.1,
 			"color":[220, 20, 60]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #button
 			"origin":[0, 0, -7.18],
 			"radius":0.1,
 			"color":[220, 20, 60]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #button
 			"origin":[0, 0.3, -7.15],
 			"radius":0.1,
 			"color":[220, 20, 60]
 		},
 		{
-			"name":"sphere",
+			"name":"sphere", #button
 			"origin":[0, 0.6, -7.1],
 			"radius":0.1,
 			"color":[220, 20, 60]

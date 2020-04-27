@@ -48,6 +48,7 @@ typedef struct			s_solution
 	double			sol[2];
 }				t_solution;
 
+t_vector			vec3(double a, double b, double c);
 double				ft_clamp(double value, double lo, double hi);
 void				ft_fmat(double (*mat)[3][3][3], t_vector rotation,
 		double way);
@@ -63,6 +64,7 @@ double				ft_vdist(t_vector pos_a, t_vector pos_b);
 t_vector			ft_vdiv(t_vector v, double f);
 t_vector			ft_divv(double f, t_vector v);
 t_vector			ft_vvmul(t_vector va, t_vector vb);
+t_vector			ft_vvdiv(t_vector va, t_vector vb);
 t_vector			ft_vsub(t_vector pos_a, t_vector pos_b);
 t_vector			ft_vadd(t_vector pos_a, t_vector pos_b);
 t_vector			ft_vmul(t_vector v, double f);

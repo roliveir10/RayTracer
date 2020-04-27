@@ -34,3 +34,23 @@ int			isStringValue(int s)
 {
 	return (s >= FIRST_STRING_VALUE && s <= LAST_STRING_VALUE);
 }
+
+char			*stateToWord(int state)
+{
+	const char	*word[NBR_STATE + NBR_WORD] = {
+		"start", "scbkt", "sword", "letter", "word", "colon",
+		"digit", "number", "point", "fdigit", "comma", "ecbkt",
+		"ssbkt", "esbkt", "minus", "comment", "enter", "end",
+		"scene", "camera", "light", "objects", "type", "texture",
+		"name", "origin", "rotation", "background", "size", "color",
+		"ambient", "angle", "radius", "reflection", "density",
+		"transparency", "shininess", "shininessStrength", "intensity",
+		"screenX", "screenY", "fov", "sampleRate", "pixPerUnit",
+		"maxDistToPrint", "limit", "lpoint", "ldir", "lspot",
+		"ssphere", "scone", "splan", "scylindre", "sbox", "error"
+		};
+	
+	if (state >= NBR_STATE + NBR_WORD)
+		return (NULL);
+	return (ft_strdup(word[state]));
+}

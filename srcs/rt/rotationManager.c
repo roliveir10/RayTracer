@@ -20,6 +20,13 @@ t_vector				changePointReference(t_vector point, t_object obj)
 	return (point);
 }
 
+t_vector				changeDirReference(t_vector dir, t_object obj)
+{
+	for (int i = 0; i < 3; i++)
+		dir = ft_vrotate(dir, obj.matRot[i]);
+	return (dir);
+}
+
 t_vector				resetPointReference(t_object obj, t_vector point)
 {
 	t_vector			new;

@@ -132,6 +132,7 @@ void					initStateTab(void);
 void					lexFile(char *file, t_error *error);
 int						*currentState(void);
 char					**charSaved(void);
+char					*stateToWord(int state);
 
 int						syntaxAnalysis(char *file, t_ast **ast);
 void						wordCompare(char *charSaved);
@@ -148,13 +149,25 @@ int						isMemberLimit(int s);
 void					addNoeud(t_ast **ast, char *content, int type);
 void					freeAst(t_ast **ast);
 
-int					addValueToStruct(t_ast **ast, int currentObject);
-int					addValueToScene(t_ast **ast);
-int					addValueToCamera(t_ast **ast);
-int					addValueToObject(t_ast **ast);
-int					addValueToLight(t_ast **ast);
-t_vector				addValueToVector(t_vector vector, char *content, int i);
-t_vector				addValueToColor(t_vector vector, char *content, int i);
-t_vector				addValueToSize(t_vector vector, char *content, int vcount);
-t_limit					addValueToLimit(t_limit limit, char *content, int i);
+
+// CONVERT VALUE
+
+t_vector				addValueFromVector(t_ast **ast);
+t_vector				addValueFromColor(t_ast **ast);
+t_vector				addValueFromSize(t_ast **ast);
+t_limit					addValueFromLimit(t_ast **ast);
+double					addValueFromDouble(char *content);
+int					addValueFromInt(char *content);
+char					*addValueFromString(char *content);
+int					addValueFromLightType(char *toCompare);
+int					addValueFromObjectType(char *toCompare);
+
+// FILL STRUCT
+int					addValueFromMember(t_ast **ast, int currentObject);
+
+// CHECK STRUCT
+
+int					checkObjectMultiplication(int *object, int currentObject);
+int					checkObject(int *object);
+int					checkElement(int currentObject, int *element);
 #endif

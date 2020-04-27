@@ -3,7 +3,7 @@
 	{
 		"screenX":1260,
 		"screenY":810,
-		"fov":10,
+		"fov":90,
 		"sampleRate":4,
 		"pixPerUnit":1,
 		"maxDistToPrint":15000,
@@ -12,17 +12,18 @@
 	},
 	"camera":
 	{
-		"origin":[0, 0, -20]
+		"origin":[0, 5, -15],
+		"rotation":[-18, 0, 0]
 	},
 	"light":[
 	{
-		"origin":[6, 0, -16],
+		"origin":[6, 0, -11],
 		"color":[200, 0, 0],
 		"intensity":1000,
 		"type":"point"
 	},
 	{
-		"origin":[-6, 0, -16],
+		"origin":[-6, 0, -11],
 		"color":[0, 0, 200],
 		"intensity":1000,
 		"type":"point"
@@ -37,6 +38,7 @@
 		{
 			"name":"plan",
 			"origin":[0, -3, 0],
-			"color":[40, 40, 40]
+			"color":[40, 40, 40],
+			"limit":[-15, 0, -15, 30, 0, 30]
 		}]
 }

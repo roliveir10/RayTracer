@@ -34,7 +34,15 @@ int				rt_main(void)
 	if (!initLib(&g_env.lib))
 		return (0);
 	if (!initLoadBar(&g_env.lib))
+	{
+		delenv(&g_env.lib);
 		return (0);
+	}
+	if (!initOpenCL(CL_PLATFORM_UNINITIALIZED))
+	{
+		delenv(&g_env.lib);
+		return (0);
+	}
 	g_env.resolution = g_env.scene.screenX * g_env.scene.screenY;
 	initializeRotation();
 	initCamera(&(g_env.camera));

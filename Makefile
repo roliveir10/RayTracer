@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME		=		RT
-
+OS		:= $(shell uname)
 
 END			=		\x1b[0m
 GREEN		=		\x1b[32m
@@ -33,6 +33,12 @@ CPPFLAGS	=		-Ilibft/includes -I$(INC_DIR) -I$(INC_TTF)
 CFLAGS		=		-Wall -Werror -Wextra $(shell ./SDL2/bin/sdl2-config --cflags)
 LDFLAGS		=		-Llibft -L$(TTF_BUILD) -lft $(shell ./$(SDL_DIR)/bin/sdl2-config --libs) -lSDL2_ttf
 
+ifeq ($(OS),Darwin)
+	LDFLAGS += -framework OpenCL
+else
+	LDFLAGS += -l OpenCL
+endif
+
 SRC_DIR		=		srcs
 SRC			=						\
 parser/main.c						\
@@ -44,13 +50,11 @@ parser/word.c					\
 parser/wordReference.c				\
 parser/ast.c						\
 parser/fillStruct.c					\
-parser/valueToStruct.c				\
-parser/objectMember.c				\
-parser/parsScene.c				\
-parser/parsCamera.c				\
-parser/parsLight.c				\
-parser/parsObject.c				\
+parser/convertValue.c				\
+parser/valueFromElement.c			\
+parser/structValidity.c				\
 rt/init.c							\
+rt/openCL.c					\
 rt/keyHandler.c						\
 rt/camera.c							\
 rt/rayHit.c							\

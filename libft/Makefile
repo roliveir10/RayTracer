@@ -111,6 +111,7 @@ SRCS = ft_bzero.c\
 	   ft_vdiv.c\
 		ft_divv.c\
 	   ft_vvmul.c\
+		ft_vvdiv.c\
 	   ft_vsub.c\
 	   ft_vadd.c\
 	   ft_vmul.c\
@@ -122,7 +123,8 @@ SRCS = ft_bzero.c\
 	   ft_clamp.c\
 	   ft_cross.c\
 	ft_print_vector.c	\
-	ft_max.c
+	ft_max.c		\
+	vec3.c
 PRINTF = ft_printf/ft_caster.c\
 		 ft_printf/ft_conv_base.c\
 		 ft_printf/ft_flag.c\

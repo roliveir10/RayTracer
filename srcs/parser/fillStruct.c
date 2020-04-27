@@ -1,6 +1,6 @@
 #include "rt.h"
 
-static void			addObjectToStruct(int type)
+static void			mallocObjectToStruct(int type)
 {
 	t_light			*tmpL;
 	t_object		*tmpO;
@@ -23,7 +23,6 @@ static void			addObjectToStruct(int type)
 		if (!g_env.object)
 		{
 			g_env.object = ft_memalloc(sizeof(t_object));
-			g_env.object->type = -1;
 		}
 		else
 		{
@@ -31,7 +30,6 @@ static void			addObjectToStruct(int type)
 			while (g_env.object->next)
 				g_env.object = g_env.object->next;
 			g_env.object->next = ft_memalloc(sizeof(t_object));
-			g_env.object->next->type = -1;
 			g_env.object = tmpO;
 		}
 	}
@@ -61,27 +59,26 @@ static void			fillExtra(t_object **obj)
 int				fillStruct(t_ast *ast)
 {
 	int			currentObject = 0;
-	t_nbrObject		objects;
+	int			object[NBR_OBJECT];
 
-	ft_bzero(&objects, sizeof(t_nbrObject));
-	countObject(ast, &objects);
-	if (!objectValidity(objects))
-		return (0);
+	ft_bzero(&object, sizeof(int) * NBR_OBJECT);
 	while (ast)
 	{
 		if (isMemberObject(ast->type))
 		{
 			currentObject = ast->type;
+			if (!checkObjectMultiplication(object, currentObject))
+				return (0);
 			ast = ast->next;
 		}
-		else
+		if (ast)
 		{
 			if (currentObject == LIGHT || currentObject == OBJECTS)
-				addObjectToStruct(currentObject);
-			if (!(addValueToStruct(&ast, currentObject)))
+				mallocObjectToStruct(currentObject);
+			if (!addValueFromMember(&ast, currentObject))
 				return (0);
 		}
 	}
 	fillExtra(&g_env.object);
-	return (1);
+	return (checkObject(object));
 }

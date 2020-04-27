@@ -9,6 +9,8 @@
 # define CAMERA_ELEMENT 2
 # define LIGHT_ELEMENT 4
 # define OBJECT_ELEMENT 14
+# define ELEMENT SCENE_ELEMENT + CAMERA_ELEMENT + LIGHT_ELEMENT + OBJECT_ELEMENT
+# define NBR_OBJECT 4
 
 typedef enum			s_shape
 {
@@ -44,6 +46,9 @@ typedef struct			s_camera
 	t_vector			direction[3];
 	t_vector			vpUpLeft;
 	double					fov;
+	double				planeDist;
+	double				viewPlaneWidth;
+	double				viewPlaneHeight;
 }						t_camera;
 
 typedef struct			s_light
@@ -80,14 +85,4 @@ typedef struct			s_object
 	struct s_object		*next;
 }						t_object;
 
-typedef struct			s_nbrObject
-{
-	int					scene;
-	int					camera;
-	int					light;
-	int					object;
-}						t_nbrObject;
-
-void					countObject(t_ast *ast, t_nbrObject *nbrObject);
-int					objectValidity(t_nbrObject objects);
 #endif
