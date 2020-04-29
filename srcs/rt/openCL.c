@@ -1,53 +1,5 @@
 #include "rt.h"
 
-/*
-**	cl_int clGetDeviceInfo(
-**		cl_device_id device, 			//gpu id
-**		cl_device_info param_name,		// a flag, see man
-**		size_t param_value_size,		// sizeof(*(pointer passed param_value))
-**		void *param_value,				// returns queried arg value
-**		size_t *param_value_size_ret)	// returns actual size of return arg
-**	return CL_SUCCESS, CL_INVALID_DEVICE or
-*/
-
-/*
-** 1 thread (work item) per core; each compute unit on the gpu may have
-**	multiple cores
-**
-** work group size = product of work group dim(i) ; also equal to number of
-**	threads (work items) in work group. This number should always be a multiple
-**	of the number of cores per compute unit (cpcu generally = 16 on nvidia
-**	and 64 on AMD).
-**
-** CL_QUEUE_SIZE
-**
-** CL_DEVICE_VENDOR						:
-** CL_DEVICE_NAME						:
-** CL_DRIVER_VERSION					:
-** CL_DEVICE_PROFILE					:
-** CL_DEVICE_VERSION					:
-** CL_DEVICE_OPENCL_C_VERSION			:
-** CL_DEVICE_MAX_COMPUTE_UNITS			:
-** CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS	:
-** CL_DEVICE_MAX_WORK_ITEM_SIZES		:
-** CL_DEVICE_MAX_WORK_GROUP_SIZE		:
-** CL_DEVICE_MEM_BASE_ADDR_ALIGN 		:
-** CL_DEVICE_MIN_DATA_TYPE_ALIGN_SIZE	:
-** CL_DEVICE_MAX_CLOCK_FREQUENCY		:
-** CL_DEVICE_LOCAL_MEM_SIZE				:
-** CL_DEVICE_MAX_MEM_ALLOC_SIZE			:
-**
-** cl_int clGetPlatformInfo( 	cl_platform_id platform,
-**   	cl_platform_info param_name, //CL_PLATFORM_...
-**   	size_t param_value_size,
-**   	void *param_value,
-**   	size_t *param_value_size_ret)
-** CL_PLATFORM_PROFILE
-** CL_PLATFORM_VERSION
-** CL_PLATFORM_NAME
-** CL_PLATFORM_VENDOR
-*/
-
 static void		printDeviceInfo(char *gpu_name, char *platform_name, char *gpu_ocl_version)
 {
 	printf("Platform index : %d\n", g_env.ocl.gpu_platform_index);
@@ -127,11 +79,97 @@ static int		clPlatformData(int platform_index)
 	return (1);
 }
 
+static int		clCreateContextAndQueue(void)
+{
+	cl_int		error;
+
+	g_env.ocl.context = clCreateContext(NULL, 1, &g_env.ocl.gpu.id, NULL, NULL, &error);
+	if (error < 0)
+		return (0);
+	g_env.ocl.cmd_queue = clCreateCommandQueue(g_env.ocl.context,
+			g_env.ocl.gpu.id, 0, &error);
+	return (error >= 0);
+}
+
+static int		clReadAndBuildProgram(void)
+{
+	int		fd;
+	cl_int		error;
+	char		*file_buf;
+	size_t		file_len;
+
+	if ((fd = open(CL_PROGRAM_SOURCE, O_RDONLY)) == -1)
+		return (0);
+	if (!ft_readfile(fd, &file_buf, (size_t)-1))
+		return (0);
+	file_len = ft_strlen(file_buf);
+	g_env.ocl.program = clCreateProgramWithSource(g_env.ocl.context, 1,
+		(char const **)&filebuf, &file_len, &error);
+	free(file_buf);
+	if (error < 0)
+		return (0);
+	if (!(error = clBuildProgram(g_env.ocl.program, 1, &g_env.ocl.gpu.id,
+			CL_PROGRAM_OPTIONS, NULL, NULL)) < 0)
+		return (0);
+	close(fd);
+	return (1);
+}
+
+static int		clInitGpuMemory(void)
+{
+	int		error;
+
+	g_env.ocl.gpu_buf.data = clCreateBuffer(g_env.ocl.context,
+		CM_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
+		sizeof(t_data), &g_env.data, &error);
+	if (error < 0)
+		return (0);
+	g_env.ocl.gpu_buf.img_texture = clCreateBuffer(g_env.ocl.context,
+		CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
+		sizeof(uint32_t) * 100 * 100, g_env.img_texture, &error);
+	if (error < 0)
+		return (0);
+	f_env.ocl.gpu_buf.canvas_pixels = clCreateBuffer(g_env.ocl.context,
+		CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR,
+		sizeof(uint32_t) * g_env.resolution, g_env.lib->image, &error);
+	return (error >= 0);
+}
+
+static int		clInitKernel(void)
+{
+	int		error = 1;
+
+	g_rt.ocl.kernels[1] = clCreateKernel(g_env.ocl.program, CL_KERNEL_0, &error);
+	if (error < 0)
+		return (0);
+	return (1);
+}
+
 int			initOpenCL(int platform_index)
 {
 	if (!clPlatformData(platform_index))
 	{
-		printf("Could not find an appropriate GPU/platform. Aborting...\n");
+		dprintf(2, "Could not find an appropriate GPU/platform. Aborting...\n");
+		return (0);
+	}
+	if (!clCreateContextAndQueue())
+	{
+		dprintf(2, "Could not create device, context or queue. Aborting...\n");
+		return (0);
+	}
+	if (!clReadAndBuildProgram())
+	{
+		dprintf(2, "Could not build program. Aborting...\n");
+		return (0);
+	}
+	if (!clInitGpuMemory())
+	{
+		dprintf(2, "Could not initialize gpu memory buffers. Aborting...\n");
+		return (0);"
+	}
+	if (!clInitKernel())
+	{
+		dprintf(2, "Could not initialize kernels. Aborting...\n");
 		return (0);
 	}
 	return (1);

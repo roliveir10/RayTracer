@@ -8,6 +8,11 @@
 
 # define CL_KERNEL_AMOUNT 3
 
+# define CL_PROGRAM_SOURCE "kernel.cl"
+# define CL_PROGRAM_OPTIONS "-Wall -Wextra -Werror"
+
+# define CL_KERNEL_0 "init"
+
 typedef struct			s_gpu
 {
 	cl_device_id		id;
@@ -21,7 +26,11 @@ typedef struct			s_gpu
 
 typedef struct			s_gpu_buffers
 {
+	cl_mem			data;
 	cl_mem			canvas_pixels;
+	cl_mem			img_texture;
+	cl_mem			ray_lum_tensor;
+	cl_mem			tensor_dims;
 }				t_gpu_buffers;
 
 typedef struct			s_cl

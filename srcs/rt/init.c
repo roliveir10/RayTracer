@@ -38,12 +38,12 @@ int				rt_main(void)
 		delenv(&g_env.lib);
 		return (0);
 	}
+	g_env.resolution = g_env.scene.screenX * g_env.scene.screenY;
 	if (!initOpenCL(CL_PLATFORM_UNINITIALIZED))
 	{
 		delenv(&g_env.lib);
 		return (0);
 	}
-	g_env.resolution = g_env.scene.screenX * g_env.scene.screenY;
 	initializeRotation();
 	initCamera(&(g_env.camera));
 	runLoop();

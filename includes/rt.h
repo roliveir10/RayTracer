@@ -31,12 +31,13 @@ typedef struct			s_env
 {
 	t_lib				lib;
 	t_cl				ocl;
-	t_scene				scene;
+	t_data				scene;
 	t_camera			camera;
-	t_light				*light;
 	t_object			*object;
-	int					running;
-	int					resolution;
+	t_light				*light;
+	int				running;
+	int				resolution;
+	unsigned int			*img_texture;
 }						t_env;
 
 typedef struct			s_rayHit
