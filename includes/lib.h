@@ -24,6 +24,10 @@ typedef struct			s_lib
 	t_load				load;
 }						t_lib;
 
+// LIB
+
+int						initLib(t_lib *lib);
+
 // FREE
 
 void					delenv(t_lib *lib);

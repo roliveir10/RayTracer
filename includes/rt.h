@@ -2,6 +2,7 @@
 # define _RT_H
 
 # include <stdio.h>
+# include <math.h>
 # include "lib.h"
 # include "libft.h"
 # include "lexer.h"
@@ -11,7 +12,15 @@
 # define NBR_KEY 1
 # define NBR_MKEY 2
 # define NBR_ELEMENT 4
-# define NBR_THREAD 6
+
+# define EPS 0.00003
+
+# define DEFAULT_BOUNCE 4
+# define DEFAULT_MAX_DIST_TO_PRINT 15000
+# define DEFAULT_SAMPLE_RATE 128
+# define DEFAULT_SCREENX 1280
+# define DEFAULT_SCREENY 800
+# define DEFAULT_FOV 3 * M_PI / 180
 
 # define SCREEN_MIN 100
 
@@ -27,101 +36,68 @@ typedef enum			s_image
 	LOAD
 }						t_image;
 
+typedef struct			s_sizet3
+{
+	size_t				x;
+	size_t				y;
+	size_t				z;
+}						t_sizet3;
+
 typedef struct			s_env
 {
 	t_lib				lib;
 	t_cl				ocl;
-	t_data				scene;
-	t_camera			camera;
-	t_object			*object;
-	t_light				*light;
-	int				running;
-	int				resolution;
-	unsigned int			*img_texture;
+	t_scene				scene;
+	int					resolution;
+	int					running;
+	int					print;
 }						t_env;
 
 typedef struct			s_rayHit
 {
-	double				distance;
-	t_vector			normal;
-	t_vector			point;
-	t_vector			viewDir;
-	t_vector			color;
+	float				distance;
+	cl_float3			normal;
+	cl_float3			point;
+	cl_float3			viewDir;
+	cl_float3			color;
 	t_object			obj;
 }						t_rayHit;
 
 typedef struct				s_ray
 {
-	t_vector			o;
-	t_vector			dir;
-	t_vector			invDir;
-	int				sign[3];
+	cl_float3			o;
+	cl_float3			dir;
 }					t_ray;
 
 t_env					g_env;
 
 int						rt_main(void);
-void					runLoop();
-void					printWindow(void);
-char					*open_file(char *argv);
-int						fillStruct(t_ast *ast);
-
-// LIBHOOK
-
 void					runLoop(void);
-void					keyHandler(SDL_Event *event);
-// SHAPEINTER
 
-double					plan(t_object obj, t_ray ray);
-double					sphere(t_object obj, t_ray ray);
-double					cylindre(t_object obj, t_ray ray);
-double					cone(t_object obj, t_ray ray);
-double					box(t_object obj, t_ray ray);
-double					lowerDist(t_solution sol);
+//DRAW
 
-//RAYCAST
-
-t_rayHit				rayCast(t_ray ray, double maxDist);
-double					distToHit(t_object obj, t_ray ray);
-t_vector				hitPoint(t_ray ray, double dist);
-double					limit(t_ray ray, t_solution  dist, t_object obj);
-void					fillRay(t_vector o, t_vector dir, t_ray *ray);
-
-//VECTOR
-
-t_vector				vDirCamToPoint(t_camera cam, double x, double y);
-
-//CAMERA
-
-void					initCamera(t_camera *cam);
+int						drawWindow(void);
 
 // ROTATION
 
-void					initializeRotation(void);
-void					changeReference(t_ray *ray, t_object obj);
-t_vector				changePointReference(t_vector point, t_object obj);
-t_vector				changeDirReference(t_vector dir, t_object obj);
-t_vector				resetPointReference(t_object obj, t_vector point);
+cl_float4				quaternionMul(cl_float4 quat_a, cl_float4 quat_b);
+cl_float4				quaternionConj(cl_float4 quat);
+cl_float3				quatRotWithQuat(cl_float3 vec, cl_float4 quatRotVec);
+cl_float4				xyzRotToQuat(cl_float3 rotation);
 
-// NORMAL
+// CAMERA
 
-t_vector				normal(t_rayHit hit);
+void					initCamera(t_camera *cam);
 
-// LIGHT
+//KEY
 
-t_vector				light(t_rayHit hit);
-t_vector				ambient(t_light light);
-t_vector				diffuse(t_light light, double angle, t_vector intensity);
-t_vector				specular(t_light light, t_rayHit hit, t_vector reflectDir, t_vector intensity);
+void					keyHandler(SDL_Event *event);
 
-// COLOR
+// UTILS
+cl_float3				vec3mul(cl_float3 f, float mul);
+float					vec3d_length2(cl_float3 vec);
+cl_float3				vec3d_unit(cl_float3 vec);
+cl_float3				clFl3(float x, float y, float z);
+void					debugPrintFile(void);
 
-t_vector				setColor(int color);
-
-// ANTIALIASING
-
-t_vector				antiAliasing(int sampleRate, int x, int y);
-
-// FREE
-void					freeStruct(void);
 #endif

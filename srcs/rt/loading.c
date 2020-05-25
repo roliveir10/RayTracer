@@ -11,7 +11,7 @@ static void		drawLoadingBar(t_lib *lib, int currentLoad)
 {
 	int			width;
 
-	width = lib->load.loadRect.w * 0.01 * NBR_THREAD;
+	width = lib->load.loadRect.w * 0.01;
 	for (int i = 0; i < lib->load.loadRect.h; i++)
 		for (int j = currentLoad - width; j < currentLoad + width; j++)
 		{
@@ -39,10 +39,10 @@ void			drawBar(t_lib *lib, int currentLoad, int loading)
 
 int				initLoadBar(t_lib *lib)
 {
-	lib->load.loadRect.w = g_env.scene.screenX * 0.25;
-	lib->load.loadRect.h = g_env.scene.screenY * 0.05;
-	lib->load.loadRect.x = (g_env.scene.screenX - lib->load.loadRect.w) * 0.5;
-	lib->load.loadRect.y = g_env.scene.screenY * 0.9;
+	lib->load.loadRect.w = g_env.scene.work_dims.x * 0.25;
+	lib->load.loadRect.h = g_env.scene.work_dims.y * 0.05;
+	lib->load.loadRect.x = (g_env.scene.work_dims.x - lib->load.loadRect.w) * 0.5;
+	lib->load.loadRect.y = g_env.scene.work_dims.y * 0.9;
 	if (!(lib->load.texture = SDL_CreateTexture(lib->renderer,
 			SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
 			lib->load.loadRect.w, lib->load.loadRect.h)))

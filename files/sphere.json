@@ -1,44 +1,29 @@
 {
 	"scene":
 	{
-		"screenX":1260,
-		"screenY":810,
-		"fov":90,
-		"sampleRate":4,
-		"pixPerUnit":1,
+		"screenX":1280,
+		"screenY":800,
 		"maxDistToPrint":15000,
-		"background":[30, 60, 200],
-		"ambient":0
+		"background":[38, 38, 63],
+		"sampleRate":128
 	},
 	"camera":
 	{
-		"origin":[0, 5, -15],
-		"rotation":[-18, 0, 0]
+		"origin":[0, 0, -4],
+		"fov":90
 	},
-	"light":[
-	{
-		"origin":[6, 0, -11],
-		"color":[200, 0, 0],
-		"intensity":1000,
-		"type":"point"
-	},
-	{
-		"origin":[-6, 0, -11],
-		"color":[0, 0, 200],
-		"intensity":1000,
-		"type":"point"
-	}],
 	"object":[
 		{
 			"name":"sphere",
-			"origin":[0, 0, 0],
-			"radius":3,
-			"color":[180, 180, 180]
+			"scale":[5, 5, 5],
+			"origin":[9, 9, 0],
+			"color":[255, 210, 150]
 		},
 		{
-			"name":"plan",
-			"origin":[0, -3, 0],
-			"color":[40, 40, 40],
-			"limit":[-15, 0, -15, 30, 0, 30]
-		}]
+			"name":"sphere",
+			"origin":[0, 0, 0],
+			"scale":[1.5, 1.5, 1.5],
+			"color":[229, 204, 178]
+		}
+		]
 }

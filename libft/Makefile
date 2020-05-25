@@ -124,6 +124,7 @@ SRCS = ft_bzero.c\
 	   ft_cross.c\
 	ft_print_vector.c	\
 	ft_max.c		\
+	ft_min.c		\
 	vec3.c			\
 	ft_readFile.c
 PRINTF = ft_printf/ft_caster.c\

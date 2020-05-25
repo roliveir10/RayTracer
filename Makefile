@@ -28,7 +28,7 @@ TTF_DIR		=		SDL_text
 TTF_BUILD	=		SDL_text/ttf_build/lib
 INC_TTF		=		SDL_text/ttf_build/include/SDL2
 
-CC			=		gcc -O2
+CC			=		gcc
 CPPFLAGS	=		-Ilibft/includes -I$(INC_DIR) -I$(INC_TTF)
 CFLAGS		=		-Wall -Werror -Wextra $(shell ./SDL2/bin/sdl2-config --cflags)
 LDFLAGS		=		-Llibft -L$(TTF_BUILD) -lft $(shell ./$(SDL_DIR)/bin/sdl2-config --libs) -lSDL2_ttf
@@ -54,39 +54,55 @@ parser/convertValue.c				\
 parser/valueFromElement.c			\
 parser/structValidity.c				\
 rt/init.c							\
-rt/openCL.c					\
-rt/keyHandler.c						\
-rt/camera.c							\
-rt/rayHit.c							\
-rt/basicsShape.c					\
-rt/rotationManager.c				\
-rt/basicsNormal.c					\
-rt/printWindow.c					\
-rt/color.c							\
-rt/light.c							\
+rt/openCL.c							\
+rt/debug.c							\
+rt/lib.c							\
 rt/loading.c						\
 rt/libHook.c						\
-rt/antiAliasing.c					\
-rt/lightType.c						\
-rt/limit.c						\
-rt/box.c
+rt/keyHandler.c						\
+rt/drawWindow.c						\
+rt/camera.c							\
+rt/utils.c							\
+rt/quaternion.c						
+
+SRC_DIR_CL	=		$(SRC_DIR)/rt/ocl/
+SRCS_CL		=						\
+rth.cl								\
+utils.cl							\
+quaternion.cl						\
+limit.cl							\
+normal.cl							\
+basicsShape.cl						\
+complexShape.cl						\
+debug.cl							\
+texture.cl							\
+main.cl								\
+initScene.cl
 
 OBJ_DIR		=		.o
 OBJ			=		$(SRC:.c=.o)
 DEP			=		$(OBJ:.o=.d)
 
+OBJ_FILES	= $(addprefix $(OBJ_DIR)/,$(OBJ))
 
 all: $(NAME)
 
-$(NAME): $(addprefix $(OBJ_DIR)/,$(OBJ))
+$(NAME): $(OBJ_FILES) kernel.cl
 	$(MAKE) -C libft
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $(OBJ_FILES)
 	@echo "\n[$(GREEN)$(NAME): Compilation successful$(END)]"
 
 -include $(addprefix $(OBJ_DIR)/,$(DEP))
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(TTF_BUILD)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -MMD -o $@ -c $<
+
+CL_FILES	=		$(addprefix $(SRC_DIR_CL), $(SRCS_CL))
+
+kernel.cl: $(CL_FILES)
+	@printf "Concatenating .cl files: "$@" --> "
+	@cat $(CL_FILES) > $@
+	@printf "$(GREEN)Concatenating successful$(END)\n"
 
 $(SDL_BUILD): | $(SDL_DIR)
 	curl https://www.libsdl.org/release/$(SDL_TAR) --output $(SDL_TAR)
@@ -123,9 +139,11 @@ clean:
 	$(RM) -r $(OBJ_DIR)
 	$(RM) -r $(TTF_DIR)/freetype-2.8
 	$(RM) -r $(TTF_DIR)/SDL2_ttf-2.0.15
+	$(RM) -f kernel.cl
 	@echo "$(GREEN)[$(NAME) objects files cleaned]$(END)"
 	@echo "$(GREEN)[$(SDL_LIB) files removed]$(END)"
 	@echo "$(GREEN)[$(TTF_DIR) files removed]$(END)"
+	@echo "$(GREEN)[kernel.cl file removed]$(END)"
 
 fclean: clean
 	$(MAKE) -C libft fclean --no-print-directory
@@ -133,9 +151,6 @@ fclean: clean
 	$(RM) -r $(SDL_DIR)
 	$(RM) -r $(TTF_DIR)/freetype_build
 	$(RM) -r $(TTF_DIR)/ttf_build
-	@echo "$(GREEN)[$(NAME) objects files cleaned]$(END)"
-	@echo "$(GREEN)[$(SDL_LIB) files removed]$(END)"
-	@echo "$(GREEN)[$(TTF_DIR) files removed]$(END)"
 	@echo "$(GREEN)[$(NAME) binary deleted]$(END)"
 
 re:

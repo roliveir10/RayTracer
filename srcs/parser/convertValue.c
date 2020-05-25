@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-t_vector			addValueFromVector(t_ast **ast)
+cl_float3			addValueFromVector(t_ast **ast)
 {
-	t_vector		new;
+	cl_float3		new;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -19,28 +19,26 @@ t_vector			addValueFromVector(t_ast **ast)
 	return (new);
 }
 
-t_vector			addValueFromSize(t_ast **ast)
+cl_float3			addValueFromRotation(t_ast **ast)
 {
-	t_vector		new;
-	double			value;
+	cl_float3		new;
 
 	for (int i = 0; i < 3; i++)
 	{
-		value = atof((*ast)->content);
 		if (i == 0)
-			new.x = ft_max(value, 0);
+			new.x = atof((*ast)->content) * M_PI / 180;
 		else if (i == 1)
-			new.y = ft_max(value, 0);
+			new.y = atof((*ast)->content) * M_PI / 180;
 		else if (i == 2)
-			new.z = ft_max(value, 0);
+			new.z = atof((*ast)->content) * M_PI / 180;
 		*ast = (*ast)->next;
 	}
 	return (new);
 }
 
-t_vector			addValueFromColor(t_ast **ast)
+cl_float3			addValueFromColor(t_ast **ast)
 {
-	t_vector		new;
+	cl_float3		new;
 	double			dTmp;
 
 	for (int i = 0; i < 3; i++)
@@ -52,31 +50,6 @@ t_vector			addValueFromColor(t_ast **ast)
 			new.y = ft_clamp(dTmp / 255, 0, 1);
 		else if (i == 2)
 			new.z = ft_clamp(dTmp / 255, 0, 1);
-		*ast = (*ast)->next;
-	}
-	return (new);
-}
-
-t_limit				addValueFromLimit(t_ast **ast)
-{
-	t_limit			new;
-	double			dTmp;
-
-	for (int i = 0; i < 6; i++)
-	{
-		dTmp = atof((*ast)->content);
-		if (i == 0)
-			new.x = dTmp;
-		else if (i == 1)
-			new.y = dTmp;
-		else if (i == 2)
-			new.z = dTmp;
-		else if (i == 3)
-			new.sizeX = ft_max(dTmp, 0);
-		else if (i == 4)
-			new.sizeY = ft_max(dTmp, 0);
-		else if (i == 5)
-			new.sizeZ = ft_max(dTmp, 0);
 		*ast = (*ast)->next;
 	}
 	return (new);
@@ -98,30 +71,64 @@ int				addValueFromInt(char *content)
 	return (iTmp);
 }
 
-char				*addValueFromString(char *content)
+int				addValueFromPrimitiveType(char *toCompare)
 {
-	return (ft_strdup(content));
-}
+	const int		type[PRIMITIVES] = {SPHERE, PLAN, CYLINDRE, CONE, BOX, DISK, HYPERBOLOID};
+	const char		*typeString[PRIMITIVES] = {
+			"\"sphere\"",
+			"\"plan\"",
+			"\"cylindre\"",
+			"\"cone\"",
+			"\"box\"",
+			"\"disk\"",
+			"\"hyperboloid\""
+	};
 
-int				addValueFromLightType(char *toCompare)
-{
-	const int		type[NBR_LIGHT_TYPE] = {POINTL, DIRECTIONAL, SPOT};
-	const char		*typeString[NBR_LIGHT_TYPE] = {"\"point\"", "\"directional\"", "\"spot\""};
-
-	for (int i = 0; i < NBR_LIGHT_TYPE; i++)
+	for (int i = 0; i < PRIMITIVES; i++)
 		if (!ft_strcmp(toCompare, typeString[i]))
 			return (type[i]);
-	return (-1);
+	return (SNONE);
 }
 
-int				addValueFromObjectType(char *toCompare)
+int				addValueFromMaterialType(char *toCompare)
 {
-	const int		type[NBR_SHAPE] = {SPHERE, PLAN, CYLINDRE, CONE, BOX};
-	const char		*typeString[NBR_SHAPE] = {"\"sphere\"", "\"plan\"",
-		"\"cylindre\"", "\"cone\"", "\"box\""};
+	const int	type[MATERIALS] = {MLIGHT, MDIFFUSE, MTRANSPARENT, MSPECULAR};
+	const char	*typeString[MATERIALS] = {
+			"\"light\"",
+			"\"diffuse\"",
+			"\"transparent\"",
+			"\"specular\""
+	};
 
-	for (int i = 0; i < NBR_SHAPE; i++)
+	for (int i = 0; i < MATERIALS; i++)
 		if (!ft_strcmp(toCompare, typeString[i]))
 			return (type[i]);
-	return (-1);
+	return (MNONE);
+}
+
+int				addValueFromPatternType(char *toCompare)
+{
+	const int	type[PATTERNS] = {PSOLID};
+	const char	*typeString[PATTERNS] = {
+			"\"solid\""
+	};
+
+	for (int i = 0; i < PATTERNS; i++)
+		if (!ft_strcmp(toCompare, typeString[i]))
+			return (type[i]);
+	return (PSOLID);
+}
+
+int				addValueFromBumpType(char *toCompare)
+{
+	const int	type[BUMP] = {BFLAT, BBUMP};
+	const char	*typeString[BUMP] = {
+			"\"flat\"",
+			"\"bump\""
+	};
+
+	for (int i = 0; i < BUMP; i++)
+		if (!ft_strcmp(toCompare, typeString[i]))
+			return (type[i]);
+	return (BFLAT);
 }

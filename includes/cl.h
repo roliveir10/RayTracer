@@ -8,10 +8,12 @@
 
 # define CL_KERNEL_AMOUNT 3
 
-# define CL_PROGRAM_SOURCE "kernel.cl"
+# define RT_CL_PROGRAM_SOURCE "kernel.cl"
 # define CL_PROGRAM_OPTIONS "-Wall -Wextra -Werror"
 
-# define CL_KERNEL_0 "init"
+# define CL_KERNEL_0 "pixelColorMain"
+# define CL_KERNEL_1 "pixAverage"
+# define CL_KERNEL_2 "initScene"
 
 typedef struct			s_gpu
 {
@@ -26,11 +28,10 @@ typedef struct			s_gpu
 
 typedef struct			s_gpu_buffers
 {
-	cl_mem			data;
+	cl_mem			scene;
 	cl_mem			canvas_pixels;
-	cl_mem			img_texture;
-	cl_mem			ray_lum_tensor;
-	cl_mem			tensor_dims;
+	cl_mem			ray;
+	cl_mem			global_dims;
 }				t_gpu_buffers;
 
 typedef struct			s_cl
@@ -47,4 +48,6 @@ typedef struct			s_cl
 }				t_cl;
 
 int				initOpenCL(int state);
+void			delOpenCL(t_cl *ocl);
+int				executeKernel0(void);
 #endif

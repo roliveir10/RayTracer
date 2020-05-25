@@ -1,35 +1,5 @@
 #include "rt.h"
 
-static void			freeLight(t_light **light)
-{
-	if (!*light)
-		return ;
-	freeLight(&(*light)->next);
-	if ((*light)->type)
-		ft_strdel(&(*light)->type);
-	ft_memdel((void**)light);
-}
-
-static void			freeObject(t_object **object)
-{
-	if (!*object)
-		return ;
-	freeObject(&(*object)->next);
-	if ((*object)->name)
-		ft_strdel(&(*object)->name);
-	if ((*object)->texture)
-		ft_strdel(&(*object)->texture);
-	ft_memdel((void**)object);
-}
-
-void				freeStruct()
-{
-	if (g_env.light)
-		freeLight(&g_env.light);
-	if (g_env.object)
-		freeObject(&g_env.object);
-}
-
 int					main(int argc, char **argv)
 {
 	char			*file;
@@ -55,10 +25,7 @@ int					main(int argc, char **argv)
 	analysis = fillStruct(ast);
 	freeAst(&ast);
 	if (!analysis)
-	{
-		freeStruct();
 		return (1);
-	}
 	rt_main();
 	return (0);
 }

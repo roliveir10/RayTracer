@@ -3,32 +3,25 @@
 	{
 		"screenX":x,		// define the width of the screen in pixel unit
 		"screenY":x,		// define the height of the screen in pixel unit
-		"fov":x,		// define the camera's field of vue
 		"sampleRate":x,		// define the precision of pixel calculation
 		"pixPerUnit":x,		// define the resolution
-		"maxDistToPrint:x,	// define the maximal distance of printing
-		"background":[color],	// define the background color
 		"ambient":x,		// define the light's ambient strength
 	},
 	"camera":
 	{
 		"origin":[vector3],	// define the camera's origin
 		"rotation":[vector3],	// define the camera's rotation
+		"fov":x,		// define the camera's field of vue
+		"background":[color],	// define the background color
+		"maxDistToPrint:x,	// define the maximal distance of printing
 	},
-	"light":[
-	{
-		"origin":[vector3],	// define the light's origin or light's direction depending of the type
-		"color":[color],	// define the light's color
-		"type":"lightType"	// define the light's type
-		"intensity:x		// define the light's intensity. Directional light ignore this value
-	}
-	],
 	"object"[
 	{
-		"origin":[vector3],	// define the object's origin
+		"origin":[vector3],	// define the object's origin or light's direction depending of the type
 		"name":"objectName"	// define the object structure
 		"rotation":[vector3]	// define the object's rotation
 		"color":[color]		// define the object's color
+		"intensity:x		// define the light's intensity. Directional light ignore this value
 		"radius":x		// define the sphere or cylindre radius for sphere or cylindre
 		"angle":x		// define the cone's angle for cone
 		"shininess":x		// define the object's shininess
@@ -58,17 +51,12 @@ low shininess : 8 ; medium shininess: 64 ; powerfull shininess: > 128
 [limit]: [x, y, z, sizeX, sizeY, sizeZ] : 0 <= size
 [size]: [x, y, z] : 0 <= value
 
-
-"lightType"	{
-			"point"		// light is spherical, with custom intensity
-			"directional"	// light is setup with direction instead of origin
-		}
-
-
 "objectName"	{
 			"sphere"
 			"cylindre"
 			"plan"
 			"cone"
 			"box"
+			"point"		// light is spherical, with custom intensity
+			"directional"	// light is setup with direction instead of origin
 		}

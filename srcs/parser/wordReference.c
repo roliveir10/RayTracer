@@ -25,11 +25,6 @@ int			isMemberObject(int s)
 	return (s >= FIRST_OBJECTS_NAME && s <= LAST_OBJECTS_NAME);
 }
 
-int			isMemberLimit(int s)
-{
-	return (s >= FIRST_LIMIT_NAME && s <= LAST_LIMIT_NAME);
-}
-
 int			isStringValue(int s)
 {
 	return (s >= FIRST_STRING_VALUE && s <= LAST_STRING_VALUE);
@@ -41,13 +36,14 @@ char			*stateToWord(int state)
 		"start", "scbkt", "sword", "letter", "word", "colon",
 		"digit", "number", "point", "fdigit", "comma", "ecbkt",
 		"ssbkt", "esbkt", "minus", "comment", "enter", "end",
-		"scene", "camera", "light", "objects", "type", "texture",
-		"name", "origin", "rotation", "background", "size", "color",
-		"ambient", "angle", "radius", "reflection", "density",
-		"transparency", "shininess", "shininessStrength", "intensity",
-		"screenX", "screenY", "fov", "sampleRate", "pixPerUnit",
-		"maxDistToPrint", "limit", "lpoint", "ldir", "lspot",
-		"ssphere", "scone", "splan", "scylindre", "sbox", "error"
+		"scene", "camera", "objects", "type", "material", "pattern",
+		"bumpType", "name", "origin", "rotation", "background", "color",
+		"scale", "limitMin", "limitMax", "refrac", "shininess",
+		"intensity", "screenX", "screenY", "fov", "sampleRate",
+		"maxDistToPrint", "bounceMax", "ssphere", "scone", "splan",
+		"scylindre", "sbox", "sdisk", "shyperboloid", "slight",
+		"sdiffuse", "stransparent", "sspecular", "ssolid", "sflat",
+		"sbump", "error"
 		};
 	
 	if (state >= NBR_STATE + NBR_WORD)

@@ -32,16 +32,6 @@ typedef struct		s_vector
 	double			z;
 }					t_vector;
 
-typedef struct		s_limit
-{
-	double			x;
-	double			y;
-	double			z;
-	double			sizeX;
-	double			sizeY;
-	double			sizeZ;
-}					t_limit;
-
 typedef struct			s_solution
 {
 	int			nbrSol;
@@ -160,5 +150,6 @@ char				*ft_delc(char **str);
 long				ft_diff_abs(int a, int b);
 void				ft_print_vector(t_vector vector);
 double				ft_max(double value1, double value2);
+double				ft_min(double value1, double value2);
 int				ft_readFile(int fd, char **file, size_t max);
 #endif

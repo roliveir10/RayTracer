@@ -1,26 +1,29 @@
 #include "rt.h"
 
-static void			printTexture(void)
+static int			printTexture(void)
 {
 	int				pitch;
 
 	if (!SDL_LockTexture(g_env.lib.texture, NULL, (void**)&g_env.lib.image, &pitch))
 	{
-		printWindow();
+		if (!drawWindow())
+			return (0);
 		SDL_UnlockTexture(g_env.lib.texture);
 		SDL_RenderCopy(g_env.lib.renderer, g_env.lib.texture, NULL, NULL);
 		SDL_RenderPresent(g_env.lib.renderer);
 	}
+	return (1);
 }
 
-static void			rayLoop(void)
+static void 		rayLoop(void)
 {	
-	if (g_env.scene.pixPerUnit > 0)
+	drawBar(&g_env.lib, 0, 0);
+	if (!printTexture())
 	{
-		drawBar(&g_env.lib, 0, 0);
-		printTexture();
+		dprintf(2, "Could not print texture. Aborting...\n");
+		g_env.running = 0;
 	}
-	g_env.scene.pixPerUnit = 0;
+	g_env.print = 0;
 }
 
 void				runLoop(void)
@@ -28,6 +31,7 @@ void				runLoop(void)
 	SDL_Event		event;
 
 	g_env.running = 1;
+	g_env.print = 1;
 	while (g_env.running)
 	{
 		while (SDL_PollEvent(&event))
@@ -43,7 +47,7 @@ void				runLoop(void)
 			}
 			keyHandler(&event);
 		}
-		if (g_env.running == 1)
+		if (g_env.running && g_env.print)
 			rayLoop();
 	}
 }
