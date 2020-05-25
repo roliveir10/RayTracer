@@ -210,7 +210,7 @@ static int			setUpKernel2(void)
 			&g_env.ocl.gpu_buf.scene)) < 0)
 		return (error);
 	if ((error = clEnqueueNDRangeKernel(g_env.ocl.cmd_queue, g_env.ocl.kernels[2],
-			1, NULL, (const size_t*)&g_env.scene.nbrObject, NULL, 0, NULL, NULL)) < 0)
+			1, NULL, &g_env.scene.nbrObject, NULL, 0, NULL, NULL)) < 0)
 		return (error);
 	return (1);
 }
