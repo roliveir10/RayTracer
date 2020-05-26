@@ -14,6 +14,10 @@ int			initLib(t_lib *lib)
 			SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
 			g_env.scene.work_dims.x, g_env.scene.work_dims.y)))
 		return (0);
+	if (!(lib->display = SDL_CreateRGBSurfaceWithFormat(SDL_RLEACCEL,
+			g_env.scene.work_dims.x, g_env.scene.work_dims.y, 8,
+			SDL_PIXELFORMAT_ARGB8888)))
+		return (0);
 	return (1);
 }
 

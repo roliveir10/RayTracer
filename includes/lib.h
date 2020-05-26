@@ -20,6 +20,7 @@ typedef struct			s_lib
 	SDL_Window			*window;
 	SDL_Renderer		*renderer;
 	SDL_Texture			*texture;
+	SDL_Surface			*display;
 	unsigned int		*image;
 	t_load				load;
 }						t_lib;

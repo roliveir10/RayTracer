@@ -48,14 +48,14 @@ typedef struct			s_env
 	t_lib				lib;
 	t_cl				ocl;
 	t_scene				scene;
-	int					resolution;
+	cl_int				resolution;
 	int					running;
 	int					print;
 }						t_env;
 
 typedef struct			s_rayHit
 {
-	float				distance;
+	cl_float			distance;
 	cl_float3			normal;
 	cl_float3			point;
 	cl_float3			viewDir;

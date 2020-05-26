@@ -2,16 +2,22 @@
 
 static int			printTexture(void)
 {
-	int				pitch;
-
-	if (!SDL_LockTexture(g_env.lib.texture, NULL, (void**)&g_env.lib.image, &pitch))
+/*	if (!SDL_LockTexture(g_env.lib.texture, NULL, (void**)&g_env.lib.image, &pitch))
 	{
 		if (!drawWindow())
 			return (0);
 		SDL_UnlockTexture(g_env.lib.texture);
 		SDL_RenderCopy(g_env.lib.renderer, g_env.lib.texture, NULL, NULL);
 		SDL_RenderPresent(g_env.lib.renderer);
-	}
+	}*/
+	if (!drawWindow())
+		return (0);
+	if (SDL_UpdateTexture(g_env.lib.texture, NULL, g_env.lib.display->pixels,
+			g_env.lib.display->pitch))
+		return (0);
+	if (SDL_RenderCopy(g_env.lib.renderer, g_env.lib.texture, NULL, NULL))
+		return (0);
+	SDL_RenderPresent(g_env.lib.renderer);
 	return (1);
 }
 

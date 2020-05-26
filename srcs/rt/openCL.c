@@ -346,7 +346,7 @@ int					executeKernel0(void)
 		return (error);
 	if ((error = clEnqueueReadBuffer(g_env.ocl.cmd_queue,
 			g_env.ocl.gpu_buf.canvas_pixels, CL_TRUE, 0,
-			g_env.resolution * sizeof(cl_uint), g_env.lib.image,
+			g_env.resolution * sizeof(cl_uint), g_env.lib.display->pixels,
 			0, NULL, NULL)) < 0)
 		return (error);
 	if (g_env.ocl.gpu_buf.ray)
