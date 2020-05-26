@@ -2,13 +2,14 @@ static t_intersection		primitiveIntersection
 (
 	float					*new_t,
 	t_ray					*rayOs,
-	t_objType				type
+	t_objType				type,
+	t_bbox					aabb
 )
 {
 	t_intersection			inter;
 
 	if (type == SPHERE)
-		inter = sphere(new_t, rayOs);
+		inter = sphere(new_t, rayOs, aabb);
 	else if (type == PLAN)
 		inter = plan(new_t, rayOs);
 	else if (type == CYLINDRE)
@@ -57,15 +58,18 @@ static t_intersection	intersectScene
 		rayOs = *ray;
 		rayOs.o = applyHomogeneousMatrice(obj->w_to_o, rayOs.o);
 		rayOs.dir = applyLinearMatrice(obj->w_to_o, rayOs.dir);
-		rayOs.interType = primitiveIntersection(&new_t, &rayOs, obj->type);
+		rayOs.interType = primitiveIntersection(&new_t, &rayOs, obj->type, obj->bboxOs);
 		if (rayOs.interType && EPSILON < new_t && new_t < ray->t)
 		{
 			rayOs.hitPos = rayOs.o + new_t * rayOs.dir;
-			inter = rayOs.interType;
-			finalRayOs = rayOs;
-			finalRayOs.objId = i;
-			ray->t = new_t;
-			finalRayOs.t = new_t;
+			if (hitPosInBbox(rayOs.hitPos, obj->bboxOs))
+			{
+				inter = rayOs.interType;
+				finalRayOs = rayOs;
+				finalRayOs.objId = i;
+				ray->t = new_t;
+				finalRayOs.t = new_t;
+			}
 		}
 	}
 	if (inter)

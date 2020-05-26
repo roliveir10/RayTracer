@@ -11,7 +11,7 @@ static void		drawLoadingBar(t_lib *lib, int currentLoad)
 {
 	int			width;
 
-	width = lib->load.loadRect.w * 0.01 * 6; // can be optimize
+	width = lib->load.loadRect.w * 0.01 * 8; // can be optimize
 	for (int i = 0; i < lib->load.loadRect.h; i++)
 		for (int j = currentLoad - width; j < currentLoad + width; j++)
 		{

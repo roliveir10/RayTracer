@@ -6,14 +6,26 @@
 
 void			delOpenCL(t_cl *ocl)
 {
-	clReleaseKernel(ocl->kernels[0]);
-	clReleaseKernel(ocl->kernels[1]);
-	clReleaseKernel(ocl->kernels[2]);
-	clReleaseProgram(ocl->program);
-	clReleaseMemObject(ocl->gpu_buf.canvas_pixels);
-	clReleaseMemObject(ocl->gpu_buf.scene);
-	clReleaseCommandQueue(ocl->cmd_queue);
-	clReleaseContext(ocl->context);
+	if (clFinish(ocl->cmd_queue))
+		return ;
+	if (clReleaseKernel(ocl->kernels[0]))
+		return ;
+	if (clReleaseKernel(ocl->kernels[1]))
+		return ;
+	if (clReleaseKernel(ocl->kernels[2]))
+		return ;
+	if (clReleaseMemObject(ocl->gpu_buf.canvas_pixels))
+		return ;
+	ocl->gpu_buf.canvas_pixels = NULL;
+	if (clReleaseMemObject(ocl->gpu_buf.scene))
+		return ;
+	ocl->gpu_buf.scene = NULL;
+	if (clReleaseCommandQueue(ocl->cmd_queue))
+		return ;
+	if (clReleaseContext(ocl->context))
+		return ;
+	if (clReleaseProgram(ocl->program))
+		return ;
 }
 
 static int		clInitializePlatforms(void)
@@ -202,6 +214,7 @@ static int			setUpKernel1(void)
 static int			setUpKernel2(void)
 {
 	int				error;
+	const size_t	nbrObject = (size_t)g_env.scene.nbrObject;
 
 	if ((error = clEnqueueWriteBuffer(g_env.ocl.cmd_queue, g_env.ocl.gpu_buf.scene,
 			CL_TRUE, 0, sizeof(t_scene), &(g_env.scene), 0, NULL, NULL)) < 0)
@@ -210,7 +223,7 @@ static int			setUpKernel2(void)
 			&g_env.ocl.gpu_buf.scene)) < 0)
 		return (error);
 	if ((error = clEnqueueNDRangeKernel(g_env.ocl.cmd_queue, g_env.ocl.kernels[2],
-			1, NULL, &g_env.scene.nbrObject, NULL, 0, NULL, NULL)) < 0)
+			1, NULL, &nbrObject, NULL, 0, NULL, NULL)) < 0)
 		return (error);
 	return (1);
 }
@@ -220,9 +233,9 @@ static int			initWorkStepAndRayBuffer(void)
 	cl_int3			*wksteps = &g_env.scene.work_steps;
 	int				error;
 
-	wksteps->x = ft_min(ft_min(32, g_env.ocl.gpu.max_witems_per_dim[0]),
+	wksteps->x = ft_min(ft_min(64, g_env.ocl.gpu.max_witems_per_dim[0]),
 			g_env.scene.work_dims.x);
-	wksteps->y = ft_min(ft_min(32, g_env.ocl.gpu.max_witems_per_dim[1]),
+	wksteps->y = ft_min(ft_min(64, g_env.ocl.gpu.max_witems_per_dim[1]),
 			g_env.scene.work_dims.y);
 	wksteps->z = ft_min(ft_min(128, g_env.ocl.gpu.max_witems_per_dim[2]),
 			g_env.scene.work_dims.z);

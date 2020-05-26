@@ -1,3 +1,32 @@
+static void				getBboxVertices(float3 * vertices, t_bbox aabb)
+{
+	vertices[0] = (float3)(aabb.vmin.x, aabb.vmin.y, aabb.vmin.z);
+	vertices[1] = (float3)(aabb.vmin.x, aabb.vmin.y, aabb.vmax.z);
+	vertices[2] = (float3)(aabb.vmin.x, aabb.vmax.y, aabb.vmin.z);
+	vertices[3] = (float3)(aabb.vmin.x, aabb.vmax.y, aabb.vmax.z);
+	vertices[4] = (float3)(aabb.vmax.x, aabb.vmin.y, aabb.vmin.z);
+	vertices[5] = (float3)(aabb.vmax.x, aabb.vmin.y, aabb.vmax.z);
+	vertices[6] = (float3)(aabb.vmax.x, aabb.vmax.y, aabb.vmin.z);
+	vertices[7] = (float3)(aabb.vmax.x, aabb.vmax.y, aabb.vmax.z);
+}
+
+static t_bbox			buildObjectBbox(__global t_object *obj)
+{
+	float3				osBboxVertices[8];
+	t_bbox				result;
+
+	getBboxVertices(osBboxVertices, obj->bboxOs);
+	for (int i = 0; i < 8; i++)
+		osBboxVertices[i] = applyHomogeneousMatrice(obj->o_to_w, osBboxVertices[i]);
+	result.vmax = result.vmin = osBboxVertices[0];
+	for (int i = 1; i < 8; i++)
+	{
+		result.vmin = fmin(result.vmin, osBboxVertices[i]);
+		result.vmax = fmax(result.vmax, osBboxVertices[i]);
+	}
+	return (result);
+}
+
 static void				buildObjectMatrices(__global t_object *obj)
 {
 	float3				pos = obj->origin;
@@ -26,6 +55,7 @@ __kernel void			initScene(__global t_scene *scene)
 	__global t_object*	obj = &scene->object[obj_id];
 	
 	buildObjectMatrices(obj);
+//	obj->bboxWs = buildObjectBbox(obj);
 
 	debugPrintObject(obj);
 }

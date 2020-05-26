@@ -34,7 +34,8 @@ void				debugPrintFile(void)
 	printf("-----SCENE ELEMENT-----\n\n");
 	printf("screenX: %d\nscreenY: %d\nsampleRate: %d\nbounceMax: %d\nnbrObject: %d\n",
 		scene.work_dims.x, scene.work_dims.y, scene.work_dims.z, scene.bounceMax, scene.nbrObject);
-	printf("resolution: %d\n", g_env.resolution);
+	printf("resolution: %d pixels\n", g_env.resolution);
+	printf("ray computed: %ld\n", (long)(g_env.resolution * scene.bounceMax * scene.work_dims.z));
 	printf("maxDistToPrint: %.f\n", scene.maxDistToPrint);
 	checkPrintVector("background: ", 1, scene.background);
 	

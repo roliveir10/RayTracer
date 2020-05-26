@@ -1,17 +1,3 @@
-/*static float	lowerDist(const float2 sol)
-{
-	float		dist;
-
-	dist = 1e6;
-	if (sol.x <= 0 && sol.y <= 0)
-		return (-1.f);
-	if (sol.x > 0.f && sol.x < dist)
-		dist = sol.x;
-	if (sol.y > 0.f && sol.y < dist)
-		dist = sol.y;
-	return (dist);
-}
-*/
 static t_intersection		plan(float *t, t_ray *ray)
 {
 	float					tmp;
@@ -22,19 +8,9 @@ static t_intersection		plan(float *t, t_ray *ray)
 		return (NONE);
 	*t = tmp;
 	return (ray->o.y > 0.f ? OUTSIDE : INSIDE);
-
-/*	if (ray->dir.y)
-	{
-		sol.x = -ray->o.y / ray->dir.y;
-		if (obj->isLimited)
-			return (limit(ray, sol, obj->limit));
-		return (sol.x);
-	}
-	return (-1.f);
-*/
 }
 
-static t_intersection		sphere(float *t, t_ray *ray)
+static t_intersection		sphere(float *t, t_ray *ray, t_bbox aabb)
 {
 	float3					quad;
 	float2					roots;
@@ -56,15 +32,14 @@ static t_intersection		sphere(float *t, t_ray *ray)
 		*t = roots.x;
 		return (INSIDE);
 	}
+	*t = fmin(roots.x, roots.y);
+	if (hitPosInBbox(ray->o + (*t) * ray->dir, aabb))
+		return (OUTSIDE);
 	else
 	{
-		*t = fmin(roots.x, roots.y);
-		return (OUTSIDE);
+		*t = fmax(roots.x, roots.y);
+		return (INSIDE);
 	}
-	/*if (obj->isLimited)
-		return (limit(ray, sol, obj->limit));
-	return (lowerDist(sol));
-*/
 }
 
 static t_intersection	cylindre(float *t, t_ray *ray)

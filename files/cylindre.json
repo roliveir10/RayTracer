@@ -2,28 +2,28 @@
 	"scene":
 	{
 		"screenX":1280,
-		"screenY":800,
-		"sampleRate":1024,
-		"pixPerUnit":1,
-		"ambient":0
+		"screenY":832,
+		"sampleRate":128,
+		"maxDistToPrint":15000,
+		"background":[38, 38, 63]
 	},
 	"camera":
 	{
 		"origin":[0, 0, -4],
-		"fov":90,
-		"maxDistToPrint":15000,
-		"background":[38, 38, 63]
+		"fov":90
 	},
 	"object":[
 		{
 			"name":"sphere",
+			"material":"light",
 			"scale":[5, 5, 5],
 			"origin":[0, 8, -4],
-			"emission":[9, 8, 6],
+			"intensity":5,
 			"color":[255, 220, 190]
 		},
 		{
 			"name":"cylindre",
+			"material":"diffuse",
 			"origin":[0, -1, 0],
 			"rotation":[0, 0, -90],
 			"scale":[1, 1, 1],

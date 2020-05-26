@@ -72,6 +72,7 @@ utils.cl							\
 quaternion.cl						\
 limit.cl							\
 normal.cl							\
+bbox.cl								\
 basicsShape.cl						\
 complexShape.cl						\
 debug.cl							\

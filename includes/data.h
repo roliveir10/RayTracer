@@ -98,7 +98,7 @@ typedef struct			s_scene
 	cl_float3			background;
 	t_camera			camera;
 	t_object			object[MAX_OBJECT];
-	size_t				nbrObject;
+	int					nbrObject;
 	float				maxDistToPrint;
 	t_bbox				bboxWs;
 	int					bounceMax;
