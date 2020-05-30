@@ -3,9 +3,9 @@
 	{
 		"screenX":1280,
 		"screenY":832,
-		"sampleRate":2048,
+		"sampleRate":4096,
 		"maxDistToPrint":15000,
-		"background":[8, 17, 30],
+		"background":[255, 255, 255],
 		"bounceMax":4
 	},
 	"camera":
@@ -16,25 +16,17 @@
 	"object":[
 		{
 			"name":"sphere",
-			"material":"light",
-			"intensity":1.5,
-			"scale":[4, 4, 4],
-			"origin":[11, 4, -2],
-			"color":[255, 220, 190]
-		},
-		{
-			"name":"sphere",
 			"material":"diffuse",
 			"origin":[1.5, 0, -0.5],
 			"scale":[1, 1, 1],
-			"color":[229, 204, 178]
+			"color":[229, 30, 30]
 		},
 		{
 			"name":"sphere",
 			"material":"diffuse",
 			"scale":[1, 1, 1],
 			"origin":[-1.5, 0, 0.5],
-			"color":[229, 204, 178]
+			"color":[0, 204, 205]
 		},
 		{
 			"name":"plan",
@@ -42,6 +34,14 @@
 			"scale":[1, 1, 1],
 			"origin":[0, -1, 0],
 			"color":[229, 204, 178]
+		},
+		{
+			"name":"plan",
+			"material":"diffuse",
+			"scale":[1, 1, 1],
+			"origin":[0, -1, 30],
+			"color":[255, 255, 255],
+			"rotation":[90, 0, 0]
 		}
 		]
 }

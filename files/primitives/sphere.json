@@ -1,0 +1,33 @@
+{
+	"scene":
+	{
+		"screenX":1280,
+		"screenY":832,
+		"maxDistToPrint":15000,
+		"background":[8, 17, 30],
+		"sampleRate":256,
+		"bounceMax":4
+	},
+	"camera":
+	{
+		"origin":[0, 0, -4],
+		"fov":90
+	},
+	"object":[
+		{
+			"name":"sphere",
+			"material":"light",
+			"scale":[5, 5, 5],
+			"origin":[10, 10, 0],
+			"intensity":10,
+			"color":[255, 210, 150]
+		},
+		{
+			"name":"sphere",
+			"material":"diffuse",
+			"origin":[0, 0, 0],
+			"scale":[1.2, 1.2, 1.2],
+			"color":[229, 204, 178]
+		}
+		]
+}

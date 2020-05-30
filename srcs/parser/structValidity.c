@@ -64,14 +64,24 @@ static t_bbox	objectBboxDefault(t_objType type, float maxDist)
 			(cl_float3){{maxDist, maxDist, maxDist}}
 	};
 
-	if (type == SPHERE)
+	if (type == SPHERE || type == CYLINDRE || type == CUBE)
 		bbox = (t_bbox){
 			(cl_float3){{-1.f - EPS, -1.f - EPS, -1.f - EPS}},
 			(cl_float3){{1.f + EPS, 1.f + EPS, 1.f + EPS}}
 		};
-	else if (type == DISK)
+	else if (type == DISK || type == RECTANGLE)
 		bbox = (t_bbox){
 			(cl_float3){{-1.f - EPS, -EPS, -1.f - EPS}},
+			(cl_float3){{1.f + EPS, EPS, 1.f + EPS}}
+			};
+	else if (type == TRIANGLE)
+		bbox = (t_bbox){
+			(cl_float3){{-0.5f - EPS, -EPS, -EPS}},
+			(cl_float3){{0.5f + EPS, EPS, 1.f + EPS}},
+			};
+	else if (type == CONE)
+		bbox = (t_bbox){
+			(cl_float3){{-1.f - EPS, -1.f - EPS, -1.f - EPS}},
 			(cl_float3){{1.f + EPS, EPS, 1.f + EPS}}
 			};
 	else if (type == PLAN)
@@ -79,11 +89,33 @@ static t_bbox	objectBboxDefault(t_objType type, float maxDist)
 			(cl_float3){{-maxDist, -EPS, -maxDist}},
 			(cl_float3){{maxDist, EPS, maxDist}}
 			};
-	else if (type == CYLINDRE)
+	else if (type == INFCYLINDRE)
 		bbox = (t_bbox){
 			(cl_float3){{-1.f - EPS, -maxDist, -1.f - EPS}},
 			(cl_float3){{1.f + EPS, maxDist, 1.f + EPS}}
 			};
+	else if (type == PARABOLOID)
+		bbox = (t_bbox){
+			(cl_float3){{-sqrt(maxDist), -EPS, -sqrt(maxDist)}},
+			(cl_float3){{sqrt(maxDist), maxDist, sqrt(maxDist)}}
+			};
+	else if (type == HYPERBOLOID)
+		bbox = (t_bbox){
+			(cl_float3){{-maxDist, -1.f - EPS, -maxDist}},
+			(cl_float3){{maxDist, 1.f + EPS, maxDist}}
+		};
+	else if (type == INFHYPERBOLOID || type == INFCONE)
+		bbox = (t_bbox){
+			(cl_float3){{-maxDist, -maxDist, -maxDist}},
+			(cl_float3){{maxDist, maxDist, maxDist}}
+			};
+	else if (type == ROUNDEDBOX)
+		bbox = (t_bbox){
+			(cl_float3){{-1.2f - EPS, -1.2f - EPS, -1.2f - EPS}},
+			(cl_float3){{1.2f + EPS, 1.2f + EPS, 1.2f + EPS}}
+			};
+	else
+		printf("TODO: bboxWs for %d type object\n", type);
 	return (bbox);
 }
 

@@ -8,7 +8,7 @@
 # define NBR_CHAR 128
 
 // number of possible word in the config file
-# define NBR_WORD 39
+# define NBR_WORD 53
 
 # define FIRST_WORD_STATE 18
 # define LAST_WORD_STATE 45
@@ -26,7 +26,7 @@
 # define LAST_NUMBER_NAME 42
 
 # define FIRST_STRING_VALUE 43
-# define LAST_STRING_VALUE 56
+# define LAST_STRING_VALUE 70
 
 
 int				g_transit[NBR_STATE][NBR_CHAR];
@@ -81,16 +81,30 @@ typedef	enum			e_state
 	SCONE,
 	SPLAN,
 	SCYLINDRE,
-	SBOX,
+	SCUBE,
 	SDISK,
 	SHYPERBOLOID,
+	SINFHYPERBOLOID,
+	SINFCYLINDRE,
+	SINFCONE,
+	SRECTANGLE,
+	STRIANGLE,
+	SPARABOLOID,
+	SSADDLE,
+	STHORUS,
+	SCAPSULE,
+	SELLIPSOID,
+	SROUNDEDCONE,
+	SSPHERE4,
+	SGOURSAT,
+	SROUNDEDBOX,
 	SLIGHT,
 	SDIFFUSE,
 	STRANSPARENT,
 	SSPECULAR,
 	SSOLID,
 	SFLAT,
-	SBUMP = 56,
+	SBUMP = 69,
 	ERROR
 }						t_state;
 

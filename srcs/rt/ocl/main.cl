@@ -1,42 +1,3 @@
-static t_intersection		primitiveIntersection
-(
-	float					*new_t,
-	t_ray					*rayOs,
-	t_objType				type,
-	t_bbox					aabb
-)
-{
-	t_intersection			inter;
-
-	if (type == SPHERE)
-		inter = sphere(new_t, rayOs, aabb);
-	else if (type == PLAN)
-		inter = plan(new_t, rayOs);
-	else if (type == CYLINDRE)
-		inter = cylindre(new_t, rayOs);
-	else
-		inter = NONE;
-	return (inter);
-}
-
-/*{
-	if (obj->type == SPHERE)
-		return (sphere(obj, ray));
-	else if (obj->type == PLAN)
-		return (plan(obj, ray));
-	else if (obj->type == CYLINDRE)
-		return (cylindre(obj, ray));
-	else if (obj->type == CONE)
-		return (cone(obj, ray));
-	else if (obj->type == BOX)
-		return (box(obj, ray));
-	else if (obj->type == DISK)
-		return (disk(obj, ray));
-	else if (obj->type == HYPERBOLOID)
-		return (hyperboloid(obj, ray));
-	return (-1.f);
-}*/
-
 static t_intersection	intersectScene
 (
 	__constant t_scene	*scene,
@@ -62,14 +23,11 @@ static t_intersection	intersectScene
 		if (rayOs.interType && EPSILON < new_t && new_t < ray->t)
 		{
 			rayOs.hitPos = rayOs.o + new_t * rayOs.dir;
-			if (hitPosInBbox(rayOs.hitPos, obj->bboxOs))
-			{
-				inter = rayOs.interType;
-				finalRayOs = rayOs;
-				finalRayOs.objId = i;
-				ray->t = new_t;
-				finalRayOs.t = new_t;
-			}
+			inter = rayOs.interType;
+			finalRayOs = rayOs;
+			finalRayOs.objId = i;
+			ray->t = new_t;
+			finalRayOs.t = new_t;
 		}
 	}
 	if (inter)
@@ -114,6 +72,11 @@ static t_ray		globalIllum
 	{
 		newRay.dir = randDirCoshemi(random_seeds, normal);
 		newRay.lum_mask = ray->lum_mask * texture.rgb * (float3)(dot(normal, newRay.dir));
+	}
+	else if (obj->material == MSPECULAR)
+	{
+		//newRay.dir = reflectCosLob(random_seeds, ray->dir, normal, obj->shininess);
+		//newRay.lum_mask = ray->lum_mask * texture.rgb * (float3)(dot(normal, newRay.dir));
 	}
 
 	hitPos = EPSILON * normal + hitPos;

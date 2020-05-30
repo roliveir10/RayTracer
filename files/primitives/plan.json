@@ -3,11 +3,9 @@
 	{
 		"screenX":1280,
 		"screenY":832,
+		"sampleRate":256,
 		"maxDistToPrint":15000,
-		"background":[38, 38, 63],
-		"sampleRate":128,
-		"bounceMax":4,
-		"sampleRate":128
+		"background":[8, 17, 30]
 	},
 	"camera":
 	{
@@ -18,16 +16,16 @@
 		{
 			"name":"sphere",
 			"material":"light",
+			"intensity":1.5,
 			"scale":[5, 5, 5],
-			"origin":[10, 10, 0],
-			"intensity":10,
-			"color":[255, 210, 150]
+			"origin":[0, 10, 10],
+			"color":[255, 220, 190]
 		},
 		{
-			"name":"sphere",
+			"name":"plan",
 			"material":"diffuse",
-			"origin":[0, 0, 0],
-			"scale":[1.5, 1.5, 1.5],
+			"origin":[0, -1, 0],
+			"scale":[1, 1, 1],
 			"color":[229, 204, 178]
 		}
 		]

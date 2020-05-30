@@ -73,15 +73,30 @@ int				addValueFromInt(char *content)
 
 int				addValueFromPrimitiveType(char *toCompare)
 {
-	const int		type[PRIMITIVES] = {SPHERE, PLAN, CYLINDRE, CONE, BOX, DISK, HYPERBOLOID};
+	const int		type[PRIMITIVES] = {SPHERE, PLAN, CYLINDRE, CONE, CUBE, DISK, HYPERBOLOID, INFHYPERBOLOID, INFCYLINDRE, INFCONE, RECTANGLE,
+			TRIANGLE, PARABOLOID, SADDLE, THORUS, CAPSULE, ELLIPSOID, ROUNDEDCONE, SPHERE4, GOURSAT, ROUNDEDBOX};
 	const char		*typeString[PRIMITIVES] = {
 			"\"sphere\"",
 			"\"plan\"",
 			"\"cylindre\"",
 			"\"cone\"",
-			"\"box\"",
+			"\"cube\"",
 			"\"disk\"",
-			"\"hyperboloid\""
+			"\"hyperboloid\"",
+			"\"infhyperboloid\"",
+			"\"infcylindre\"", 
+			"\"infcone\"",
+			"\"rectangle\"",
+			"\"triangle\"",
+			"\"paraboloid\"",
+			"\"saddle\"",
+			"\"thorus\"",
+			"\"capsule\"",
+			"\"ellipsoid\"",
+			"\"roundedcone\"",
+			"\"sphere4\"",
+			"\"goursat\"",
+			"\"roundedbox\""
 	};
 
 	for (int i = 0; i < PRIMITIVES; i++)

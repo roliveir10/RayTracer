@@ -41,7 +41,11 @@ char			*stateToWord(int state)
 		"scale", "limitMin", "limitMax", "refrac", "shininess",
 		"intensity", "screenX", "screenY", "fov", "sampleRate",
 		"maxDistToPrint", "bounceMax", "ssphere", "scone", "splan",
-		"scylindre", "sbox", "sdisk", "shyperboloid", "slight",
+		"scylindre", "scube", "sdisk", "shyperboloid", "sinfhyperboloid",
+		"sinfcylindre",
+		"sinfcone", "srectangle", "striangle", "sparaboloid", "ssaddle",
+		"sthorus", "scapsule", "sellipsoid", "sroundedcone", "ssphere4",
+		"sgoursat", "sroundedbox", "slight",
 		"sdiffuse", "stransparent", "sspecular", "ssolid", "sflat",
 		"sbump", "error"
 		};

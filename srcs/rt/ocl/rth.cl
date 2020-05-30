@@ -3,7 +3,7 @@
 # define CAMERA_ELEMENT 3
 # define OBJECT_ELEMENT 15
 
-__constant float EPSILON = 0.00003f;
+__constant float EPSILON = 0.0001f;
 __constant float PI = 0x1.921fb54442d18p1f;
 __constant float TAU = 0x1.921fb54442d18p2f;
 
@@ -14,9 +14,23 @@ typedef enum		e_objType
 	PLAN,
 	CYLINDRE,
 	CONE,
-	BOX,
+	CUBE,
 	DISK,
-	HYPERBOLOID
+	HYPERBOLOID,
+	INFHYPERBOLOID,
+	INFCYLINDRE,
+	INFCONE,
+	RECTANGLE,
+	TRIANGLE,
+	PARABOLOID,
+	SADDLE,
+	THORUS,
+	CAPSULE,
+	ELLIPSOID,
+	ROUNDEDCONE,
+	SPHERE4,
+	GOURSAT,
+	ROUNDEDBOX
 }					t_objType;
 
 typedef enum		e_intersection

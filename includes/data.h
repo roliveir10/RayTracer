@@ -12,7 +12,7 @@
 
 # define MAX_OBJECT 64
 
-# define PRIMITIVES 8
+# define PRIMITIVES 21
 typedef enum			e_objType
 {
 	SNONE = -1,
@@ -20,9 +20,23 @@ typedef enum			e_objType
 	PLAN,
 	CYLINDRE,
 	CONE,
-	BOX,
+	CUBE,
 	DISK,
-	HYPERBOLOID
+	HYPERBOLOID,
+	INFHYPERBOLOID,
+	INFCYLINDRE,
+	INFCONE,
+	RECTANGLE,
+	TRIANGLE,
+	PARABOLOID,
+	SADDLE,
+	THORUS,
+	CAPSULE,
+	ELLIPSOID,
+	ROUNDEDCONE,
+	SPHERE4,
+	GOURSAT,
+	ROUNDEDBOX
 }						t_objType;
 
 typedef struct			s_camera

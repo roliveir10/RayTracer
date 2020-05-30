@@ -72,11 +72,11 @@ utils.cl							\
 quaternion.cl						\
 limit.cl							\
 normal.cl							\
-bbox.cl								\
-basicsShape.cl						\
+primitives.cl						\
 complexShape.cl						\
 debug.cl							\
 texture.cl							\
+material.cl							\
 main.cl								\
 initScene.cl
 

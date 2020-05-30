@@ -1,0 +1,254 @@
+{
+	"scene":
+	{
+		"screenX":1280,
+		"screenY":832,
+		"sampleRate":512,
+		"background":[8, 17, 30],
+		"maxDistToPrint":15000,
+		"bounceMax":4
+	},
+	"camera":
+	{
+		"origin":[3, 3, -6],
+		"fov":90,
+		"rotation":[15, -15, 0]
+	},
+	"object":[
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"origin":[0, -1.5, 5],
+		"scale":[15, 15, 10],
+		"color":[180, 180, 180]
+	},
+	{
+		"name":"cube",
+		"material":"light",
+		"origin":[0, 6, 0],
+		"scale":[2, 0.05, 2],
+		"intensity":8,
+		"color":[255, 230, 210]
+	},
+	{
+		"name":"cube",
+		"material":"diffuse",
+		"scale":[1.5, 1.5, 1.5],
+		"origin":[-0, 0, 0],
+		"color":[0, 0, 0]
+	},
+	# 1st crown
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[-1, -1, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[0, -1, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1, -1, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, -1, -1],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, -1, 0],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, -1, 1],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+
+	#2nd crown
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[-1, 0, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[0, 0, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1, 0, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, 0, -1],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, 0, 0],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, 0, 1],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	#3th crowd
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[-1, 1, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[-1, 1.51, -1],
+		"color":[202, 19, 19]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[0, 1, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[0, 1.51, -1],
+		"color":[202, 19, 19]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1, 1, -1.51],
+		"rotation":[90, 0, 0],
+		"color":[0, 35, 193]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1, 1.51, -1],
+		"color":[202, 19, 19]
+	},
+
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, 1, -1],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, 1, 0],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1, 1.51, 0],
+		"color":[202, 19, 19]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1.51, 1, 1],
+		"rotation":[0, 0, 90],
+		"color":[255, 255, 255]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[1, 1.51, 1],
+		"color":[202, 19, 19]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[-1, 1.51, 0],
+		"color":[255, 19, 19]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[0, 1.51, 0],
+		"color":[255, 19, 19]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[-1, 1.51, 1],
+		"color":[255, 19, 19]
+	},
+	{
+		"name":"rectangle",
+		"material":"diffuse",
+		"scale":[0.4, 0.4, 0.4],
+		"origin":[0, 1.51, 1],
+		"color":[255, 19, 19]
+	}
+
+	]
+}

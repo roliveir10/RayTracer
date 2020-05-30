@@ -7,6 +7,13 @@ static float		ft_clamp(float value, float lo, float hi)
 	return (value);
 }
 
+static bool			hitPosInBbox(float3 pos, t_bbox aabb)
+{
+	return (aabb.vmin.x - EPSILON < pos.x && pos.x < aabb.vmax.x + EPSILON
+				&& aabb.vmin.y - EPSILON < pos.y && pos.y < aabb.vmax.y + EPSILON
+				&& aabb.vmin.z - EPSILON < pos.z && pos.z < aabb.vmax.z + EPSILON);
+}
+
 static bool		ft_2nd_degree(float2 *roots, float3 quad)
 {
 	float		delta;
@@ -111,6 +118,18 @@ static float3		randDirCoshemi
 	lin_mat.s89A = axis;
 	randdir = applyLinearMatrice(lin_mat, randdir);
 	return (randdir);
+}
+
+static float3		randDirCosLob
+(
+	uint2			*random_seeds,
+	float3			axis,
+	float			shininess
+)
+{
+	float3			randdir;
+	float2			seed;
+	return (axis);
 }
 
 static float16		buildDiagonalMat33in44(float3 diag)
