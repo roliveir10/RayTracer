@@ -8,7 +8,7 @@ static float3				dirInCosLobFromAxis
 	float					phong;
 
 	phong = native_recip(shininess) - 1.f;
-	return (randDirCosLos(random_seeds, axisDir, phong));
+	return (randDirCosLob(random_seeds, axisDir, phong));
 }
 
 static float3				reflectDir(float3 incDir, float3 normal)

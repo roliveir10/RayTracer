@@ -129,7 +129,29 @@ static float3		randDirCosLob
 {
 	float3			randdir;
 	float2			seed;
-	return (axis);
+	float			cosTh;
+	float			sinTh;
+	float			tmp;
+	float3			vtan1;
+	float3			vtan2;
+	float16			lin_mat;
+	float			phongexp;
+
+	seed.x = TAU * frand0To1(random_seeds);
+	seed.y = frand0To1(random_seeds);
+	phongexp = native_powr(seed.y, shininess);
+	tmp = sqrt((float)(1.f - phongexp * phongexp));
+	sinTh = sincos(seed.x, &cosTh);
+	randdir = (float3)(cosTh * tmp, sinTh * tmp, phongexp);
+	vtan1 = fabs(axis.x) < EPSILON ? (float3)(1.f, 0.f, 0.f) : (float3)(0.f, 0.f, 1.f);
+	vtan1 = cross(axis, vtan1);
+	vtan1 = normalize(vtan1);
+	vtan2 = cross(vtan1, axis);
+	lin_mat.s012 = vtan1;
+	lin_mat.s456 = vtan2;
+	lin_mat.s89A = axis;
+	randdir = applyLinearMatrice(lin_mat, randdir);
+	return (randdir);
 }
 
 static float16		buildDiagonalMat33in44(float3 diag)

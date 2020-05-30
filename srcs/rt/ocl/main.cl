@@ -75,8 +75,8 @@ static t_ray		globalIllum
 	}
 	else if (obj->material == MSPECULAR)
 	{
-		//newRay.dir = reflectCosLob(random_seeds, ray->dir, normal, obj->shininess);
-		//newRay.lum_mask = ray->lum_mask * texture.rgb * (float3)(dot(normal, newRay.dir));
+		newRay.dir = reflectCosLob(random_seeds, ray->dir, normal, obj->shininess);
+		newRay.lum_mask = ray->lum_mask * texture.rgb * (float3)(dot(normal, newRay.dir));
 	}
 
 	hitPos = EPSILON * normal + hitPos;

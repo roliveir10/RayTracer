@@ -105,7 +105,7 @@ static int		fillObject(int currentField, t_ast **ast)
 	else if (currentField == INTENSITY)
 		curObj->intensity = ft_max(addValueFromInt((*ast)->content), 0);
 	else if (currentField == SHININESS)
-		curObj->shininess = ft_max(addValueFromInt((*ast)->content), 0);
+		curObj->shininess = ft_clamp(addValueFromDouble((*ast)->content), 0.f, 1.f) *0.5 + 0.5;
 	else if (currentField == MATERIAL)
 		curObj->material = addValueFromMaterialType((*ast)->content);
 	else if (currentField == LIMITMIN)
