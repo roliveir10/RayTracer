@@ -1,0 +1,88 @@
+{
+	"scene":
+	{
+		"screenX":1280,
+		"screenY":832,
+		"sampleRate":512,
+		"maxDistToPrint":15000,
+		"background":[8, 17, 30],
+		"bounceMax":8
+	},
+	"camera":
+	{
+		"origin":[-2.5, 0, -2.5],
+		"rotation":[0, 45, 0],
+		"fov":90
+	},
+	"object":[
+		{
+			"name":"cube",
+			"material":"light",
+			"scale":[0.7, 0.05, 0.7],
+			"intensity":6,
+			"origin":[-1.5, 2, 0],
+			"color":[255, 255, 255]
+		},
+		{
+			"name":"cube",
+			"material":"light",
+			"scale":[0.7, 0.05, 0.7],
+			"intensity":6,
+			"origin":[1.5, 2, 0],
+			"color":[255, 255, 255]
+		},
+		{
+			"name":"rectangle",
+			"material":"diffuse",
+			"scale":[3, 0.01, 3],
+			"rotation":[90, 0, 0],
+			"origin":[0, 1, 2.99],
+			"color":[255, 0, 0]
+		},
+		{
+			"name":"cube",
+			"material":"diffuse",
+			"scale":[3, 2, 3],
+			"origin":[0, 0, 0],
+			"color":[229, 204, 178]
+		},
+		{
+			"name":"rectangle",
+			"material":"diffuse",
+			"scale":[3, 0.01, 3],
+			"rotation":[90, 0, 0],
+			"origin":[0, 1, -2.99],
+			"color":[255, 0, 0]
+		},
+		{
+			"name":"rectangle",
+			"material":"diffuse",
+			"scale":[3, 0.01, 3],
+			"origin":[0, -1.99, 0],
+			"color":[250, 230, 180]
+		},
+		{
+			"name":"sphere",
+			"material":"diffuse",
+			"scale":[0.6, 0.6, 0.6],
+			"origin":[1.5, -1.4, -1.5],
+			"color":[255, 220, 160]
+		},
+		{
+			"name":"sphere",
+			"material":"diffuse",
+			"scale":[0.6, 0.6, 0.6],
+			"origin":[0, -1.4, 0.5],
+			"color":[0, 134, 255]
+		},
+
+		{
+			"name":"cube",
+			"origin":[1.5, -0.25, 1.5],
+			"material":"specular",
+			"scale":[1.2, 1.5, 0.4],
+			"rotation":[0, 25, 0],
+			"color":[255, 255, 255]
+		}
+		]
+}
